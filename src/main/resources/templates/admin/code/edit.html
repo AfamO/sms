@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+
+<body>
+<div id="wrapper">
+    <div class="container" layout:fragment="content">
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Add Code</h2>
+            </div>
+        </div>
+        <br>
+        <div class="wrapper">
+
+            <form class="form-horizontal" id="codeForm"  method="POST" th:action="@{/codes}" th:object="${code}">
+                <div hidden="hidden">
+                    <ul id="fieldErrors" th:if="${#fields.hasErrors('*')}">
+                        <li th:each="e : ${#fields.detailedErrors()}" th:text="${e.global}? '*' : ${e.fieldName}"></li>
+                    </ul>
+                </div>
+                <div hidden="hidden">
+                    <ul id="fieldMessages" th:if="${#fields.hasErrors('*')}" >
+                        <li th:each="e : ${#fields.detailedErrors()}" th:attr="field=${e.fieldName}" th:text="${e.message}"></li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="type" class="col-sm-2 control-label">Type</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{type.type}" class="form-control" id="type" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{name}" class="form-control" id="name" >
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{description}" class="form-control" id="description" >
+                    </div>
+                </div>
+
+                <input  th:hidden="hidden" th:field="*{version}"/>
+                <input  th:hidden="hidden" th:field="*{id}"/>
+
+                <div>
+                    <button class="btn btn-w-m btn-primary btn-block" onclick="validate();" id="addStaff">Submit</button>
+                </div>
+
+            </form>
+
+        </div>
+        <br>
+        <div class="margin-footer">
+        </div>
+
+    </div>
+    <!-Staff ajax-->
+    <th:block layout:fragment="scripts">
+        <!--<script src="ajax/staff.js" ></script>-->
+    </th:block>
+
+    <!--POP UP WELCOME MESSAGE-->
+    <script th:replace="layout :: welcomeMsg">
+    </script>
+    <!--END HERE-->
+</div>
+
+</body>
+</html>

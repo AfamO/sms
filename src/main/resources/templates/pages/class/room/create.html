@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<body>
+<
+<div id="wrapper">
+    <div class="container" layout:fragment="content">
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Add Room</h2>
+            </div>
+        </div>
+        <br>
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <div>
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Room Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter class Name" id="name" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Teacher</label>
+                                    <select id="tch_id" class="form-control">
+                                        <option th:each="staffs: ${staff}" th:text="${staffs.getFirstName()}" th:value="${staffs.getId()}"/>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Assistance Teacher</label>
+                                    <select id="asstch_id" class="form-control">
+                                        <option th:each="staffs: ${staff}" th:text="${staffs.getFirstName()}" th:value="${staffs.getId()}"/>
+                                    </select>
+                            </div>
+                        </div>
+                            <input type="hidden" id="class_id" th:value="${sclass.getId()}"/>
+                            <input type="hidden" id="class_descrp" th:value="${sclass.getDescription()}"/>
+                            <input type="hidden" id="class_nor" th:value="${sclass.getNumberOfRoom()}"/>
+                            <input type="hidden" id="class_name" th:value="${sclass.getName()}"/>
+                        <button class="btn btn-w-m btn-primary btn-block" id="submit">create</button>
+                        </div>
+
+                    </form>
+                    <br>
+                </div>
+                <div>
+
+                </div>
+                <br>
+            </div>
+
+            <div class="margin-footer">
+            </div>
+
+            <!--FOOTER START HERE-->
+</div>
+    </div>
+
+<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<!-Staff ajax-->
+<th:block layout:fragment="scripts">
+    <script th:src="@{/ajax/class/room/create.js}"></script>
+</th:block>
+
+<!--<select th:each="staff: ${staff}">-->
+    <!--<option th:text="staff.firstName"/>-->
+<!--</select>-->
+
+</body>
+</html>

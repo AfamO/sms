@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<body>
+<div id="wrapper">
+    <div class="container" layout:fragment="content">
+        <div class="row border-bottom white-bg dashboard-header">
+            <h2>View Class</h2>
+        </div>
+        <br>
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <div class="col-md-9 col-lg-9 col-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="makeBold">Name:</span></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p><span th:text="${roomconfig.name}"/></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="makeBold">Description</span></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p><span th:text="${roomconfig.description}"/></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="margin-footer">
+        </div>
+
+    </div>
+
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-Staff ajax-->
+    
+
+    <!--POP UP WELCOME MESSAGE-->
+    <script th:replace="layout :: welcomeMsg">
+    </script>
+    <!--END HERE-->
+
+
+</body>
+</html>

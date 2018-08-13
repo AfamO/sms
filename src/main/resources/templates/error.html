@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"><head>
+	<meta charset="UTF-8"/>
+	<title>DashBoard</title>
+
+</head>
+<body >
+
+
+
+<div class="coronation" layout:fragment="content" >
+	<section class="section" th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+		<div class="container-fluid">
+			<div class="col-md-offset-3 col-md-6 mt-50 pt-50">
+				<div class="panel">
+					<div class="panel-body p-30">
+						<div class="error-box">
+							<i class="fa fa-exclamation-circle error-icon"></i>
+							<h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|" class="error-title">500</h1>
+							<p class="sub-title">WhOops! Error Occurred!</p>
+							<p th:utext="${errorMessage}" class="text-muted"></p>
+							<a th:href="@{/}" class="btn btn-primary btn-lg btn-rounded">Back To Dashboard</a>
+						</div>
+						<!-- /.error-box -->
+					</div>
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-md-offset-3 col-md-6 -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+</div>
+<th:block layout:fragment="scripts">
+
+</th:block>
+<script th:inline="javascript">
+</script>
+</body>
+</html>

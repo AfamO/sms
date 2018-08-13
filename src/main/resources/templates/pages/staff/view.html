@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+<body>
+    <div id="wrapper">
+        <div class="container" layout:fragment="content">
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                    <h2>View Staff Details</h2>
+                </div>
+            </div>
+            <br>
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                        <div class="row">
+                            <div class="visible-xs col-xs-12">
+                                <div class="passportFrame">
+                                    <img src="" alt="Staff-passport">
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-12">
+                                <h3>Bio-Data</h3>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Name:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Miss Marcia Cole</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Staff ID:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>#00099</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Position:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Head Teacher</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Venue assigned to:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Class 1</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Date of employment:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>20/12/2013</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Religion:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Christian</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Gender:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Female</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Marital Status:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Single</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Nationality:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Nigerian</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">State of Origin:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Lagos state</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Local Govt Area:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>Lagos Island West</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Address:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>17 Ige-Igbo Str, Eleso B/Stop, Iyana-Era, Lagos</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Email Address:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>marcia.cole@longbridgetech.com</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><span class="makeBold">Telephone Number:</span></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><span>08100969815</span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-lg-3 hidden-xs">
+                                <div class="passportFrame">
+                                    <img src="" alt="Staff-passport">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <br>
+            
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                   <h3>Qualification</h3>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Name of School</th>
+                                            <th>Type of Institution</th>
+                                            <th>Year of Entry</th>
+                                            <th>Year of Graduation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Longbridge College</td>
+                                            <td>High School</td>
+                                            <td>2016</td>
+                                            <td>2017</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Longbridge College</td>
+                                            <td>High School</td>
+                                            <td>2016</td>
+                                            <td>2017</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Longbridge College</td>
+                                            <td>High School</td>
+                                            <td>2016</td>
+                                            <td>2017</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                   <h3>Referee</h3>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Name of Referee</th>
+                                            <th>Occupation</th>
+                                            <th>Phone Number</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Mr God'sPower</td>
+                                            <td>Account Admistration</td>
+                                            <td>08136954854</td>
+                                            <td>5 joel Ogunnaike street, GRA ikeja, Lagos</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mr God'sPower</td>
+                                            <td>Account Admistration</td>
+                                            <td>08136954854</td>
+                                            <td>5 joel Ogunnaike street, GRA ikeja, Lagos</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mr God'sPower</td>
+                                            <td>Account Admistration</td>
+                                            <td>08136954854</td>
+                                            <td>5 joel Ogunnaike street, GRA ikeja, Lagos</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                   <h3>Documents</h3>
+                    <div class="col-md-6">
+                        <p><a href="#">View C.V</a>
+                    </div>
+                    <div class="col-md-6 textRight">
+                        <p><a href="#">View Cover Letter</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            
+            <div class="textRight">
+                <button class="btn btn-w-m btn-info">Edit</button>
+            </div>
+        </div>
+            <br>
+            <div class="margin-footer">
+            </div>
+
+        </div>
+        <!-Staff ajax-->
+        <th:block layout:fragment="scripts">
+            <script src="ajax/staff.js"></script>
+        </th:block>
+
+        <!--POP UP WELCOME MESSAGE-->
+        <script th:replace="layout :: welcomeMsg">
+        </script>
+        <!--END HERE-->
+
+
+
+</html>

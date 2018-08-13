@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+>
+
+
+<body>
+<div id="wrapper">
+
+    <div class="container" layout:fragment="content">
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Parent Registration</h2>
+            </div>
+        </div>
+        <br>
+        <div class="wrapper">
+            <form  role="form" id="parent" enctype="text/plain">
+                <div class="wrapper">
+                    <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Bio-Data</h3>
+                        <div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <select class="form-control" name="title" id="title">
+                                            <option>Mr.</option>
+                                            <option>Mrs.</option>
+                                            <option>Miss</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>First Name*</label>
+                                        <input type="text" class="form-control"  id="firstName" name="firstName" placeholder="Enter first name of Parent" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Middle Name*</label>
+                                        <input type="text" class="form-control"  id="middleName" name="middleName" placeholder="Enter middle name of Parent" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Last Name*</label>
+                                        <input type="text" class="form-control"  id="lastName" name="lastName" placeholder="Enter last name of Parent" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Religion*</label>
+                                        <select class="form-control" name="religion" id="religion">
+                                            <option>Selet Religion</option>
+                                            <option>Christian</option>
+                                            <option>Muslim</option>
+                                            <option>Traditionalist</option>
+                                            <option>Buddist</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Gender*</label>
+                                        <br>
+                                        <label class="checkbox-inline"> <input type="radio" name = "gender" value="male" id="inlineCheckbox1"> Male </label>
+                                        <label class="checkbox-inline">
+                                            <input type="radio" value="female" id="inlineCheckbox2" name = "gender"> Female </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Marital Status*</label>
+                                        <select class="form-control" name="maritalStatus" id="maritalStatus">
+                                            <option>Single</option>
+                                            <option>Married</option>
+                                            <option>Divorced</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Email Address*</label>
+                                        <input type="email" class="form-control" name="emailAddress" id="email" placeholder="Enter Email Address" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Telephone Number*</label>
+                                        <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Enter Telephone Number" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="wrapper">
+                    <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Address</h3>
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Address*</label>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Address" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Country*</label>
+                                        <select class="form-control" name="country" id="country">
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>State of origin*</label>
+                                        <select class="form-control" name="stateOfOrigin" id="stateOfOrigin">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Local Govt*</label>
+                                        <select class="form-control" name="localGovt" id="localGovt">
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--<div class="row">-->
+                                <!--<div class="col-lg-6 col-md-6 col-xs-12">-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label>Postal  Code</label>-->
+                                        <!--<input type="text" class="form-control" name="postalCode" id="postalCode" placeholder="Enter Postal code" aria-describedby="basic-addon1" required>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-lg-6 col-md-6 col-xs-12">-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label>Zip code</label>-->
+                                        <!--<input type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Enter Zip code" aria-describedby="basic-addon1">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <button class="btn btn-w-m btn-primary btn-block" id="addparent">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+        <br>
+        <div class="margin-footer">
+        </div>
+
+    </div>
+
+    <!-Parent ajax-->
+    <th:block layout:fragment="scripts">
+        <script src="/ajax/parent.js"></script>
+    </th:block>
+
+    <!--POP UP WELCOME MESSAGE-->
+    <script th:replace="layout :: welcomeMsg">
+    </script>
+    <!--END HERE-->
+
+
+</body>
+</html>

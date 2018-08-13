@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+<body>
+<div id="wrapper">
+    <div class="container" layout:fragment="content">
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Student Registration</h2>
+            </div>
+        </div>
+        <br>
+        <div class="wrapper">
+            <form method="post" enctype="multipart/form-data" id="student" th:object="${student}">
+                <div class="row border-bottom white-bg dashboard-header" >
+                    <h3>Admission Details</h3>
+                    <div>
+                        <!--<form role="form" >-->
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group" >
+                                    <label>Admission No*</label>
+                                    <input type="number" class="form-control" placeholder="1" name="admissionNum" id="admissionNum" th:field="*{admissionNum}" aria-describedby="basic-addon1" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Admission Date</label>
+                                    <input type="date" class="form-control" placeholder="Enter date of admission" name="entryDate" id="entryDate" th:field="*{entryDate}" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Class to be Admitted in*</label>
+                                    <input type="text" class="form-control" placeholder="Enter Class to be admitted in" name="entryClass" id="entryClass" th:field="*{entryClass}" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Previous Class</label>
+                                    <input type="text" class="form-control" placeholder="Enter previous class" name="previousClass" id="previousClass" th:field="*{previousClass}" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Department<small>(for secondary school only)</small></label>
+                                    <select class="form-control" name="department" id="department" th:ondrop="*{department}">
+                                        <option>Select Department</option>
+                                        <option>Science</option>
+                                        <option>Art</option>
+                                        <option>Commercial</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Club</label>
+                                    <select class="form-control" name="Club" id="Club" th:ondrop="*{Club}">
+                                        <option>Select Department</option>
+                                        <option>Jet</option>
+                                        <option>Music</option>
+                                        <option>Drama</option>
+                                        <option>Debate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Sport</label>
+                                    <select class="form-control"  name="sportHouse" id="sportHouse" th:ondrop="*{sportHouse}">
+                                        <option>Red House</option>
+                                        <option>Blue House</option>
+                                        <option>Yellow House</option>
+                                        <option>Green House</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-w-m btn-info">Next</button>
+                        </div>
+                        <!--</form>-->
+                    </div>
+                </div>
+                <!--</div>-->
+
+                <br>
+                <div class="wrapper">
+                    <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Bio-Data</h3>
+                        <div>
+                            <!--<form  role="form">-->
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>First Name*</label>
+                                        <input type="text" class="form-control" placeholder="Enter first name" id="firstName" name="firstName" th:field="*{firstName}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Last Name*</label>
+                                        <input type="text" class="form-control" placeholder="Enter last name" id="lastName" name="lastName" th:field="*{lastName}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Middle Name*</label>
+                                        <input type="text" class="form-control" placeholder="Enter last name" id="middleName" name="middleName" th:field="*{middleName}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>D.O.B*</label>
+                                        <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" th:datetime="*{dateOfBirth}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Gender*</label>
+                                        <br>
+                                        <label class="checkbox-inline"> <input type="radio" value="Male" id="gender" name="gender" th:field="*{gender}"> Male </label>
+                                        <label class="checkbox-inline">
+                                            <input type="radio" value="Female" id="gender" name="gender" th:field="*{gender}"> Female </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Religion*</label>
+                                        <select class="form-control" name="religion" id="religion" th:ondrop="*{religion}">
+                                            <option>Select Religion</option>
+                                            <option>Christian</option>
+                                            <option>Muslim</option>
+                                            <option>Traditionalist</option>
+                                            <option>Buddist</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Nationality*</label>
+                                        <select class="form-control" name="nationality" id="nationality" th:ondrop="*{nationality}">
+                                            <option>Select Nationality</option>
+                                            <option>Nigeria</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group" >
+                                        <label>State of Origin*</label>
+                                        <select class="form-control" name="stateOfOrigin" id="stateOfOrigin" th:ondrop="*{stateOfOrigin}">
+                                            <option>Select State of Origin</option>
+                                            <option>Lagos</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Local Govt Area*</label>
+                                        <select class="form-control" name="localGovt" id="localGovt" th:field="*{localGovt}">
+                                            <option>Select L.G.A</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pull-right">
+                                <button class="btn btn-w-m btn-info">Next</button>
+                            </div>
+                            <!--</form>-->
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="wrapper">
+                    <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Contact Details</h3>
+                        <div>
+                            <!--<form role="form">-->
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Address*</label>
+                                        <input type="text" class="form-control" placeholder="Enter Home address" name="address" id="address" th:field="*{address}" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Country*</label>
+                                        <select class="form-control" name="country" id="country" th:field="*{country}">
+                                            <option>Select Country</option>
+                                            <option>Nigeria</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>State*</label>
+                                        <select class="form-control" name="state" id="state" th:field="*{state}">
+                                            <option>Select State</option>
+                                            <option>Lagos</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Mobile Number*</label>
+                                        <input type="year" class="form-control" placeholder="Enter Mobile Number" name="phoneNum" id="phoneNum" th:field="*{phoneNum}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="pull-right">
+                                <button class="btn btn-w-m btn-info">Next</button>
+                            </div>
+                            <!--</form>-->
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="wrapper">
+                    <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Educational History</h3>
+                        <div>
+                            <!--<form role="form">-->
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Name of School*</label>
+                                        <input type="text" class="form-control" placeholder="Enter name of school" name="schoolName" id="schoolName" th:field="*{admissionNum}" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Type of Institution*</label>
+                                        <select class="form-control" name="schoolClassType" id="schoolClassType" th:field="*{schoolClassType}">
+                                            <option>Select Institution</option>
+                                            <option>Creche</option>
+                                            <option>Nursery</option>
+                                            <option>Primary</option>
+                                            <option>Secondary</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div  class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Previous Class*</label>
+                                        <input type="text" class="form-control" placeholder="Enter Year of entry" name="schoolPreviousClass" id="schoolPreviousClass" th:field="*{schoolPreviousClass}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Date of Entry*</label>
+                                        <input type="date" class="form-control" placeholder="Enter Year of entry" name="schoolEntryDate" id="schoolEntryDate" th:field="*{schoolEntryDate}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Date of Exit*</label>
+                                        <input type="date" class="form-control" placeholder="Enter Year of graduation" name="schoolLeavingDate" id="schoolLeavingDate" th:field="*{schoolLeavingDate}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Reason for leaving*</label>
+                                        <textarea class="form-control" rows="6" name="schoolReason" id="schoolReason" th:field="*{schoolReason}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <button class="btn btn-info btn-circle btn-lg"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="pull-right">
+                                <button class="btn btn-w-m btn-info">Next</button>
+                            </div>
+                            <!--</form>-->
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+
+                <div class="wrapper">
+                    <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Parent History</h3>
+                        <div>
+                            <!--<form role="form">-->
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Name of Parent*</label>
+                                        <input type="text" class="form-control" placeholder="Enter name of parent" name="parentFirstName" id="parentFirstName" th:field="*{parentFirstName}" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Occupation of Parent*</label>
+                                        <input type="text" class="form-control" placeholder="Enter occupation of parent" name="parentOccupation" id="parentOccupation" th:field="*{parentOccupation}" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Phone Number of Parent*</label>
+                                        <input type="text" class="form-control" placeholder="Enter Phone number" name="phoneNumber" id="phoneNumber" th:field="*{phoneNumber}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Address of Parent*</label>
+                                        <input type="text" class="form-control" placeholder="Enter address of parent" name="parentAddress" id="parentAddress" th:field="*{parentAddress}" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Email*</label>
+                                        <input type="text" class="form-control" placeholder="Enter occupation of parent" name="email" id="email" th:field="*{email}" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <button class="btn btn-info btn-circle btn-lg"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="pull-right">
+                                <button class="btn btn-w-m btn-info">Next</button>
+                            </div>
+                            <!--</form>-->
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+
+                <div class="wrapper">
+                    <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Upload Documents</h3>
+                        <div>
+                            <!--<form role="form">-->
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Upload Previous Report*</label>
+                                        <input type="file" class="form-control" placeholder="Upload previous report" aria-describedby="basic-addon1">
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Upload Passport*</label>
+                                        <input type="file" class="form-control" placeholder="Upload Passport" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pull-right">
+                                <button class="btn btn-w-m btn-info">Next</button>
+                            </div>
+                            <!--</form>-->
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+
+
+                <div>
+                    <button class="btn btn-w-m btn-primary btn-block" id="createStudent" >Submit</button>
+                </div>
+            </form>
+
+        </div>
+        <br>
+        <div class="margin-footer">
+        </div>
+
+    </div>
+    <!-Student ajax-->
+    <th:block layout:fragment="scripts">
+        <script src="ajax/student.js" ></script>
+    </th:block>
+
+    <!--POP UP WELCOME MESSAGE-->
+    <script th:replace="layout :: welcomeMsg">
+    </script>
+    <!--END HERE-->
+
+
+
+</body>
+</html>
