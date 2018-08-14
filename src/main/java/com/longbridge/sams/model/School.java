@@ -57,7 +57,15 @@ School extends AbstractEntity {
         return motto;
     }
 
-    public void setMotto(String motto) {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setMotto(String motto) {
         this.motto = motto;
     }
 

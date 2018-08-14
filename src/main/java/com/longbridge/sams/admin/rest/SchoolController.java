@@ -23,7 +23,7 @@ import javax.validation.Valid;
 
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/school")
+@RequestMapping("/admin/v1/school")
 public class SchoolController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SchoolController.class);
@@ -69,7 +69,7 @@ public class SchoolController {
 
 	
 	@GetMapping
-	public DataTablesOutput<School> getSchools(@RequestBody DataTablesInput input) {
+	public DataTablesOutput<School> getSchools(DataTablesInput input) {
 		Pageable pageable = DataTablesUtils.getPageable(input);
 
 		Page<School> schools = null;

@@ -15,7 +15,6 @@ public interface PermissionRepository extends CommonRepository<Permission, Long>
 	@Query("SELECT b FROM Permission b INNER JOIN b.roles pr WHERE pr = :role")
 	List<Permission> findByRole(@Param("role") Role role);
 	
-	
 //	List<Permission> findByRole(@Param("role") Role role);
 //	
 	

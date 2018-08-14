@@ -27,14 +27,14 @@ import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.DataTablesUtils;
 
 @RestController()
-@RequestMapping("/codes")
+@RequestMapping("/admin/v1/codes")
 public class CodeController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	CodeService codeService;
 
-	@GetMapping("{id}/view")
+	@GetMapping("{id}")
 	ResponseEntity<Code> getCode(@PathVariable Long id) {
 		Code code = codeService.getCode(id);
 		return ResponseEntity.ok(code);
