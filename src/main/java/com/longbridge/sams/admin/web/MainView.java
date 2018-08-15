@@ -20,19 +20,5 @@ public class MainView {
 	}
 
 
-	@GetMapping("/createschool")
-	String createSchool(){ return  "admin/school/create"; }
-
-	@GetMapping("/school/edit/{id}")
-	String editSchool(){ return  "admin/school/edit"; }
-
-	@GetMapping("/school/list")
-	String listSchool(){ return  "admin/school/list"; }
-
-	@GetMapping("/setting")
-	String setting(){ return  "admin/settings/create"; }
-
-	@GetMapping("/setting/edit/{id}")
-	String editSetting(){ return  "admin/settings/edit"; }
 
 }
