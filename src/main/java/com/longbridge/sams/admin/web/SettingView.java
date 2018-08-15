@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,12 +16,12 @@ public class SettingView {
     @GetMapping("/create")
     public String create(){ return "admin/settings/create";}
 
-    @GetMapping("/edit")
-    public String edit(){ return "admin/settings/edit"; }
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Long id){ return "admin/settings/edit"; }
 
-    @GetMapping("/view")
-    public String view(){ return "admin/settings/view"; }
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable Long id){ return "admin/settings/view"; }
 
     @GetMapping("/list")
-    public  String list(){ return  "admin/setting/list"; }
+    public  String list(){ return  "admin/settings/list"; }
 }

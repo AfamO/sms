@@ -30,9 +30,9 @@ $("#create").click(function(){
 
 $(document).ready(function(){
 
-    //DATATABLE IMPLEMENTATION STARTS HERE
 
-    var $table = $('#schoolTable').DataTable({
+
+    var table = $('#settingsTable').DataTable({
         select: true,
         responsive: true,
         "draw":1,
@@ -44,7 +44,7 @@ $(document).ready(function(){
         "paging" : true,
         "ordering" : false,
         "dom": 'blfrtip',
-        "sAjaxSource": "/setting/list",
+        "sAjaxSource": "/setting/all",
         "sAjaxDataProp": "",
         "aoColumns": [
             {"mData": "name"},
@@ -58,10 +58,10 @@ $(document).ready(function(){
             "data" : "operations",
             "render" : function (data, type, row) {
                 var linkView = '<div class="btn-group">'+
-                    '<a type="button" class="btn btn-warning " href="/setting/view/'+row.id +'"><i class="fa fa-eye"></i></a>'+
+                    '<a type="button" class="btn btn-warning " href="/admin/setting/view/'+row.id +'"><i class="fa fa-eye"></i></a>'+
                     '</div>';
                 var linkEdit = '<div class="btn-group">'+
-                    '<a type="button" class="btn btn-warning " href="/setting/edit/'+row.id +'"><i class="fa fa-pencil"></i></a>'+
+                    '<a type="button" class="btn btn-warning " href="/admin/setting/edit/'+row.id +'"><i class="fa fa-pencil"></i></a>'+
                     '</div>';
                 var linkDelete = '<div class="btn-group">'+
                     '<a type="button" class="btn btn-warning " onclick="deleteDialog('+row.id+')"><i class="fa fa-trash"></i></a>'+
@@ -74,7 +74,7 @@ $(document).ready(function(){
     });
 });
 
-// DATATABLE IMPLEMENTATION ENDS HERE
+
 
 //Delete Method starts here
 function deleteDialog(id) {
@@ -85,8 +85,20 @@ function deleteDialog(id) {
                 label: 'Delete',
                 className: 'btn-danger',
                 callback: function (result) {
-                    console.log("Successfully deleted school");
-                    window.location = id+"/delete/";
+                    // console.log("successfully delete user");
+                    // window.location = "/class/delete/"+id;
+                    $.ajax({
+                        url:"http://localhost:8080/setting/delete/"+id,
+                        method:"POST",
+                        contentType:"application/json; charset=utf-8",
+                        success:function(res){
+
+                            window.location.reload(true);
+                        },
+                        error:function(res){
+                            console.log(res+ "error");
+                        }
+                    })
                 }
             },
             cancel: {
