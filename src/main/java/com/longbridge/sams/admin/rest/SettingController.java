@@ -2,12 +2,19 @@ package com.longbridge.sams.admin.rest;
 
 import com.longbridge.sams.admin.service.implementation.SettingServiceImpl;
 import com.longbridge.sams.model.Setting;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 @RestController
 @RequestMapping("/setting")
 public class SettingController {
+
+    private static final Logger logger = LoggerFactory.getLogger(SettingController.class);
 
     @Autowired
     private SettingServiceImpl settingService;
@@ -15,7 +22,7 @@ public class SettingController {
     @PostMapping("/create")
     public String create(Setting setting){
 
-        String result = settingService.create(setting);
+        String result = settingService.addSetting(setting);
 
         return result;
     }
@@ -23,7 +30,7 @@ public class SettingController {
     @PostMapping("/update")
     public String update(Setting setting){
 
-        String result = settingService.update(setting);
+        String result = settingService.updateSetting(setting);
 
         return  result;
     }
@@ -31,16 +38,28 @@ public class SettingController {
     @GetMapping("/get/{id}")
     public Setting get(@PathVariable Long id){
 
-        Setting setting = settingService.get(id);
+        Setting setting = settingService.getSetting(id);
 
         return setting;
     }
 
-    @PostMapping("/delete")
-    public String delete(Setting setting){
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
 
-        String result = settingService.delete(setting);
+        String result = settingService.deleteSetting(id);
 
         return result;
+    }
+
+    @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
+    public ResponseEntity handle() {
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
+    @ExceptionHandler(Exception.class)
+    public void handleException(Exception ex, WebRequest webRequest) {
+        logger.error("an error occur here {} ", ex);
+        ex.printStackTrace();
     }
 }

@@ -38,7 +38,7 @@ public class Permission extends AbstractEntity {
 	@NotEmpty
 	private String description;
 	@ManyToMany(mappedBy="permissions")
-	private Set<Role>  profiles;
+	private Set<Role>  roles;
 	public String getName() {
 		return name;
 	}
@@ -62,12 +62,14 @@ public class Permission extends AbstractEntity {
 
 	
 	@JsonIgnore
-	public Set<Role> getProfiles() {
-		return profiles;
+	public Set<Role> getRoles() {
+		return roles;
 	}
-	public void setProfiles(Set<Role> profiles) {
-		this.profiles = profiles;
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
+
 	@Override
 	public String toString() {
 		return "Permission [id=" + getId() + ", name=" + name + ", category=" + category + ", description=" + description + "]";

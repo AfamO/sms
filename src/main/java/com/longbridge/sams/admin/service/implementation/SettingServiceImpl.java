@@ -1,80 +1,87 @@
 package com.longbridge.sams.admin.service.implementation;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.admin.service.SettingService;
 import com.longbridge.sams.model.Setting;
 import com.longbridge.sams.repository.SettingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.longbridge.sams.utils.Messages;
 
-import java.util.Optional;
 
 @Service
 public class SettingServiceImpl implements SettingService {
 
-    @Autowired
-    private SettingRepository settingRepo;
+	@Autowired
+	private SettingRepository repo ;
+	@Autowired
+	Messages messageSource;
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	
+	@Override  
+	public String addSetting(Setting setting) throws ApplicationException {
+		String result = "" ;
+		try{
+			repo.save(setting);
+			result= messageSource.get("setting.add.success");
+		}catch(Exception ex){
+			result= messageSource.get("setting.add.error");
+			log.error(result, ex);
+			throw new ApplicationException(result);
+		}
+		return result;
+	
+	}
 
+	@Override
+	public Setting getSetting(Long id) {
+		return repo.findById(id).get();
+	}
 
-    @Override
-    public String create(Setting setting) {
+	@Override
+	public Setting getSettingByName(String name) {
+		return repo.findFirstByName(name);
+	}
 
-        String result;
-        try{
-            settingRepo.save(setting);
+	@Override
+	public Iterable<Setting> getSettings() {
+		return repo.findAll();
+	}
 
-            result = "created";
+	@Override
+	public Page<Setting> getSettings(Pageable pageDetails) {
+		return repo.findAll(pageDetails);
+	}
 
-        }catch (Exception ex){
+	@Override 
+	public String updateSetting(Setting setting) throws ApplicationException {
+		String result = "" ;
+		try{
+			repo.save(setting);
+			result= messageSource.get("setting.update.success");
+		}catch(Exception ex){
+			result= messageSource.get("setting.update.error");
+			log.error(result, ex);
+			throw new ApplicationException(result);
+		}
+		return result;
+	}
 
-            result = "failed";
-        }
-        return result;
-    }
+	@Override
+	public String deleteSetting(Long id) throws ApplicationException {
+		throw new ApplicationException("Unimplemted");
+	}
 
-    @Override
-    public String update(Setting setting) {
+	@Override
+	public Page<Setting> getSettings(String pattern, Pageable pageDetails) {
+		return repo.findUsingPattern(pattern, pageDetails);
+	}
 
-        String result;
-        try{
-
-            settingRepo.save(setting);
-            result = "settings updated";
-        }catch(Exception ex){
-
-            result = "update failed0";
-        }
-        return result;
-    }
-
-    @Override
-    public Setting get(Long id) {
-
-        Setting result=null;
-
-        Optional<Setting> tempSetting = settingRepo.findById(id);
-
-        if(tempSetting.isPresent()){
-                Setting setting = tempSetting.get();
-                result  = setting;
-        }
-
-        return result;
-    }
-
-    @Override
-    public String delete(Setting setting) {
-
-        String result;
-        try{
-
-            setting.setDelFlag("Y");
-            settingRepo.save(setting);
-
-            result = "deleted";
-        }catch(Exception ex){
-
-            result = "not deleted";
-        }
-        return result;
-    }
 }
