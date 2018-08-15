@@ -73,7 +73,7 @@ public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/css/**", "/img/**", "/ajax/**", "/fonts/**", "/js/**").permitAll().and()
+				.antMatchers("/css/**", "/img/**", "/ajax/**", "/fonts/**", "/js/**","/datatables/**").permitAll().and()
 				.antMatcher("/admin/**").addFilterBefore(customAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests().anyRequest()
 				.fullyAuthenticated().and()
