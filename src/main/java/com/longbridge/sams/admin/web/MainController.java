@@ -8,15 +8,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class MainController {
 	
-	@GetMapping("index")
-	String getIndex() {
-		return "admin/index";
-	}
-	
+//	@GetMapping("index")
+//	String getIndex() {
+//		return "admin/index";
+//	}
+//
 	
 	@GetMapping
 	String getDashboard() {
 		return "admin/index";
+	}
+
+	@GetMapping("/code/add")
+	String addCode(){
+		return "admin/code/add";
+	}
+
+	@GetMapping("/code/list")
+	String listCode(){
+		return "admin/code/list-type-code";
 	}
 
 }

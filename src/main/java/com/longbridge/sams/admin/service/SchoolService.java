@@ -9,11 +9,11 @@ import com.longbridge.sams.model.School;
 
 public interface SchoolService {
 
-	String create(School school);
+	School create(School school);
 
-    String update(School school);
+	School update(School school);
 
-    String changeSchoolStatus(School school, String status);
+	School changeSchoolStatus(Long Id, String status);
 
     School getSchool(Long Id);
 

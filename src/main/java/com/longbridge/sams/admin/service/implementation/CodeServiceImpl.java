@@ -1,158 +1,163 @@
 package com.longbridge.sams.admin.service.implementation;
 
-import com.longbridge.sams.admin.service.CodeService;
-import com.longbridge.sams.model.Code;
-import com.longbridge.sams.repository.CodeRepository;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.BeanUtilsBean;
-import org.apache.logging.log4j.message.MessageFactory;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.longbridge.sams.ApplicationException;
+import com.longbridge.sams.admin.service.CodeService;
+import com.longbridge.sams.data.dto.CodeTypeDTO;
+import com.longbridge.sams.model.Code;
+import com.longbridge.sams.repository.CodeRepository;
+import com.longbridge.sams.utils.Messages;
+
 
 @Service
+//@Transactional
 public class CodeServiceImpl implements CodeService {
 
-    @Autowired
-    CodeRepository codeRepo;
+	@Autowired
+	private CodeRepository repo;
+	public void setRepo(CodeRepository repo) {
+		this.repo = repo;
+	}
 
-    @Autowired
-    MessageSource messageSource;
+	@Autowired
+	Messages Messages;
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	@Override
+	public Code getCode(long id) {
+		Code code = repo.findById(id).get();
+		return code;
+	}
 
+	@Override
+	public Iterable<Code> getAllCodes() {
 
-    @Override
-    public String create(Code code) {
-        String result;
-        try {
+	    return repo.findAll();
+	}
 
-            codeRepo.save(code);
-            result = "Successfully Created";
-        } catch (Exception ex) {
-            result = "Failed";
-        }
+	@Override
+	public Iterable<Code> getCodeByType(String type) {
+		
+		return repo.findByType(type);
+	}
 
-        return result;
-    }
+	@Override
+	public Iterable<Code> getCodeByName(String name) {
 
+	    return  repo.findByName(name);
+	}
 
-    @Override
-    public String update(Code code) {
+	@Override
+	@Transactional 
+	public Code modify(Code code) throws ApplicationException {
+		Code result = null;
+		try {
+			result = repo.save(code);
+		} catch (Exception e) {
+			log.error("Error saving code {}",code, e);
+			throw new ApplicationException(e);
+		}
+		return result;
+	}
 
-        String result = "";
+	@Override
+	@Transactional(rollbackFor=Exception.class) 
+	public Code add(Code code) throws ApplicationException {
+		Code result = null;
+		try {
+			result = repo.save(code);
+		}
+		catch (Exception e) {
+			log.error("Error adding code {}",code, e);
+			throw new ApplicationException(e);
+		}
+		return result;
+	}
 
-        try{
-            Code code1 = codeRepo.getCodeById(code.getId());
-            if (code1 != null){
-                BeanUtilsBean.getInstance().getConvertUtils().register(false, false, 0);
-                //BeanUtils.copyProperties(Destination, Source)
-                BeanUtils.copyProperties(code1,code);
+	@Override
+	public void remove(Code code) throws ApplicationException {
+		repo.delete(code);
+	}
 
-                codeRepo.save(code1);
+	@Override
+	public Iterable<Code> findCode(String name, String type, String desc) {
+		Code c = new Code();
+		if(StringUtils.isNotEmpty(name)){
+			c.setName(name);
+		}
+		
+		if(StringUtils.isNotEmpty(type)){
+			c.setType(type);
+		}
+		if(StringUtils.isNotEmpty(desc)){
+			c.setDescription(desc);
+		}
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase().withIgnoreNullValues();
+		return repo.findAll(Example.of(c,matcher));
+	}
 
-                result = "Successful";
-            }
+	@Override
+	public Iterable<Code> findCode(Code c) {
+		return repo.findAll(Example.of(c));
+	}
 
+	@Override
+	public Page<Code> getAllCodes(Pageable page) {
+		return repo.findAll(page);
+	}
 
-        }catch (Exception ex){
-            result = "Failed";
-        }
+	@Override
+	public Page<Code> findCode(String pattern,Pageable page) {
+		return repo.findUsingPattern(pattern, page);
+		//return repo.findCodes(pattern, page);
+	}
+	
+	@Override
+	public Page<Code> getCodeByType(String type,Pageable page) {
+		Code c = new Code();
+		c.setType(type);
+		return repo.findByType(type,page);
+	}
 
-        return result;
-    }
+	@Override
+	public Page<Code> findCode(Code c, Pageable page) {
+		if(StringUtils.isBlank(c.getName())){
+			c.setName(null);
+		}
+		if(StringUtils.isBlank(c.getType())){
+			c.setType(null);
+		}
+		if(StringUtils.isBlank(c.getDescription())){
+			c.setDescription(null);
+		}
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase().withIgnoreNullValues();
+		return repo.findAll(Example.of(c,matcher),page);
+	}
 
-    @Override
-    public String delete(Code code) {
-        String result;
-        try {
-            code.setDelFlag("Y");
-            codeRepo.save(code);
-            result = "Successfully Deleted";
-
-        } catch (Exception ex) {
-
-            result = "Failed";
-        }
-
-        return result;
-
-    }
-
-    @Override
-    public Code getCodeById(Long id) {
-        Code code1 = null;
-
-        Optional<Code> tempCode = codeRepo.findById(id);
-        if (tempCode.isPresent()) {
-            Code code = tempCode.get();
-            code1 = code;
-
-        }
-
-        return code1;
-
-    }
-//
-//    @Override
-//    public List<Code> getCodeByType(String type) {
-//
-//        Iterable<Code> codeList = codeRepo.findByType(type);
-//
-//        return (List<Code>) codeList;
-//    }
-
-//    @Override
-//    public Iterable<Code> getCodeByType(String type) {
-//        return codeRepo.findAllTypes();
-//    }
-
-    @Override
-    public Iterable<Code> getCodeType(String type) {
-        return codeRepo.findByType(type);
-    }
-
-
-//    @Override
-//    public Code getCodeByType(String type) {
-//        Code result = null;
-//        Iterable<Code> codeTypes = codeRepo.findByType(type);
-//
-//        for (Code code : codeTypes) {
-//            result = code;
-//        }
-//
-//        return result;
-//    }
-
-
-    @Override
-    public Code getCodeByName(String name) {
-        Code result = null;
-
-        Iterable<Code> codeNames = codeRepo.findByName(name);
-
-        for (Code codeName : codeNames){
-            result = codeName;
-        }
-
-        return result;
-    }
-
-
-
-    @Override
-    public List<Code> getAllCodes(String delFlag) {
-        List<Code> codeList = codeRepo.findByDelFlag(delFlag);
-        return codeList;
-    }
-
-
-    @Override
-    public Page<Code> getCodes(Pageable pageable) {
-        return codeRepo.findAll(pageable);
-    }
+	@Override
+	public Page<CodeTypeDTO> getCodeTypes(Pageable pageDetails) {
+		Page<String> allTypes = repo.findAllTypes(pageDetails);
+		long t = allTypes.getTotalElements();
+		List<CodeTypeDTO> list = new ArrayList<CodeTypeDTO>();
+		for(String s :allTypes){
+			list.add(new CodeTypeDTO(s));
+		}
+		return new PageImpl<CodeTypeDTO>(list,pageDetails,t);
+	}
 }

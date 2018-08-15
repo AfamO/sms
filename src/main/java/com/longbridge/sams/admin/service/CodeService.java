@@ -1,26 +1,36 @@
 package com.longbridge.sams.admin.service;
 
 
-import com.longbridge.sams.model.Code;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import com.longbridge.sams.ApplicationException;
+import com.longbridge.sams.data.dto.CodeTypeDTO;
+import com.longbridge.sams.model.Code;
+
+
+
+
 
 public interface CodeService {
-
-    String create(Code code);
-    String delete(Code code);
-    String update(Code code);
-    Code getCodeById(Long id);
-//    Code  getCodeByType(String type);
-//    List<Code> getCodeByType(String type);
-    Code getCodeByName(String name);
-
-    Iterable<Code> getCodeType(String type);
-    List<Code> getAllCodes(String delFlag);
-
-    Page<Code> getCodes(Pageable pageable);
-
-
+	Code getCode(long id);
+	
+	Iterable<Code> getAllCodes();
+	Iterable<Code> getCodeByType(String type);
+	Iterable<Code> getCodeByName(String name);
+	Iterable<Code> findCode(String code,String type, String desc);
+	public Iterable<Code> findCode(Code c) ;
+	
+	Page<Code> getAllCodes(Pageable page);
+	Page<Code> getCodeByType(String type,Pageable page);
+	Page<Code> findCode(Code c,Pageable page) ;
+	Page<Code> findCode(String pattern,Pageable page);
+	Page<CodeTypeDTO> getCodeTypes(Pageable pageDetails);
+	
+	
+	Code modify(Code code) throws ApplicationException;
+	Code add(Code code) throws ApplicationException;
+	void remove(Code code) throws ApplicationException;
+	
 }
