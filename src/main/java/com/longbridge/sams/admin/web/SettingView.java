@@ -20,4 +20,7 @@ public class SettingView {
 
     @GetMapping("/view")
     public String view(){ return "admin/settings/view"; }
+
+    @GetMapping("/list")
+    public  String list(){ return  "admin/setting/list"; }
 }

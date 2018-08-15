@@ -20,7 +20,7 @@ public class SettingController {
     private SettingServiceImpl settingService;
 
     @PostMapping("/create")
-    public String create(Setting setting){
+    public String create(@RequestBody Setting setting){
 
         String result = settingService.addSetting(setting);
 
@@ -28,7 +28,7 @@ public class SettingController {
     }
 
     @PostMapping("/update")
-    public String update(Setting setting){
+    public String update(@RequestBody Setting setting){
 
         String result = settingService.updateSetting(setting);
 
