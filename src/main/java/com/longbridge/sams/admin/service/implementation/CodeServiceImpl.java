@@ -77,7 +77,7 @@ public class CodeServiceImpl implements CodeService {
 	}
 
 	@Override
-	@Transactional(rollbackFor=Exception.class) 
+//	@Transactional(rollbackFor=Exception.class)
 	public Code add(Code code) throws ApplicationException {
 		Code result = null;
 		try {

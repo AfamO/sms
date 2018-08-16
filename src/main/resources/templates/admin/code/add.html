@@ -53,7 +53,7 @@
                 <!--<input  th:hidden="hidden" th:field="*{id}"/>-->
 
                 <div>
-                    <button class="btn btn-w-m btn-primary" onclick="validate();" id="addcode">Submit</button>
+                    <button class="btn btn-w-m btn-primary" id="addcode">Submit</button>
                 </div>
 
             </form>
@@ -67,6 +67,41 @@
     <!-Staff ajax-->
     <th:block layout:fragment="scripts">
         <script th:src="@{/ajax/admin.js}"></script>
+        <!--<script>-->
+            <!--$("#addcode").click(function () {-->
+                <!--$(this).attr("disabled","disabled");-->
+
+                <!--var data = {-->
+                    <!--"type": $("#type").val(),-->
+                    <!--"name":$("#name").val(),-->
+                    <!--"description":$("#description").val()-->
+                <!--}-->
+
+                <!--var res = data.type + "  " + data.name + "  " + data.description;-->
+
+                <!--alert(res);-->
+
+
+                <!--// $.ajax({-->
+                <!--//-->
+                <!--//     url:"/admin/codes/add",-->
+                <!--//-->
+                <!--//     type:"POST",-->
+                <!--//-->
+                <!--//     contentType:"application/json;charset=utf-8",-->
+                <!--//-->
+                <!--//     data:JSON.stringify(data),-->
+                <!--//-->
+                <!--//     success: function (code) {-->
+                <!--//         alert(code.name);-->
+                <!--//-->
+                <!--//     },-->
+                <!--//     error: function (e) {-->
+                <!--//         alert(e)-->
+                <!--//     }-->
+                <!--// })-->
+            <!--});-->
+        <!--</script>-->
     </th:block>
 
     <!--POP UP WELCOME MESSAGE-->

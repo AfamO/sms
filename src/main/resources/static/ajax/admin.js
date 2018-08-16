@@ -6,29 +6,26 @@ $("#addcode").click(function () {
         "type": $("#type").val(),
         "name":$("#name").val(),
         "description":$("#description").val()
-    }
+    };
 
     $.ajax({
+        url:"http://localhost:8080/admin/v1/codes/add",
 
-        url:"/codes/add/",
+        type:'POST',
 
-        type:"POST",
+        contentType:'application/json;charset=utf-8',
 
-        contentType:"application/json;charset=utf-8",
+        data: JSON.stringify(data),
 
-        data:JSON.stringify(data),
-
-        success: function (code) {
-            console.log(code);
-            window.location.href = "/admin/code/list";
+        success:function (data) {
+            alert("Success");
         },
-        error: function (e) {
-            alert("Failed");
-            console.log(e);
+
+        error: function () {
+            alert("failed")
         }
     })
 
-    var codeTable = "";
 
 
 });

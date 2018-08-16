@@ -34,40 +34,46 @@ public class CodeController {
 	@Autowired
 	CodeService codeService;
 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	ResponseEntity<Code> getCode(@PathVariable Long id) {
 		Code code = codeService.getCode(id);
 		return ResponseEntity.ok(code);
 	}
 
-	@PostMapping("/add")
-	public ResponseEntity<?> createCode(@RequestBody @Valid Code code, Errors err) {
-		Code response = null;
-		ResponseEntity<?> resp = null;
-		try {
-			if(err.hasErrors()) {
-				return ResponseEntity.badRequest().body(err);
-			}
-			if (code.getId() != null) {
-				Code code2 = codeService.getCode(code.getId());
-				CustomBeanUtilsBean.getInstance().copyProperties(code2, code);
-				code = code2;
-				response = codeService.modify(code);
-				resp = new ResponseEntity<>(response,HttpStatus.OK);
-			} else {
-				response = codeService.add(code);
-				resp = new ResponseEntity<>(response,HttpStatus.OK);
-			}
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			logger.debug("Error Adding {}",code,ex);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(code);
-		}
-		
-		return resp;
-	}
-	
+//	@PostMapping("/add")
+//	public ResponseEntity<?> createCode(@RequestBody @Valid Code code, Errors err) {
+//		Code response = null;
+//		ResponseEntity<?> resp = null;
+//		try {
+//			if(err.hasErrors()) {
+//				return ResponseEntity.badRequest().body(err);
+//			}
+//			if (code.getId() != null) {
+//				Code code2 = codeService.getCode(code.getId());
+//				CustomBeanUtilsBean.getInstance().copyProperties(code2, code);
+//				code = code2;
+//				response = codeService.modify(code);
+//				resp = new ResponseEntity<>(response,HttpStatus.OK);
+//			} else {
+//				response = codeService.add(code);
+//				resp = new ResponseEntity<>(response,HttpStatus.OK);
+//			}
+//
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//			logger.debug("Error Adding {}",code,ex);
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(code);
+//		}
+//
+//		return resp;
+//	}
+//
+    @PostMapping("/add")
+    public String createCode(@RequestBody Code code){
+        System.out.println(code.getName());
+	    codeService.add(code);
+	    return  "Successfull";
+    }
 
 
 	@GetMapping
