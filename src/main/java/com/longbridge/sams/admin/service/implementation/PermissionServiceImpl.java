@@ -102,7 +102,7 @@ public class PermissionServiceImpl implements PermissionService {
 			permissionArray[idx] = perm.getId();
 			idx++;
 		}
-		// not in NULL check
+		// not in NULL 1check
 		if (permissionArray.length == 0)
 			permissionArray = new Long[] { -1L };
 		List<Permission> optionsNotInRole = repo.findByIdNotIn(permissionArray);

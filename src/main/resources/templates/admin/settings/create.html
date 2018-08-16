@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head th:replace="layout :: head">
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <div class="container" layout:fragment="content">
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                    <h2>Create Setting</h2>
+                </div>
+            </div>
+            <br />
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+
+                    <form role="form" id="createSetting">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Name*</label>
+                                    <input type="text" class="form-control"  id="sname" placeholder="Name of Setting" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Type*</label>
+                                    <input type="text" class="form-control"  id="type" placeholder="Enter Setting type" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Description*</label>
+                                    <input type="text" class="form-control"  id="descrp" placeholder="Setting Description" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Value*</label>
+                                    <input type="text" class="form-control"  id="setVal" placeholder="Enter Setting value" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Enabled*</label>
+                                    <input type="text" class="form-control"  id="enable" placeholder="Setting Description" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-center">
+                            <button class="btn btn-w-m btn-primary" id="create" >Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div class="margin-footer">
+        </div>
+    </div>
+    <th:block layout:fragment="scripts">
+        <script th:src="@{/ajax/setting.js}"></script>
+    </th:block>
+</body>
+</html>
