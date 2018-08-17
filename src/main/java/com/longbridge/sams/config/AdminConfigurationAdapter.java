@@ -37,6 +37,7 @@ public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
 		provider.setPasswordEncoder(encoder);
 		auth.authenticationProvider(provider);
 		auth.userDetailsService(userDetailsService);
+		//changes
 //		super.configure(auth);
 	}
 

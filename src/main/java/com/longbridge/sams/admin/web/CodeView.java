@@ -10,17 +10,20 @@ public class CodeView {
 
 	@GetMapping("/edit")
     public String editCode(){
-        return "code/edit";
+        return "admin/code/edit";
     }
   	
     @GetMapping("/list")
     public String listcode(){
 
-        return "code/list";
+        return "admin/code/list-type-code";
     }
+
+    @GetMapping("/add")
+    public String addcode(){ return "admin/code/add"; }
 
     @GetMapping("/info")
     public String codeInfo(){
-        return "code/info";
+        return "admin/code/info";
     }
 }

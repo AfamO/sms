@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.longbridge.sams.model.Code;
 
+import java.util.List;
+
 @Repository
 public interface CodeRepository extends CommonRepository<Code, Long> {
 
@@ -21,5 +23,12 @@ public interface CodeRepository extends CommonRepository<Code, Long> {
 
 	@Query("select distinct c.type from Code c")
 	Page<String> findAllTypes(Pageable pageable);
-	
+
+	List<Code> findByDelFlag(String delFlag);
+
+	Code getCodeById(Long id);
+
+//	Page<Code> findCodeByType(String pattern, Pageable pageable);
+
+	Page<Code> findCodeByType(String type, Pageable page);
 }
