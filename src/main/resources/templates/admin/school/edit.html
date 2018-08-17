@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
-
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{/admin/layout}">
 
 
 <body>
     <div id="wrapper">
         <div class="container" layout:fragment="content">
-
             <div class="wrapper">
                 <div class="row border-bottom white-bg dashboard-header">
                     <h2>Create School Information</h2>
@@ -21,7 +19,7 @@
                                     <div class="col-lg-6 col-md-6 col-xs-12">
                                         <div class="form-group">
                                           <label>Name*</label>
-                                          <input type="text" class="form-control" name="schoolName" id="schoolName" placeholder="Name of School" aria-describedby="basic-addon1">
+                                          <input type="text" class="form-control" name="name" id="schoolName" placeholder="Name of School" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-xs-12">
@@ -78,7 +76,7 @@
                                     <div class="col-lg-6 col-md-6 col-xs-12">
                                         <div class="form-group">
                                           <label>Address*</label>
-                                          <input type="text" class="form-control" name="name" id="name" placeholder="Enter Address" aria-describedby="basic-addon1">
+                                          <input type="text" class="form-control" name="address.name" id="name" placeholder="Enter Address" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
 
@@ -115,6 +113,7 @@
                                 <div class="pull-right">
                                     <button class="btn btn-w-m btn-primary" id="createPermission" >Submit</button>
                                 </div>
+                                 <input type="hidden" th:name="id"  th:value="${id}" >
                             </form>
                 </div>
             </div>
@@ -124,14 +123,13 @@
             </div>
 
         </div>
-        <!-Staff ajax-->
+        <!--Staff ajax-->
         <th:block layout:fragment="scripts">
-            <script src="ajax/school.js"></script>
+            <script th:src="@{/ajax/school/edit.js}"></script>
+             <script th:src="@{/ajax/entity_loader.js}"></script>
         </th:block>
 
         <!--POP UP WELCOME MESSAGE-->
-        <script th:replace="layout :: welcomeMsg">
-        </script>
         <!--END HERE-->
 
 

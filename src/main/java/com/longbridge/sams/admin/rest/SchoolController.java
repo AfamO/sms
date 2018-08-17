@@ -46,25 +46,27 @@ public class SchoolController {
 				CustomBeanUtilsBean.getInstance().copyProperties(sch2, school);
 				school = sch2;
 				response = schoolService.update(school);
-				resp = new ResponseEntity<>(response,HttpStatus.OK);
+				resp = new ResponseEntity<>(new ResponseData (response),HttpStatus.OK);
 			} else {
 				response = schoolService.create(school);
-				resp = new ResponseEntity<>(response,HttpStatus.OK);
+				resp = new ResponseEntity<>( new ResponseData (response),HttpStatus.OK);
 			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			logger.debug("Error Adding {}",school,ex);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(school);
+			ResponseData responseData = new ResponseData ();
+			responseData.setError(ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
 		}
 		
 		return resp;
 	}
 
 	@GetMapping("{id}/view")
-	ResponseEntity<School> getSchool(@PathVariable Long id) {
+	ResponseEntity<?> getSchool(@PathVariable Long id) {
 		School school = schoolService.getSchool(id);
-		return ResponseEntity.ok(school);
+		return ResponseEntity.ok(new ResponseData(school));
 	}
 
 	

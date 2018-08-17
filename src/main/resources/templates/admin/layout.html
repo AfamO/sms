@@ -15,8 +15,6 @@
 
     <link th:href="@{~/css/font-awesome.css}" rel="stylesheet">
 
-    <link th:href="@{~/css/plugins/dataTables/datatables.min.css}" rel="stylesheet">
-    <link th:href="@{~/css/plugins/dataTables/jquery.dataTables.min.css}" rel="stylesheet">
 
 
     <!-- Toastr style -->
@@ -72,17 +70,10 @@
 
 
               <li>
-                    <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label"> Codes</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label"> System</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a th:href="@{/admin/codes/add}">Codes</a></li>
-                        <li><a th:href="@{/admin/codes/list}">Manage Code</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label"> Permission</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a th:href="@{/admin/permission/edit}">Permissions</a></li>
-                        <li><a th:href="@{/admin/permission/list}">Manage Permission</a></li>
+                        <li><a th:href="@{/admin/code/type}">Codes</a></li>
+                        <li><a th:href="@{/admin/setting}"> Settings</a></li>
                     </ul>
                 </li>
                 <li>
@@ -115,138 +106,11 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Curriculum</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="form_basic.html">Basic form</a></li>
-                        <li><a href="form_advanced.html">Advanced Plugins</a></li>
-                        <li><a href="form_wizard.html">Wizard</a></li>
-                        <li><a href="form_file_upload.html">File Upload</a></li>
-                        <li><a href="form_editors.html">Text Editor</a></li>
-                        <li><a href="form_autocomplete.html">Autocomplete</a></li>
-                        <li><a href="form_markdown.html">Markdown</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-table"></i> <span class="nav-label">Time Table</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-edit"></i> <span class="nav-label">Lesson Plan</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-bus"></i> <span class="nav-label">Transport</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-home"></i> <span class="nav-label">Hostel</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-medkit"></i> <span class="nav-label">Medicals</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-handshake-o"></i> <span class="nav-label">Clubs</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-book"></i> <span class="nav-label">Library</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-book"></i> <span class="nav-label">Bookshop</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Manage books</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Email templates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Messages</span><span class="label label-warning pull-right">16/24</span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="mailbox.html">Inbox</a></li>
-                        <li><a href="mail_detail.html">Email view</a></li>
-                        <li><a href="mail_compose.html">Compose email</a></li>
-                        <li><a href="email_template.html">Broadcast</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">Gallery</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="basic_gallery.html">Lightbox Gallery</a></li>
-                        <li><a href="slick_carousel.html">Slick Carousel</a></li>
-                        <li><a href="carousel.html">Bootstrap Carousel</a></li>
-
-                    </ul>
-                </li>
-                <li>
                     <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Documents</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="basic_gallery.html">Manage Document</a></li>
                         <li><a href="slick_carousel.html">Inventories</a></li>
                         <li><a href="carousel.html">Expenses</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Exams</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="basic_gallery.html">Manage Document</a></li>
-                        <li><a href="slick_carousel.html">Inventories</a></li>
-                        <li><a href="carousel.html">Bootstrap Carousel</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Certificate</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="basic_gallery.html">Manage Document</a></li>
-                        <li><a href="slick_carousel.html">Inventories</a></li>
-                        <li><a href="carousel.html">Bootstrap Carousel</a></li>
                     </ul>
                 </li>
             </ul>
