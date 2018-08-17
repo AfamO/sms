@@ -4,60 +4,64 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
-@Entity
-public class
-School extends AbstractEntity {
+@Entity @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class School extends AbstractEntity {
 
-    private String code;
+	private String code;
 
-    private String name;
+	private String name;
 
-    private String phoneNumber;
+	private String phoneNumber;
 
-    private String motto;
+	private String motto;
 
-    private String emailAddress;
+	private String emailAddress;
 
-    private String status;
+	private String status;
 
-    private String history;
+	private String history;
 
-    private String website;
+	private String website;
 
-    @OneToOne
-    private Image logo;
+	@OneToOne
+	@JsonIgnore
+	private Image logo;
 
-    @OneToOne
-    private Image banner;
+	@OneToOne
+	@JsonIgnore
+	private Image banner;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Address address;
 
+	public String getCode() {
+		return code;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+	public String getMotto() {
+		return motto;
+	}
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getMotto() {
-        return motto;
-    }
-
-    public String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -66,64 +70,64 @@ School extends AbstractEntity {
 	}
 
 	public void setMotto(String motto) {
-        this.motto = motto;
-    }
+		this.motto = motto;
+	}
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
+	public String getEmailAddress() {
+		return emailAddress;
+	}
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public String getHistory() {
-        return history;
-    }
+	public String getHistory() {
+		return history;
+	}
 
-    public void setHistory(String history) {
-        this.history = history;
-    }
+	public void setHistory(String history) {
+		this.history = history;
+	}
 
-    public String getWebsite() {
-        return website;
-    }
+	public String getWebsite() {
+		return website;
+	}
 
-    public void setWebsite(String website) {
-        this.website = website;
-    }
+	public void setWebsite(String website) {
+		this.website = website;
+	}
 
-    public Image getLogo() {
-        return logo;
-    }
+	public Image getLogo() {
+		return logo;
+	}
 
-    public void setLogo(Image logo) {
-        this.logo = logo;
-    }
+	public void setLogo(Image logo) {
+		this.logo = logo;
+	}
 
-    public Image getBanner() {
-        return banner;
-    }
+	public Image getBanner() {
+		return banner;
+	}
 
-    public void setBanner(Image banner) {
-        this.banner = banner;
-    }
+	public void setBanner(Image banner) {
+		this.banner = banner;
+	}
 
-    public Address getAddress() {
-        return address;
-    }
+	public Address getAddress() {
+		return address;
+	}
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	@Override
 	public String toString() {
@@ -132,6 +136,3 @@ School extends AbstractEntity {
 	}
 
 }
-
-
-
