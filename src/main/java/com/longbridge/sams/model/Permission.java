@@ -35,10 +35,13 @@ public class Permission extends AbstractEntity {
 	private String name;
 	
 	private String category;
+
 	@NotEmpty
 	private String description;
+
 	@ManyToMany(mappedBy="permissions")
 	private Set<Role>  roles;
+
 	public String getName() {
 		return name;
 	}

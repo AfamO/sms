@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+
+
+
+<body>
+<div id="wrapper">
+    <div class="container" layout:fragment="content">
+
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Create School Information</h2>
+            </div>
+        </div>
+        <br>
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <form  role="form"  id="Permission" enctype="multipart/form-data">
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Permission Name" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>Category:</label>
+                                <input type="text" class="form-control" name="category" id="category" placeholder="Enter Category" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>Description:</label>
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Enter Description" aria-describedby="basic-addon1">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-w-m btn-primary" id="createPermission" >Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="margin-footer">
+    </div>
+
+</div>
+<!-Permission ajax-->
+<th:block layout:fragment="scripts">
+    <script th:src="@{/ajax/permission.js}"></script>
+</th:block>
+
+<!--POP UP WELCOME MESSAGE-->
+<script th:replace="layout :: welcomeMsg">
+</script>
+<!--END HERE-->
+
+
+</body>
+</html>

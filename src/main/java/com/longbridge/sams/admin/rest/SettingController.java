@@ -56,8 +56,7 @@ public class SettingController {
         return result;
     }
 
-    @GetMapping("/list")
-    public DataTablesOutput<Setting> getSettings( DataTablesInput input) {
+    @GetMapping DataTablesOutput<Setting> getSettings( DataTablesInput input) {
         Pageable pageable = DataTablesUtils.getPageable(input);
 
         Page<Setting> settings = null;
