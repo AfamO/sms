@@ -29,8 +29,9 @@ public class SchoolView {
 
 	private static final Logger logger = LoggerFactory.getLogger(SchoolView.class);
 
-	  	@GetMapping("/edit")
-	    public String editSchool(){
+	  	@GetMapping("/{id}/edit")
+	    public String editSchool(@PathVariable Long id, Model model){
+	  		model.addAttribute("id", id);
 	        return "admin/school/edit";
 	    }
 	  	

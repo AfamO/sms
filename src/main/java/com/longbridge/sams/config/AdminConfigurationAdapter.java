@@ -81,6 +81,6 @@ public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
 //				.access("hasRole('ROLE_ADMIN')").and()
 				.formLogin().permitAll().loginPage("/admin/login").loginProcessingUrl("/admin/login").and().logout()
 				.permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
-				.logoutSuccessUrl("/admin/login?logout=true").invalidateHttpSession(true);
+				.logoutSuccessUrl("/admin/login?logout=true").invalidateHttpSession(true).and().csrf().disable();
 	}
 }
