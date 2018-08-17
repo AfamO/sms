@@ -5,7 +5,6 @@ function entityload(url,form){
 		  .done(function( data ) {
 		    $(form).find("[name]").each(function( index , element ) {
 		    	e = $(element);
-		    	e.attr('name');
 		    	try{
 		    	  $(element).val(data.data[e.attr('name')]);
 		    	}catch(err){

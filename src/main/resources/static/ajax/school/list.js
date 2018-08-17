@@ -2,9 +2,6 @@ $(document).ready(function () {
 
     // DATATABLE IMPLEMENTATION STARTS HERE
     var $table = $('#schoolTable').DataTable({
-            select: {
-                style: 'single'
-            },
             language: {
                 processing: "<i class='fa fa-spinner fa-spin'/>"
             },
@@ -50,29 +47,3 @@ $(document).ready(function () {
 
 });
 
-// DATATABLE IMPLEMENTATION ENDS HERE
-
-// Delete Method starts here
-function deleteDialog(id) {
-    bootbox.dialog({
-        message: "You are about to delete a school?",
-        buttons: {
-            danger: {
-                label: 'Delete',
-                className: 'btn-danger',
-                callback: function (result) {
-                    console.log("Successfully deleted school");
-                    window.location = id + "/delete/";
-                }
-            },
-            cancel: {
-                label: 'No',
-                className: 'btn-success',
-                callback: function (result) {
-                    result = false;
-                }
-            }
-        },
-    });
-
-};

@@ -27,7 +27,7 @@ import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.DataTablesUtils;
 
 @RestController()
-@RequestMapping("/admin/v1/codes")
+@RequestMapping("/admin/v1/code")
 public class CodeController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -35,9 +35,9 @@ public class CodeController {
 	CodeService codeService;
 
 	@GetMapping("{id}")
-	ResponseEntity<Code> getCode(@PathVariable Long id) {
+	ResponseEntity<?> getCode(@PathVariable Long id) {
 		Code code = codeService.getCode(id);
-		return ResponseEntity.ok(code);
+		return ResponseEntity.ok(new ResponseData(code));
 	}
 
 	@PostMapping("/add")
@@ -70,14 +70,11 @@ public class CodeController {
 	
 
 
-	@GetMapping
+/*	@GetMapping("code")
 	public DataTablesOutput<Code> getCodes(@RequestBody DataTablesInput input) {
 		Pageable pageable = DataTablesUtils.getPageable(input);
 
 		Page<Code> codes = null;
-//		if (StringUtils.isNoneBlank(search)) {
-//			codes = codeService.findCode(search, pageable);
-//		} else {
 			codes = codeService.getAllCodes(pageable);
 //		}
 		DataTablesOutput<Code> out = new DataTablesOutput<Code>();
@@ -87,11 +84,11 @@ public class CodeController {
 		out.setRecordsTotal(codes.getTotalElements());
 		return out;
 	}
+*/
 
 
-
-	@GetMapping(path = "/alltype")
-	public DataTablesOutput<Code> getAllCodesOfType(@RequestParam(name = "codeType") String codeType,
+	@GetMapping
+	public DataTablesOutput<Code> getAllCodesOfType(@RequestParam(name = "type") String codeType,
 			DataTablesInput input) {
 
 		Pageable pageable = DataTablesUtils.getPageable(input);
