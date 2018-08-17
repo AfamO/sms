@@ -48,7 +48,7 @@ $(document).ready(function () {
         "paging" : true,
         "ordering" : false,
         "dom": 'blfrtip',
-        "sAjaxSource": "/codes/alltype",
+        "sAjaxSource": "http//localhost:8080/codes/alltype",
         "aoColumns": [
             {"mData": "name"},
             {"mData":"description"}
