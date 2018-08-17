@@ -1,7 +1,10 @@
 package com.longbridge.sams.admin.rest;
 
+import javax.json.*;
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +29,15 @@ import com.longbridge.sams.model.Code;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.DataTablesUtils;
 
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
 @RestController()
-@RequestMapping("/admin/v1/codes")
+@RequestMapping("/codes")
 public class CodeController {
+
+
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
@@ -44,6 +53,7 @@ public class CodeController {
 //	public ResponseEntity<?> createCode(@RequestBody @Valid Code code, Errors err) {
 //		Code response = null;
 //		ResponseEntity<?> resp = null;
+
 //		try {
 //			if(err.hasErrors()) {
 //				return ResponseEntity.badRequest().body(err);
@@ -55,6 +65,7 @@ public class CodeController {
 //				response = codeService.modify(code);
 //				resp = new ResponseEntity<>(response,HttpStatus.OK);
 //			} else {
+//
 //				response = codeService.add(code);
 //				resp = new ResponseEntity<>(response,HttpStatus.OK);
 //			}
@@ -70,45 +81,72 @@ public class CodeController {
 //
     @PostMapping("/add")
     public String createCode(@RequestBody Code code){
-        System.out.println(code.getName());
 	    codeService.add(code);
+	    logger.debug("Successfull");
 	    return  "Successfull";
     }
 
 
-	@GetMapping
-	public DataTablesOutput<Code> getCodes(@RequestBody DataTablesInput input) {
-		Pageable pageable = DataTablesUtils.getPageable(input);
+//	@GetMapping
+//	public DataTablesOutput<Code> getCodes(@RequestBody DataTablesInput input) {
+//		Pageable pageable = DataTablesUtils.getPageable(input);
+//
+//		Page<Code> codes = null;
+////		if (StringUtils.isNoneBlank(search)) {
+////			codes = codeService.findCode(search, pageable);
+////		} else {
+//			codes = codeService.getAllCodes(pageable);
+////		}
+//		DataTablesOutput<Code> out = new DataTablesOutput<Code>();
+//		out.setDraw(input.getDraw());
+//		out.setData(codes.getContent());
+//		out.setRecordsFiltered(codes.getTotalElements());
+//		out.setRecordsTotal(codes.getTotalElements());
+//		return out;
+//	}
 
-		Page<Code> codes = null;
-//		if (StringUtils.isNoneBlank(search)) {
-//			codes = codeService.findCode(search, pageable);
-//		} else {
-			codes = codeService.getAllCodes(pageable);
+
+//
+//	@GetMapping(path = "/alltype")
+//	public DataTablesOutput<Code> getAllCodesOfType(@RequestParam(name = "codeType") String codeType,
+//			DataTablesInput input) {
+//
+//		Page<Code> codes = null;
+//		Pageable pageable = DataTablesUtils.getPageable(input);
+//
+//		if (codeType == null){
+//
+//			codes = codeService.findCode(codeType, pageable);
+//		}else{
+//			codes = codeService.getAllCodes(pageable);
 //		}
-		DataTablesOutput<Code> out = new DataTablesOutput<Code>();
-		out.setDraw(input.getDraw());
-		out.setData(codes.getContent());
-		out.setRecordsFiltered(codes.getTotalElements());
-		out.setRecordsTotal(codes.getTotalElements());
-		return out;
-	}
+//
+////		Page<Code> codes = codeService.getCodeByType(codeType, pageable);
+//
+//		DataTablesOutput<Code> out = new DataTablesOutput<Code>();
+//		out.setDraw(input.getDraw());
+//		out.setData(codes.getContent());
+//		out.setRecordsFiltered(codes.getTotalElements());
+//		out.setRecordsTotal(codes.getTotalElements());
+//
+//		return out;
+//	}
 
 
+    //Try this if it does not work
+    @GetMapping(path = "/alltype")
+    public DataTablesOutput<Code> getAllCodesOfType(DataTablesInput input) {
 
-	@GetMapping(path = "/alltype")
-	public DataTablesOutput<Code> getAllCodesOfType(@RequestParam(name = "codeType") String codeType,
-			DataTablesInput input) {
+        Pageable pageable = DataTablesUtils.getPageable(input);
+        Page<Code> codes = codeService.getAllCodes(pageable);
+        DataTablesOutput<Code> out = new DataTablesOutput<Code>();
+        out.setDraw(input.getDraw());
+        out.setData(codes.getContent());
+        out.setRecordsFiltered(codes.getTotalElements());
+        out.setRecordsTotal(codes.getTotalElements());
+        return out;
+    }
 
-		Pageable pageable = DataTablesUtils.getPageable(input);
-		Page<Code> codes = codeService.getCodeByType(codeType, pageable);
-		DataTablesOutput<Code> out = new DataTablesOutput<Code>();
-		out.setDraw(input.getDraw());
-		out.setData(codes.getContent());
-		out.setRecordsFiltered(codes.getTotalElements());
-		out.setRecordsTotal(codes.getTotalElements());
-		return out;
-	}
 
 	@GetMapping(path = "/type")
 	public DataTablesOutput<CodeTypeDTO> getAllCodeTypes(DataTablesInput input) {

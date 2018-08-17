@@ -27,5 +27,8 @@ public interface CodeRepository extends CommonRepository<Code, Long> {
 	List<Code> findByDelFlag(String delFlag);
 
 	Code getCodeById(Long id);
-	
+
+//	Page<Code> findCodeByType(String pattern, Pageable pageable);
+
+	Page<Code> findCodeByType(String type, Pageable page);
 }

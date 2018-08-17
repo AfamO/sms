@@ -66,42 +66,40 @@
     </div>
     <!-Staff ajax-->
     <th:block layout:fragment="scripts">
-        <script th:src="@{/ajax/admin.js}"></script>
-        <!--<script>-->
-            <!--$("#addcode").click(function () {-->
-                <!--$(this).attr("disabled","disabled");-->
+       // <script th:src="@{/ajax/admin.js}"></script>
+        <script>
+            $("#addcode").click(function () {
+                $(this).attr("disabled", "disabled");
 
-                <!--var data = {-->
-                    <!--"type": $("#type").val(),-->
-                    <!--"name":$("#name").val(),-->
-                    <!--"description":$("#description").val()-->
-                <!--}-->
+                var data = {
+                "type": $("#type").val(),
+                "name":$("#name").val(),
+                "description":$("#description").val()
 
-                <!--var res = data.type + "  " + data.name + "  " + data.description;-->
+            }
 
-                <!--alert(res);-->
+                var res = data.type + "  " + data.name + "  " + data.description;
 
+                $.ajax({
 
-                <!--// $.ajax({-->
-                <!--//-->
-                <!--//     url:"/admin/codes/add",-->
-                <!--//-->
-                <!--//     type:"POST",-->
-                <!--//-->
-                <!--//     contentType:"application/json;charset=utf-8",-->
-                <!--//-->
-                <!--//     data:JSON.stringify(data),-->
-                <!--//-->
-                <!--//     success: function (code) {-->
-                <!--//         alert(code.name);-->
-                <!--//-->
-                <!--//     },-->
-                <!--//     error: function (e) {-->
-                <!--//         alert(e)-->
-                <!--//     }-->
-                <!--// })-->
-            <!--});-->
-        <!--</script>-->
+                     url:"/codes/add",
+
+                     type:"POST",
+
+                    contentType:"application/json;charset=utf-8",
+
+                    data:JSON.stringify(data),
+
+                     success: function (code) {
+                       window.location = "/admin/codes/list"
+
+                   },
+                  error: function (e) {
+                       window.location = "/admin/codes/list"
+                     }
+                })
+            });
+        </script>
     </th:block>
 
     <!--POP UP WELCOME MESSAGE-->
