@@ -10,6 +10,7 @@ import com.longbridge.sams.model.Role;
 
 
 public interface PermissionRepository extends CommonRepository<Permission, Long> {
+	Permission findFirstByName(String name);
 	List<Permission> findByIdNotIn(Long[] permissions);
 
 	@Query("SELECT b FROM Permission b INNER JOIN b.roles pr WHERE pr = :role")

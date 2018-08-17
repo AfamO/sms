@@ -60,12 +60,20 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public String create(Permission permission) throws ApplicationException {
 		String result = "" ;
+		System.out.println("permission name is: " + permission.getName());
+		Permission permission1 = repo.findFirstByName(permission.getName());
+		System.out.println("permission1 is " + permission1);
 		try{
-			repo.save(permission);
-			result= messageSource.get("permission.create.success");
+			if(permission1 != null){
+				result = messageSource.get("permission.name.exist");
+				return result;
+			}else {
+				repo.save(permission);
+				result= messageSource.get("permission.create.success");
+			}
+
 		}catch(Exception ex){
 			result= messageSource.get("permission.create.error");
-			log.error(result, ex);
 			throw new ApplicationException(result);
 		}
 		return result;
