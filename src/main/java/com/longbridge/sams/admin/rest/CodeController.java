@@ -106,46 +106,46 @@ public class CodeController {
 //	}
 
 
-//
-//	@GetMapping(path = "/alltype")
-//	public DataTablesOutput<Code> getAllCodesOfType(@RequestParam(name = "codeType") String codeType,
-//			DataTablesInput input) {
-//
-//		Page<Code> codes = null;
-//		Pageable pageable = DataTablesUtils.getPageable(input);
-//
-//		if (codeType == null){
-//
-//			codes = codeService.findCode(codeType, pageable);
-//		}else{
-//			codes = codeService.getAllCodes(pageable);
-//		}
-//
-////		Page<Code> codes = codeService.getCodeByType(codeType, pageable);
-//
-//		DataTablesOutput<Code> out = new DataTablesOutput<Code>();
-//		out.setDraw(input.getDraw());
-//		out.setData(codes.getContent());
-//		out.setRecordsFiltered(codes.getTotalElements());
-//		out.setRecordsTotal(codes.getTotalElements());
-//
-//		return out;
-//	}
+
+	@GetMapping(path = "/alltype")
+	public DataTablesOutput<Code> getAllCodesOfType(@RequestParam(name = "codeType") String codeType,
+			DataTablesInput input) {
+
+		Page<Code> codes = null;
+		Pageable pageable = DataTablesUtils.getPageable(input);
+
+		if (codeType != null){
+
+			codes = codeService.findCode(codeType, pageable);
+		}else{
+			codes = codeService.getAllCodes(pageable);
+		}
+
+//		Page<Code> codes = codeService.getCodeByType(codeType, pageable);
+
+		DataTablesOutput<Code> out = new DataTablesOutput<Code>();
+		out.setDraw(input.getDraw());
+		out.setData(codes.getContent());
+		out.setRecordsFiltered(codes.getTotalElements());
+		out.setRecordsTotal(codes.getTotalElements());
+
+		return out;
+	}
 
 
     //Try this if it does not work
-    @GetMapping(path = "/alltype")
-    public DataTablesOutput<Code> getAllCodesOfType(DataTablesInput input) {
-
-        Pageable pageable = DataTablesUtils.getPageable(input);
-        Page<Code> codes = codeService.getAllCodes(pageable);
-        DataTablesOutput<Code> out = new DataTablesOutput<Code>();
-        out.setDraw(input.getDraw());
-        out.setData(codes.getContent());
-        out.setRecordsFiltered(codes.getTotalElements());
-        out.setRecordsTotal(codes.getTotalElements());
-        return out;
-    }
+//    @GetMapping(path = "/alltype")
+//    public DataTablesOutput<Code> getAllCodesOfType(DataTablesInput input) {
+//
+//        Pageable pageable = DataTablesUtils.getPageable(input);
+//        Page<Code> codes = codeService.getAllCodes(pageable);
+//        DataTablesOutput<Code> out = new DataTablesOutput<Code>();
+//        out.setDraw(input.getDraw());
+//        out.setData(codes.getContent());
+//        out.setRecordsFiltered(codes.getTotalElements());
+//        out.setRecordsTotal(codes.getTotalElements());
+//        return out;
+//    }
 
 
 	@GetMapping(path = "/type")
