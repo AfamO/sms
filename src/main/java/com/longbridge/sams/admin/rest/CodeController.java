@@ -34,7 +34,7 @@ public class CodeController {
 		return ResponseEntity.ok(new ResponseData(code));
 	}
 
-	@PostMapping("/add")
+	@PostMapping(consumes="application/json")
 	public ResponseEntity<?> createCode(@RequestBody @Valid Code code, Errors err) {
 		Code response = null;
 		ResponseEntity<?> resp = null;

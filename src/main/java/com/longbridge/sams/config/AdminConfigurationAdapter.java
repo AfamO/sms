@@ -21,7 +21,7 @@ import com.longbridge.sams.security.config.CustomAuthenticationFilter;
 import com.longbridge.sams.security.config.TypeUsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug=true)
 public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
 	@Autowired
 	@Qualifier("userDetailsService")
@@ -58,7 +58,7 @@ public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
 		filter.setAuthenticationManager(authenticationManagerBean());
 		filter.setAuthenticationFailureHandler(failureHandler());
 		filter.setAuthenticationSuccessHandler(successHandler());
-		filter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/**", "POST"));
+		filter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/login", "POST"));
 		return filter;
 	}
 

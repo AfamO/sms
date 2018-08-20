@@ -44,6 +44,10 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 		if (password == null) {
 			password = "";
 		}
+		
+		if (type == null) {
+			type = "";
+		}
 
 		username = username.trim();
 		String usernameUserType = String.format("%s%s%s", username, String.valueOf(Character.LINE_SEPARATOR), type);
