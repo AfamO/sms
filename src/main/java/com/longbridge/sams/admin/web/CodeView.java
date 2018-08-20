@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin/code")
 public class CodeView {
 
+
+    @GetMapping("/add")
+    public String addtype(){
+
+        return "admin/code/add";
+    }
+
 	@GetMapping("/{id}/edit")
     public String editCode(@PathVariable("id")String id, Model model){
 		model.addAttribute("id",id);

@@ -12,13 +12,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.longbridge.sams.admin.service.CodeService;
 import com.longbridge.sams.data.dto.CodeTypeDTO;
@@ -64,10 +58,25 @@ public class CodeController {
 			logger.debug("Error Adding {}",code,ex);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(code);
 		}
-		
+
 		return resp;
 	}
-	
+
+//	@PostMapping("/add")
+//
+//	public String addCode(@RequestBody Code code){
+//
+//		System.out.println("I got here! ");
+//		if (code.getId() != null){
+//
+//			codeService.modify(code);
+//		}else{
+//			codeService.add(code);
+//		}
+//
+//		return "Successfull";
+//	}
+//
 
 
 /*	@GetMapping("code")

@@ -28,9 +28,8 @@ public interface CodeService {
 	Page<Code> findCode(String pattern,Pageable page);
 	Page<CodeTypeDTO> getCodeTypes(Pageable pageDetails);
 	
-	
 	Code modify(Code code) throws ApplicationException;
-	String add(Code code) throws ApplicationException;
+	Code add(Code code) throws ApplicationException;
 	void remove(Code code) throws ApplicationException;
 	
 }
