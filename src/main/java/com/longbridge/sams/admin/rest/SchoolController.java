@@ -18,6 +18,8 @@ import com.longbridge.sams.model.School;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.DataTablesUtils;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -31,15 +33,18 @@ public class SchoolController {
 	@Autowired
 	SchoolService schoolService;
 
-	@PostMapping("/save")
-	public ResponseEntity<?>  createOrUpdateSchool(@RequestBody @Valid School school,  Errors err) {
+	@PostMapping(consumes="application/json")
+	public ResponseEntity<?>  createOrUpdateSchool(@RequestBody @Valid School school,  Errors errors) {
 		logger.info("schoolDTO received is {} " + school);
 
 		School response = null;
 		ResponseEntity<?> resp = null;
+		ResponseData dt = new ResponseData();
 		try {
-			if(err.hasErrors()) {
-				return ResponseEntity.badRequest().body(err);
+			if(errors.hasErrors()) {
+				List<FieldError> err_summary = errors.getFieldErrors().stream().map(f -> new FieldError(f.getField(),f.getDefaultMessage())).collect(Collectors.toList());
+				dt.setError(err_summary);
+				return ResponseEntity.badRequest().body(dt);
 			}
 			if (school.getId() != null) {
 				School sch2 = schoolService.getSchool(school.getId());

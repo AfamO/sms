@@ -1,5 +1,8 @@
 package com.longbridge.sams.admin.rest;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,28 +45,32 @@ public class CodeController {
 	}
 
 	@PostMapping(consumes="application/json")
-	public ResponseEntity<?> createCode(@RequestBody @Valid Code code, Errors err) {
+	public ResponseEntity<?> createCode(@RequestBody @Valid Code code, BindingResult result) {
 		Code response = null;
 		ResponseEntity<?> resp = null;
+		ResponseData dt = new ResponseData();
 		try {
-			if(err.hasErrors()) {
-				return ResponseEntity.badRequest().body(err);
+			if(result.hasErrors()) {
+				List<FieldError> errors = result.getFieldErrors().stream().map(f -> new FieldError(f.getField(),f.getDefaultMessage())).collect(Collectors.toList());
+				dt.setError(errors);
+				return ResponseEntity.badRequest().body(dt);
 			}
 			if (code.getId() != null) {
 				Code code2 = codeService.getCode(code.getId());
 				CustomBeanUtilsBean.getInstance().copyProperties(code2, code);
 				code = code2;
 				response = codeService.modify(code);
-				resp = new ResponseEntity<>(response,HttpStatus.OK);
+				resp = new ResponseEntity<>(new ResponseData(response),HttpStatus.OK);
 			} else {
 				response = codeService.add(code);
-				resp = new ResponseEntity<>(response,HttpStatus.OK);
+				resp = new ResponseEntity<>(new ResponseData(response),HttpStatus.OK);
 			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			logger.debug("Error Adding {}",code,ex);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(code);
+			dt.setError(ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dt);
 		}
 		
 		return resp;

@@ -17,6 +17,12 @@ public class CodeView {
         return "admin/code/edit";
     }
   	
+	
+	@GetMapping("/new")
+    public String newCode(){
+        return "admin/code/edit";
+    }
+	
     @GetMapping("/type")
     public String listTypes(){
 

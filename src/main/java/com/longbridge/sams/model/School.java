@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,8 +14,10 @@ import java.util.List;
 @Entity @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class School extends AbstractEntity {
 
+	@NotBlank
 	private String code;
 
+	@NotBlank
 	private String name;
 
 	private String phoneNumber;

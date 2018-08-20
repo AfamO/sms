@@ -21,7 +21,7 @@ import com.longbridge.sams.security.config.CustomAuthenticationFilter;
 import com.longbridge.sams.security.config.TypeUsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity(debug=true)
+@EnableWebSecurity(debug=false)
 public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
 	@Autowired
 	@Qualifier("userDetailsService")

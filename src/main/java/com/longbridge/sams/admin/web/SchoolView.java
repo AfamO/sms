@@ -35,6 +35,11 @@ public class SchoolView {
 	        return "admin/school/edit";
 	    }
 	  	
+	  	@GetMapping("/new")
+	    public String newSchool(){
+	        return "admin/school/edit";
+	    }
+	  	
 	    @GetMapping
 	    public String listschool(){
 

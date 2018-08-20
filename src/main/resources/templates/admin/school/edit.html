@@ -24,8 +24,8 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-xs-12">
                                         <div class="form-group">
-                                          <label>Motto*</label>
-                                          <input type="text" class="form-control" name="motto" id="motto" placeholder="Enter School Motto" aria-describedby="basic-addon1">
+                                          <label>Code*</label>
+                                          <input type="text" class="form-control" name="code" id="code" placeholder="Mnemonic" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,14 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                 <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Motto*</label>
+                                          <input type="text" class="form-control" name="motto" id="motto" placeholder="Enter School Motto" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-xs-12">
                                         <div class="form-group">
@@ -127,6 +134,7 @@
         <th:block layout:fragment="scripts">
             <script th:src="@{/ajax/school/edit.js}"></script>
              <script th:src="@{/ajax/entity_loader.js}"></script>
+             <script th:src="@{/ajax/entity_saver.js}"></script>
         </th:block>
 
         <!--POP UP WELCOME MESSAGE-->
