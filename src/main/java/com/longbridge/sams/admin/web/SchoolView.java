@@ -34,6 +34,11 @@ public class SchoolView {
 	  		model.addAttribute("id", id);
 	        return "admin/school/edit";
 	    }
+
+		@GetMapping("/add")
+		public String addSchool(){
+			return "admin/school/edit";
+		}
 	  	
 	    @GetMapping
 	    public String listschool(){
