@@ -78,11 +78,11 @@ public class CodeServiceImpl implements CodeService {
 
 	@Override
 //	@Transactional(rollbackFor=Exception.class)
-	public String add(Code code) throws ApplicationException {
-		String result = null;
+	public Code add(Code code) throws ApplicationException {
+		Code result = null;
 		try {
-			repo.save(code);
-			result = "Successful";
+
+			result = repo.save(code);;
 		}
 		catch (Exception e) {
 			log.error("Error adding code {}",code, e);

@@ -30,7 +30,7 @@ public interface CodeService {
 	
 	
 	Code modify(Code code) throws ApplicationException;
-	String add(Code code) throws ApplicationException;
+	Code add(Code code) throws ApplicationException;
 	void remove(Code code) throws ApplicationException;
 	
 }
