@@ -22,9 +22,8 @@
 //import com.longbridge.sams.security.config.TypeUsernamePasswordAuthenticationFilter;
 //
 //@Configuration
-//@EnableWebSecurity(debug=false)
-//@Order(1)
-//public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
+//@Order(2)
+//public class SchoolConfigurationAdapter extends WebSecurityConfigurerAdapter {
 //	@Autowired
 //	@Qualifier("userDetailsService")
 //	private UserDetailsService userDetailsService;
@@ -50,29 +49,29 @@
 //		filter.setAuthenticationManager(authenticationManagerBean());
 //		filter.setAuthenticationFailureHandler(failureHandler());
 //		filter.setAuthenticationSuccessHandler(successHandler());
-//		filter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/login", "POST"));
+//		filter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/*/login", "POST"));
 //		return filter;
 //	}
 //
 //
 //	public SimpleUrlAuthenticationFailureHandler failureHandler() {
-//		return new SimpleUrlAuthenticationFailureHandler("/admin/login?error=true");
+//		return new SimpleUrlAuthenticationFailureHandler("/school/login?error=true");
 //	}
 //	
 //	public SimpleUrlAuthenticationSuccessHandler successHandler() {
-//		return new SimpleUrlAuthenticationSuccessHandler("/admin/index");
+//		return new SimpleUrlAuthenticationSuccessHandler("/school/index");
 //	}
 //
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
 //		http.authorizeRequests()
 //				.antMatchers("/css/**", "/img/**", "/ajax/**", "/fonts/**", "/js/**","/datatables/**").permitAll().and()
-//				.antMatcher("/admin/**").addFilterBefore(customAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class)
+//				.antMatcher("/school/**").addFilterBefore(customAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class)
 //				.authorizeRequests().anyRequest()
 //				.fullyAuthenticated().and()
 ////				.access("hasRole('ROLE_ADMIN')").and()
-//				.formLogin().permitAll().loginPage("/admin/login").loginProcessingUrl("/admin/login").and().logout()
-//				.permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
-//				.logoutSuccessUrl("/admin/login?logout=true").invalidateHttpSession(true).and().csrf().disable();
+//				.formLogin().permitAll().loginPage("/school/login").loginProcessingUrl("/school/login").and().logout()
+//				.permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/school/logout"))
+//				.logoutSuccessUrl("/school/login?logout=true").invalidateHttpSession(true).and().csrf().disable();
 //	}
 //}

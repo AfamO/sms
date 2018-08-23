@@ -26,9 +26,9 @@ import javax.validation.Valid;
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/admin/v1/school")
-public class SchoolController {
+public class AdmSchoolController {
 
-	private static final Logger logger = LoggerFactory.getLogger(SchoolController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdmSchoolController.class);
 
 	@Autowired
 	SchoolService schoolService;
@@ -53,7 +53,7 @@ public class SchoolController {
 				response = schoolService.update(school);
 				resp = new ResponseEntity<>(new ResponseData (response),HttpStatus.OK);
 			} else {
-				response = schoolService.create(school);
+				response = schoolService.create(school,true);
 				resp = new ResponseEntity<>( new ResponseData (response),HttpStatus.OK);
 			}
 

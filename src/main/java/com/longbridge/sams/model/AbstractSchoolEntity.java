@@ -38,13 +38,13 @@ public class AbstractSchoolEntity extends AbstractEntity {
 	}
 
 	@Column(name="sid")
-	private Integer schoolId;
+	private Long schoolId;
 
-	public Integer getSchoolId() {
+	public Long getSchoolId() {
 		return schoolId;
 	}
 
-	public void setSchoolId(Integer schoolId) {
+	public void setSchoolId(Long schoolId) {
 		this.schoolId = schoolId;
 	}
 

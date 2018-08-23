@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/code")
-public class CodeView {
+public class AdmCodeView {
 
 	@GetMapping("/{id}/edit")
     public String editCode(@PathVariable("id")String id, Model model){

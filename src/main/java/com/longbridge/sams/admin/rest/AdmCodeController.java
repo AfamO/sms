@@ -32,7 +32,7 @@ import com.longbridge.sams.utils.DataTablesUtils;
 
 @RestController()
 @RequestMapping("/admin/v1/code")
-public class CodeController {
+public class AdmCodeController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired

@@ -1,19 +1,29 @@
 package com.longbridge.sams.admin.service.implementation;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.admin.service.SchoolService;
+import com.longbridge.sams.data.dto.SchoolInfo;
+import com.longbridge.sams.model.Role;
 import com.longbridge.sams.model.School;
+import com.longbridge.sams.model.User;
+import com.longbridge.sams.model.UserStatus;
+import com.longbridge.sams.model.UserType;
+import com.longbridge.sams.repository.RoleRepository;
 import com.longbridge.sams.repository.SchoolRepository;
+import com.longbridge.sams.repository.UserRepository;
 import com.longbridge.sams.utils.Messages;
 
 @Service
@@ -22,6 +32,16 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private SchoolRepository repo;
+	
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private RoleRepository roleRepo;
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	public void setRepo(SchoolRepository repo) {
 		this.repo = repo;
 	}
@@ -89,5 +109,46 @@ public class SchoolServiceImpl implements SchoolService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public User addDefaultUser(Long schoolId, User user) {
+		// TODO Auto-generated method stub
+		School school = repo.getOne(schoolId);
+		user.setType(UserType.STAFF);
+		user.setDelFlag("N");
+		user.setCreatedOn(new Date());
+		//TODO: get password expiry period
+		user.setExpiryDate(DateUtils.addMonths(new Date(), 3));
+		user.setLoginId(school.getCode().toLowerCase());
+		//TODO: set and send password
+		user.setPassword(encoder.encode(school.getCode().toLowerCase()));
+		user.setStatus(UserStatus.ENABLED);
+		//user.setRole(role);
+		user.setSchoolId(schoolId);
+		return userRepo.save(user);
+	}
+
+	@Override
+	public School create(School school, boolean adduser) {
+		// TODO Auto-generated method stub
+		School school2 = create(school);
+		if(adduser) {
+			Role role = new Role();
+			role.setSchoolId(school2.getId());
+			role.setName("default Role");
+			role.setCreatedOn(new Date());
+			role = roleRepo.save(role);
+			User user = new User();
+			user.setRole(role);
+			User defaultUser = addDefaultUser(school2.getId(), user);
+		}
+		return school2;
+	}
+
+	@Override
+	public SchoolInfo getSchool(String code) {
+		return repo.findByCode(code);
+	}
+
 
 }

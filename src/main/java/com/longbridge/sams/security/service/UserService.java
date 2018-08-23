@@ -3,6 +3,7 @@ package com.longbridge.sams.security.service;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class UserService {
 	@Transactional
 	public User getUserForLoginByName(String userName) {
 		
-		String[] usernameAndType = StringUtils.split(userName, String.valueOf(Character.LINE_SEPARATOR));
+		String[] usernameAndType = StringUtils.split(userName, ":");
 		if(usernameAndType.length <2)
 			return null;
 		String type = usernameAndType[1];
@@ -37,7 +38,11 @@ public class UserService {
 			user = userrepo.findFirstByLoginIdAndType(name, UserType.ADMIN);
 			break;
 		case "school":
-			user = userrepo.findFirstByLoginIdAndType(name, UserType.STAFF);
+			if(usernameAndType.length >= 2) {
+				String sid = usernameAndType[2];
+				Long schoolid = NumberUtils.createLong(sid);
+				user = userrepo.findFirstByLoginIdAndTypeAndSchoolId(name, UserType.STAFF,schoolid);
+			}
 			break;
 		case "parent":
 			user = userrepo.findFirstByLoginIdAndType(name, UserType.PARENT);

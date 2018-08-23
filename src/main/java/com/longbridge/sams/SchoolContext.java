@@ -1,13 +1,13 @@
 package com.longbridge.sams;
 public class SchoolContext {
 
-  private static ThreadLocal<Integer> currentTenant = new ThreadLocal<>();
+  private static ThreadLocal<Long> currentTenant = new ThreadLocal<>();
 
-  public static Integer getCurrentTenant() {
+  public static Long getCurrentTenant() {
     return currentTenant.get();
   }
 
-  public static void setCurrentTenant(Integer sid) {
+  public static void setCurrentTenant(Long sid) {
     currentTenant.set(sid);
   }
 
