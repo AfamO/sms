@@ -1,4 +1,4 @@
-package com.longbridge.sams.admin.rest;
+package com.longbridge.sams.data.dto;
 
 public class ResponseData {
 

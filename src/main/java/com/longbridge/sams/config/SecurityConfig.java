@@ -23,7 +23,7 @@ import com.longbridge.sams.security.config.CustomAuthenticationFilter;
 import com.longbridge.sams.security.config.SchoolAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity(debug=true)
+@EnableWebSecurity(debug=false)
 public class SecurityConfig {
 
 	@Autowired

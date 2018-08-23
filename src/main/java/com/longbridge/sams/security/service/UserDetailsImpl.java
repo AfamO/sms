@@ -29,6 +29,8 @@ public class UserDetailsImpl implements UserDetails {
     private String role;
     
     private UserType type;
+    
+    private Long sid;
 
     public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
         this.authorities = authorities;
@@ -126,4 +128,13 @@ public class UserDetailsImpl implements UserDetails {
 		this.type = type;
 	}
 
+	public Long getSid() {
+		return sid;
+	}
+
+	public void setSid(Long sid) {
+		this.sid = sid;
+	}
+
+	
 }

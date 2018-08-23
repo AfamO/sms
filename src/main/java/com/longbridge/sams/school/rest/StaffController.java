@@ -1,4 +1,4 @@
-package com.longbridge.sams.admin.rest;
+package com.longbridge.sams.school.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +13,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
-import com.longbridge.sams.admin.service.SchoolService;
 import com.longbridge.sams.data.dto.FieldError;
 import com.longbridge.sams.data.dto.ResponseData;
-import com.longbridge.sams.model.School;
+import com.longbridge.sams.model.Staff;
+import com.longbridge.sams.school.service.StaffService;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.DataTablesUtils;
 
@@ -25,21 +25,20 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-//@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/admin/v1/school")
-public class AdmSchoolController {
+@RequestMapping("/school/v1/staff")
+public class StaffController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AdmSchoolController.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	SchoolService schoolService;
+	StaffService staffService;
 
 	@PostMapping(consumes="application/json")
-	public ResponseEntity<?>  createOrUpdateSchool(@RequestBody @Valid School school,  Errors errors) {
-		logger.info("schoolDTO received is {} " + school);
+	public ResponseEntity<?>  createOrUpdateStaff(@RequestBody @Valid Staff staff,  Errors errors) {
+		logger.info("staff received is {} " + staff);
 
-		School response = null;
+		Staff response = null;
 		ResponseEntity<?> resp = null;
 		ResponseData dt = new ResponseData();
 		try {
@@ -48,20 +47,20 @@ public class AdmSchoolController {
 				dt.setError(err_summary);
 				return ResponseEntity.badRequest().body(dt);
 			}
-			if (school.getId() != null) {
-				School sch2 = schoolService.getSchool(school.getId());
-				CustomBeanUtilsBean.getInstance().copyProperties(sch2, school);
-				school = sch2;
-				response = schoolService.update(school);
+			if (staff.getId() != null) {
+				Staff staff2 = staffService.getStaff(staff.getId());
+				CustomBeanUtilsBean.getInstance().copyProperties(staff2, staff);
+				staff = staff2;
+				response = staffService.updateStaff(staff);
 				resp = new ResponseEntity<>(new ResponseData (response),HttpStatus.OK);
 			} else {
-				response = schoolService.create(school,true);
+				response = staffService.createStaff(staff);
 				resp = new ResponseEntity<>( new ResponseData (response),HttpStatus.OK);
 			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			logger.debug("Error Adding {}",school,ex);
+			logger.debug("Error Adding {}",staff,ex);
 			ResponseData responseData = new ResponseData ();
 			responseData.setError(ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
@@ -71,27 +70,27 @@ public class AdmSchoolController {
 	}
 
 	@GetMapping("{id}/view")
-	ResponseEntity<?> getSchool(@PathVariable Long id) {
-		School school = schoolService.getSchool(id);
-		return ResponseEntity.ok(new ResponseData(school));
+	ResponseEntity<?> getStaff(@PathVariable Long id) {
+		Staff staff = staffService.getStaff(id);
+		return ResponseEntity.ok(new ResponseData(staff));
 	}
 
 	
 	@GetMapping
-	public DataTablesOutput<School> getSchools(DataTablesInput input) {
+	public DataTablesOutput<Staff> getStaff(DataTablesInput input) {
 		Pageable pageable = DataTablesUtils.getPageable(input);
 
-		Page<School> schools = null;
+		Page<Staff> staffers = null;
 //		if (StringUtils.isNoneBlank(search)) {
 //			codes = codeService.findCode(search, pageable);
 //		} else {
-		schools = schoolService.getSchools(pageable);
+		staffers = staffService.getStaff(pageable);
 //		}
-		DataTablesOutput<School> out = new DataTablesOutput<School>();
+		DataTablesOutput<Staff> out = new DataTablesOutput<Staff>();
 		out.setDraw(input.getDraw());
-		out.setData(schools.getContent());
-		out.setRecordsFiltered(schools.getTotalElements());
-		out.setRecordsTotal(schools.getTotalElements());
+		out.setData(staffers.getContent());
+		out.setRecordsFiltered(staffers.getTotalElements());
+		out.setRecordsTotal(staffers.getTotalElements());
 		return out;
 	}
 

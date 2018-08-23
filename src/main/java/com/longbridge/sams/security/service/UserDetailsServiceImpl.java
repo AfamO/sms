@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.longbridge.sams.ApplicationException;
+import com.longbridge.sams.SchoolContext;
 import com.longbridge.sams.model.User;
+import com.longbridge.sams.model.UserType;
 
 
 @Service("userDetailsService")

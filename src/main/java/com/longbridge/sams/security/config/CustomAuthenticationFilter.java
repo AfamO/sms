@@ -71,6 +71,7 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 	private String obtainSchool(HttpServletRequest request) {
             // request param
 		SchoolInfo school = (SchoolInfo)request.getSession().getAttribute("school");
+		if(school == null) return null;
 		return school.getId().toString();
 	}
 
