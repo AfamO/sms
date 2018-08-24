@@ -25,9 +25,9 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/school")
-public class SchoolView {
+public class AdmSchoolView {
 
-	private static final Logger logger = LoggerFactory.getLogger(SchoolView.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdmSchoolView.class);
 
 	  	@GetMapping("/{id}/edit")
 	    public String editSchool(@PathVariable Long id, Model model){
@@ -39,6 +39,11 @@ public class SchoolView {
 		public String addSchool(){
 			return "admin/school/edit";
 		}
+	  	
+	  	@GetMapping("/new")
+	    public String newSchool(){
+	        return "admin/school/edit";
+	    }
 	  	
 	    @GetMapping
 	    public String listschool(){

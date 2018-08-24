@@ -31,7 +31,7 @@ public class Code extends AbstractEntity  {
 	@NotEmpty
 	private String type;
 	 
-	
+
 	public String getName() {
 		return name;
 	}

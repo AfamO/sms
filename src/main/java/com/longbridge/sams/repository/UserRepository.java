@@ -13,5 +13,6 @@ public interface UserRepository extends CommonRepository<User,Long> {
 	
 	User findByLoginIdAndStatus(String name, String status);
 	User findFirstByLoginIdAndType(String name, UserType type);
+	User findFirstByLoginIdAndTypeAndSchoolId(String name, UserType type, Long schoolId);
 	List<User> findByIdNotIn(Long[] memberArray);
 }

@@ -14,32 +14,39 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import com.longbridge.sams.admin.service.SchoolService;
+import com.longbridge.sams.data.dto.FieldError;
+import com.longbridge.sams.data.dto.ResponseData;
 import com.longbridge.sams.model.School;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.DataTablesUtils;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/admin/v1/school")
-public class SchoolController {
+public class AdmSchoolController {
 
-	private static final Logger logger = LoggerFactory.getLogger(SchoolController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdmSchoolController.class);
 
 	@Autowired
 	SchoolService schoolService;
 
-	@PostMapping("/save")
-	public ResponseEntity<?>  createOrUpdateSchool(@RequestBody @Valid School school,  Errors err) {
+	@PostMapping(consumes="application/json")
+	public ResponseEntity<?>  createOrUpdateSchool(@RequestBody @Valid School school,  Errors errors) {
 		logger.info("schoolDTO received is {} " + school);
 
 		School response = null;
 		ResponseEntity<?> resp = null;
+		ResponseData dt = new ResponseData();
 		try {
-			if(err.hasErrors()) {
-				return ResponseEntity.badRequest().body(err);
+			if(errors.hasErrors()) {
+				List<FieldError> err_summary = errors.getFieldErrors().stream().map(f -> new FieldError(f.getField(),f.getDefaultMessage())).collect(Collectors.toList());
+				dt.setError(err_summary);
+				return ResponseEntity.badRequest().body(dt);
 			}
 			if (school.getId() != null) {
 				School sch2 = schoolService.getSchool(school.getId());
@@ -48,7 +55,7 @@ public class SchoolController {
 				response = schoolService.update(school);
 				resp = new ResponseEntity<>(new ResponseData (response),HttpStatus.OK);
 			} else {
-				response = schoolService.create(school);
+				response = schoolService.create(school,true);
 				resp = new ResponseEntity<>( new ResponseData (response),HttpStatus.OK);
 			}
 

@@ -5,20 +5,21 @@ package com.longbridge.sams.school.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
+import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.model.Staff;
 
 
 public interface StaffService {
-    String createStaff(Staff staffDTO);
+	
+	Staff createStaff(Staff staffDTO) throws ApplicationException;
 
-    String updateStaff(Staff staffDTO);
+	Staff updateStaff(Staff staffDTO) throws ApplicationException;
 
-    String deleteStaff(Staff staff);
+    void deleteStaff(Staff staff) throws ApplicationException;
 
     Staff getStaff(Long Id);
 
-    Page<Staff> getStaff (String delFlag, Pageable pageable );
+    Page<Staff> getStaff (Pageable pageable );
     
     
 

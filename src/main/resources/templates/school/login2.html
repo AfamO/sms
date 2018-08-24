@@ -1,60 +1,83 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Sep 2017 15:11:57 GMT -->
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ICON | School Management</title>
+<title>ICON | School Management</title>
 
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet">
+<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet">
 
-    <link href="../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet">
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+<link href="../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet">
+<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
 
 </head>
 
 <body class="gray-bg">
 
-    <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
-            <div>
+	<div class="middle-box text-center loginscreen animated fadeInDown">
+		<div>
+			<div>
 
-                <div class="logo-name"><img src="img/sms-logo1.png"></div>
+				<div class="logo-name">
+					<img src="../static/img/sms-logo1.png" th:src="@{/img/sms-logo1.png}">
+				</div>
 
-            </div>
-            <h3>Welcome to Icon School Management</h3>
-             <h2>[[ ${#session.getAttribute('sid')}]]</h2>
-            <p>Login as an Admin</p>
-            <form class="m-t" role="form" action="http://webapplayers.com/inspinia_admin-v2.7.1/index.html">
-                <div class="form-group">
-                    <input type="email" class="form-control" name="susername" placeholder="Username" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="spassword" placeholder="Password" required="">
-                </div>
-                 <div class="form-group">
-                    <input type="hidden" class="form-control" name="usertype" value="school">
-                </div>
-                <button style="background-color: #465765; border-color: #465765;" type="submit" class="btn btn-primary block full-width m-b">Login</button>
-				<input type="hidden" name="usertype" value="school"/>
-                <a href="#"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
-            </form>
-            <p class="m-t"> <small> Icon School Management App <span>2018</span>. Powered by Longbridge Technologies</small> </p>
-        </div>
-    </div>
+			</div>
+			<h3>Welcome to Icon School Management</h3>
+            <h2>[[${session.school.name}]]</h2> 
+			<th:block th:if="${param.error}">
+				<div class="alert alert-danger" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<strong>Login Error</strong> <span th:if="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"
+						th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}">Invalid credentials</span>
+				</div>
+			</th:block>
 
-    <!-- Mainly scripts -->
-    <script src="../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
-    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+			<th:block th:if="${param.logout}">
+				<div class="alert alert-info" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<strong>Logout Successful</strong>
+				</div>
+			</th:block>
+			<form class="m-t" role="form" method="post" th:action="@{/school/login}">
+				<div class="form-group">
+					<input type="text" class="form-control" name="susername" placeholder="Username" required="">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control"  name="spassword" placeholder="Password" required="">
+				</div>
+				<input type="hidden" name="usertype" value="school" />
+				<button style="background-color: #465765; border-color: #465765;" type="submit"
+					class="btn btn-primary block full-width m-b">Login</button>
+
+				<a href="#"><small>Forgot password?</small></a>
+				<p class="text-muted text-center">
+					<small>Do not have an account?</small>
+				</p>
+				<a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+			</form>
+			<p class="m-t">
+				<small> Icon School Management App <span>2018</span>. Powered by Longbridge Technologies
+				</small>
+			</p>
+		</div>
+	</div>
+
+	<!-- Mainly scripts -->
+	<script src="../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 
 </body>
 
 
-<!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Sep 2017 15:11:57 GMT -->
 </html>

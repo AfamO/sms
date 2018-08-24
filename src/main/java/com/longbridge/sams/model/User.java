@@ -1,25 +1,16 @@
 package com.longbridge.sams.model;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 
 import javax.persistence.Column;
 
@@ -36,7 +27,7 @@ public class User extends AbstractSchoolEntity{
 	private static final String INVALID_PWD = "ROLE_PWD_RESET";
 	private String password;
 	private UserType type;
-	private String status;
+	private UserStatus status;
 	private Date expiryDate;
 	private Date lastLoginDate;
 	@Column(unique=true) @NotEmpty
@@ -71,13 +62,14 @@ public class User extends AbstractSchoolEntity{
 		this.loginId = loginId;
 	}
 	
-	public String getStatus() {
+	public UserStatus getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+
+	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
-	
+
 	public Date getExpiryDate() {
 		return expiryDate;
 	}

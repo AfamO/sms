@@ -13,6 +13,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.longbridge.sams.data.dto.SchoolInfo;
+
 public class CustomAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 	private final String username_param = "susername";
@@ -36,6 +38,8 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 		String username = obtainUsername(request);
 		String password = obtainPassword(request);
 		String type = obtainUserType(request);
+		
+		String sid = obtainSchool(request);
 
 		if (username == null) {
 			username = "";
@@ -48,9 +52,13 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 		if (type == null) {
 			type = "";
 		}
-
+		if (sid == null) {
+			sid = "";
+		}
+		
+		
 		username = username.trim();
-		String usernameUserType = String.format("%s%s%s", username, String.valueOf(Character.LINE_SEPARATOR), type);
+		String usernameUserType = String.format("%s%s%s%s%s", username, ":", type,":",sid);
 
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(usernameUserType, password);
 
@@ -60,6 +68,15 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 		return this.getAuthenticationManager().authenticate(authRequest);
 	}
 	
+	private String obtainSchool(HttpServletRequest request) {
+            // request param
+		SchoolInfo school = (SchoolInfo)request.getSession().getAttribute("school");
+		if(school == null) return null;
+		return school.getId().toString();
+	}
+
+
+
 	private void setDetails(HttpServletRequest request,
 			UsernamePasswordAuthenticationToken authRequest) {
 		authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
