@@ -1,6 +1,8 @@
 $(document).ready(function () {
-    school_id =	$("input[name='id']").val();
-    _url = '/admin/permission/{idx}/edit';
-    url = _url.replace('{idx}',permission_id);
-    entityload(url,$('#editPermission'));
+    $("#createPermission").click(function(e) {
+        school_id = $("input[name='id']").val();
+        _url = "http://localhost:8080/permission/add",
+        url = _url.replace('{idx}', permission_id);
+        entityload(url, $('#Permission'));
+    });
 });
