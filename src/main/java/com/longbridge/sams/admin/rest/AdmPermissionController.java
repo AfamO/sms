@@ -24,7 +24,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("/permission")
-public class PermissionController {
+public class AdmPermissionController {
 
     @Autowired
     PermissionService permissionService;
