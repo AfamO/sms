@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
 	public User createUser(Long schoolId, User user) throws ApplicationException {
 		User result = null;
 		try {
+			user.setStatus(Status.DISABLED);
 			user.setSchoolId(schoolId);
 			result = repo.save(user);
 		}
