@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/school/layout}">
+
+<body>
+	<div class="col-md-6" layout:fragment="breadcrumb">
+		<ul class="breadcrumb">
+			<li class="active"><i class="fa fa-home"></i> Home</li>
+		</ul>
+	</div>
+
+	<div class="container-fluid" layout:fragment="content">
+
+		
+		<!-- /.row -->
+
+	</div>
+	<th:block layout:fragment="scripts">
+	</th:block>
+
+	<!--POP UP WELCOME MESSAGE-->
+	<script th:replace="layout :: welcomeMsg">
+		
+	</script>
+	<!--END HERE-->
+
+
+</body>
+</html>

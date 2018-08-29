@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">SMS - School Management System</title>
+
+    <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link href="../../static/font-awesome/css/font-awesome.css" th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+<link href="../../static/css/plugins/toastr/toastr.min.css" th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
+    <link href="../../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet">
+    <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+     <link href="../../static/css/custom.css" th:href="@{/css/custom.css}" rel="stylesheet">
+
+</head>
+
+<body class="">
+
+    <div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" src="../../static/img/profile_small.jpg"/>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span sec:authentication="name" class="block m-t-xs font-bold">David Williams</span>
+                            <span sec:authentication="principal.role" class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
+                            <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/logout}">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        SAMS
+                    </div>
+                </li>
+                 <li>
+                    <a th:href="@{/admin/school}"><i class="fa fa-institution"></i> <span class="nav-label">Schools</span></a>
+                </li>
+                <li>
+                    <a href=""><i class="fa fa-cogs"></i> <span class="nav-label">System</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a th:href="@{/admin/code/type}">Codes</a></li>
+                        <li><a th:href="@{/admin/setting}">Settings</a></li>
+                        <li><a th:href="@{/admin/permission}">Permissions</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+           <!--  <form role="search" class="navbar-form-custom">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form> -->
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    
+                </li>
+
+
+                <li>
+                    <a th:href="@{/admin/logout}">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4"  layout:fragment="subject">
+                    <h2>the main title</h2>
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item">
+                            <a href="index-2.html">This is</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Breadcrumb</strong>
+                        </li>
+                    </ol>
+                </div>
+               <!--  <div class="col-sm-8">
+                    <div class="title-action">
+                        <a href="#" class="btn btn-primary">This is action area</a>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight" >
+                <!-- Content goes here -->
+                <div layout:fragment="content">
+                </div>
+            </div>
+            <div class="footer">
+                <div class="float-right">
+                    Powered by <strong>Longbridge</strong> ltd.
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    <!-- Mainly scripts -->
+    <script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script src="../../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+    <script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js" th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../../static/js/inspinia.js" th:src="@{/js/inspinia.js}"></script>
+    <script src="../../static/js/plugins/pace/pace.min.js" th:src="@{/js/plugins/pace/pace.min.js}"></script>
+        <script src="../../static/js/plugins/toastr/toastr.min.js" th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+	    function initnotices(){
+	    	toastr.options = {
+		                    "closeButton": true,
+		                    "debug": false,
+		                    "newestOnTop": false,
+		                    "progressBar": false,
+		                    "positionClass": "toast-top-right",
+		                    "preventDuplicates": false,
+		                    "onclick": null,
+		                    "showDuration": "5000",
+		                    "hideDuration": "1000",
+		                    "timeOut": "3500",
+		                    "extendedTimeOut": "1000",
+		                    "showEasing": "swing",
+		                    "hideEasing": "linear",
+		                    "showMethod": "fadeIn",
+		                    "hideMethod": "fadeOut"
+		                }
+		$("#fieldErrors li").each(function(index, value) {
+			
+			fname = $(this).attr("fieldName");
+			msg = '<label  class="error" for="'+fname+'">'+$(this).text()+'</label>'
+			field = $("[name='" + fname + "']");
+			
+			$("[name='" + fname + "']").closest(".form-group").addClass("has-error");
+		});
+		
+		$('#messages li').each(function(index, value) {
+			tt = $(this).text();
+            toastr["success"](tt);
+		});
+	
+		$('#fieldMessages li').each(function(index, value) {
+			fld = $(this).attr("field");
+			field = $("[name='" + fld + "']");
+			msg = '<label  class="error" for="'+field+'">'+$(this).text()+'</label>'
+			$(field).after(msg)
+			$(field).closest(".form-group").addClass("has-error");
+		});
+	
+		$('#errors li').each(function(index, value) {
+			var tt = $(this).text();
+			toastr["error"](tt);
+		});
+	}
+
+        $(document).ready(function(){
+        		initnotices();
+        });
+            /*]]>*/
+        </script>
+ <th:block layout:fragment="scripts">
+  </th:block>
+  <div hidden="hidden">
+		<ul id="messages" >
+			<li th:if="${message != null}" th:text="${message}"></li>
+		</ul>
+	</div>
+	<div hidden="hidden">
+		<ul id="errors" >
+			<li th:if="${error != null}" th:text="${error}"></li>
+		</ul>
+	</div>
+</body>
+
+
+</html>
