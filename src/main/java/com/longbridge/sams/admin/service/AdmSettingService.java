@@ -3,6 +3,7 @@ package com.longbridge.sams.admin.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.model.Setting;
@@ -10,8 +11,9 @@ import com.longbridge.sams.model.Setting;
 
 
 
-public interface SettingService{
+public interface AdmSettingService{
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     String addSetting( Setting setting) throws ApplicationException;
 
     Setting getSetting(Long id);
