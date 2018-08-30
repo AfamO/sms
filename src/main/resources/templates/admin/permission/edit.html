@@ -1,80 +1,92 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
-
-
-
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/admin/layout}" th:with="title='Schools List'">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/datatables/select/css/select.bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/datatables/css/dataTables.bootstrap.css}" />
+</head>
 <body>
-<div id="wrapper">
-    <div class="container" layout:fragment="content">
+	
+	<div layout:fragment="subject">
+		<h2>Permission - Edit</h2>
+		<div class="col-md-12" >
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
+				<li class="breadcrumb-item"><a th:href="@{/admin/permission}">Permissions</a></li>
+				<li class="breadcrumb-item active">Edit</li>
+			</ul>
+		</div>
+	</div>
 
-        <div class="wrapper">
-            <div class="row border-bottom white-bg dashboard-header">
-                <h2>Create School Information</h2>
-            </div>
-        </div>
-        <br>
-        <div class="wrapper">
-            <div class="row border-bottom white-bg dashboard-header">
-                <form  role="form"  id="Permission" enctype="multipart/form-data">
+	<div class="row" layout:fragment="content">
+		<div class="col-lg-12">
+			<div class="ibox ">
+				<div class="ibox-title">
+					<h5></h5>
+					<div class="ibox-tools">
+						<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+						</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-wrench"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li><a href="#" class="dropdown-item">Config option 1</a></li>
+							<li><a href="#" class="dropdown-item">Config option 2</a></li>
+						</ul>
+						<a class="close-link"> <i class="fa fa-times"></i>
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+					<form role="form" method="post"  th:action="@{/admin/permission}" th:object="${permission}">
+						<div hidden="hidden">
+							<ul id="fieldErrors" th:if="${#fields.hasErrors('*')}">
+								<li th:each="e : ${#fields.detailedErrors()}" th:text="${e.global}? '*' : ${e.fieldName}"></li>
+							</ul>
+						</div>
+						<div hidden="hidden">
+							<ul id="fieldMessages" th:if="${#fields.hasErrors('*')}">
+								<li th:each="e : ${#fields.detailedErrors()}" th:attr="field=${e.fieldName}" th:text="${e.message}"></li>
+							</ul>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-xs-12">
+								<div class="form-group">
+									<label>Name*</label> <input type="text" class="form-control" th:field="*{name}" placeholder="Name "
+										aria-describedby="basic-addon1">
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-xs-12">
+								<div class="form-group">
+									<label>Description*</label> <input type="text" class="form-control" th:field="*{description}" placeholder="Description"
+										aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-xs-12">
+								<div class="form-group">
+									<label>Category*</label> <input type="text" class="form-control" th:field="*{category}" placeholder="Category"
+										aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<button class="btn btn-w-m btn-primary" id="createOrUpdateSchool">Submit</button>
+								<input th:hidden="hidden" th:field="*{id}">
+								<input th:hidden="hidden" th:field="*{version}">
+							</div>
+						</div>
 
+					</form>
+				</div>
 
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Name:</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Permission Name" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Category:</label>
-                                <input type="text" class="form-control" name="category" id="category" placeholder="Enter Category" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Description:</label>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="Enter Description" aria-describedby="basic-addon1">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-lg-6 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Role*</label>
-                                <select type="text" class="form-control" name="role" id="role" placeholder="Enter Role" aria-describedby="basic-addon1">
-                                </select>
-                            </div>
-                        </div>
-                    <div class="pull-right">
-                        <button class="btn btn-w-m btn-primary" id="createPermission" >Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="margin-footer">
-    </div>
-
-</div>
-<!-Permission ajax-->
-<th:block layout:fragment="scripts">
-    <!--<script th:src="@{/ajax/permission/edit.js}"></script>-->
-    <script th:src="@{/ajax/permission/permission.js}"></script>
-    <script th:src="@{/ajax/permission/permissionSave.js}"></script>
-</th:block>
-
-<!--POP UP WELCOME MESSAGE-->
-<script th:replace="layout :: welcomeMsg">
-</script>
-<!--END HERE-->
-
-
+			</div>
+		</div>
+	</div>
 </body>
-</html>
+
+
+
+<th:block layout:fragment="scripts">
+</th:block>

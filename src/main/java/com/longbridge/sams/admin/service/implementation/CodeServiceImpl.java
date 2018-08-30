@@ -47,8 +47,7 @@ public class CodeServiceImpl implements CodeService {
 
 	@Override
 	public Iterable<Code> getAllCodes() {
-
-	    return repo.findAll();
+		return repo.findAll();
 	}
 
 	@Override
@@ -59,8 +58,7 @@ public class CodeServiceImpl implements CodeService {
 
 	@Override
 	public Iterable<Code> getCodeByName(String name) {
-
-	    return  repo.findByName(name);
+		return  repo.findByName(name);
 	}
 
 	@Override
@@ -77,12 +75,11 @@ public class CodeServiceImpl implements CodeService {
 	}
 
 	@Override
-//	@Transactional(rollbackFor=Exception.class)
+	@Transactional(rollbackFor=Exception.class) 
 	public Code add(Code code) throws ApplicationException {
 		Code result = null;
 		try {
-
-			result = repo.save(code);;
+			result = repo.save(code);
 		}
 		catch (Exception e) {
 			log.error("Error adding code {}",code, e);
@@ -90,22 +87,6 @@ public class CodeServiceImpl implements CodeService {
 		}
 		return result;
 	}
-
-//    @Override
-//    @Transactional(rollbackFor=Exception.class)
-//    public Code add(Code code) throws ApplicationException {
-//        Code result = null;
-//        try {
-//            result = repo.save(code);
-//        }
-//        catch (Exception e) {
-//            log.error("Error adding code {}",code, e);
-//            throw new ApplicationException(e);
-//        }
-//        return result;
-//    }
-
-
 
 	@Override
 	public void remove(Code code) throws ApplicationException {
@@ -141,8 +122,8 @@ public class CodeServiceImpl implements CodeService {
 
 	@Override
 	public Page<Code> findCode(String pattern,Pageable page) {
-//		return repo.findUsingPattern(pattern, page);
-		return repo.findCodeByType(pattern, page);
+		return repo.findUsingPattern(pattern, page);
+		//return repo.findCodes(pattern, page);
 	}
 	
 	@Override

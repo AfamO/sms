@@ -1,6 +1,6 @@
 package com.longbridge.sams;
 
-public class ApplicationException extends RuntimeException {
+public class ApplicationException extends Exception {
 
 	/**
 	 * 

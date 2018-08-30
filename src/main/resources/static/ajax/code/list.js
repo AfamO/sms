@@ -25,39 +25,11 @@ $(document).ready(function () {
 		"columnDefs" : [{
        	 "targets" : 1,
            "render" : function (data, type, row) {
-               var linkView = '<div class="btn-group">'+
-                   '<a type="button" class="btn btn-warning " href="/admin/code/type/'+row.type +'"><i class="fa fa-eye"></i></a>'+
-                   '</div>';
-               return linkView ;
+               kk='<a href="/admin/code/type/' + row.type + '" class="btn btn-white btn-sm"><i class="fa fa-eye"></i>  </a>'
+               return kk ;
            }
           
        }]
 });
 });
 
-// DATATABLE IMPLEMENTATION ENDS HERE
-
-// Delete Method starts here
-function deleteDialog(id) {
-    bootbox.dialog({
-        message: "You are about to delete a school?",
-        buttons: {
-            danger: {
-                label: 'Delete',
-                className: 'btn-danger',
-                callback: function (result) {
-                    console.log("Successfully deleted school");
-                    window.location = id + "/delete/";
-                }
-            },
-            cancel: {
-                label: 'No',
-                className: 'btn-success',
-                callback: function (result) {
-                    result = false;
-                }
-            }
-        },
-    });
-
-};

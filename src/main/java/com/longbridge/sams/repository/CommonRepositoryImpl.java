@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.longbridge.sams.model.Code;
 import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.springframework.data.domain.Page;
@@ -91,6 +90,5 @@ public  class CommonRepositoryImpl<T> extends SimpleJpaRepository<T, Serializabl
 		return en.getDefaultSearchFields();
 
 	}
-
 
 }

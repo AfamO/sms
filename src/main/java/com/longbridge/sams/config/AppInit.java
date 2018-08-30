@@ -18,7 +18,7 @@ import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.model.Permission;
 import com.longbridge.sams.model.Role;
 import com.longbridge.sams.model.User;
-import com.longbridge.sams.model.UserStatus;
+import com.longbridge.sams.model.Status;
 import com.longbridge.sams.model.UserType;
 import com.longbridge.sams.repository.PermissionRepository;
 import com.longbridge.sams.repository.RoleRepository;
@@ -80,7 +80,7 @@ public class AppInit implements InitializingBean {
 		// user.set
 		user.setLoginId("su");
 		user.setType(UserType.ADMIN);
-		user.setStatus(UserStatus.ENABLED);
+		user.setStatus(Status.ENABLED);
 		Date d = DateUtils.addDays(new Date(), 30);
 		user.setRole(role);
 		user.setExpiryDate(d);

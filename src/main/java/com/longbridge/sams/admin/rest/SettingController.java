@@ -1,5 +1,6 @@
 package com.longbridge.sams.admin.rest;
 
+import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.admin.service.implementation.SettingServiceImpl;
 import com.longbridge.sams.model.Setting;
 import com.longbridge.sams.utils.DataTablesUtils;
@@ -27,13 +28,18 @@ public class SettingController {
     @PostMapping("/create")
     public String create(@RequestBody Setting setting){
 
-        String result = settingService.addSetting(setting);
+        String result = null;
+        try {
+            result = settingService.addSetting(setting);
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+        }
 
         return result;
     }
 
     @PostMapping("/update")
-    public String update(@RequestBody Setting setting){
+    public String update(@RequestBody Setting setting) throws ApplicationException {
 
         String result = settingService.updateSetting(setting);
 
@@ -49,7 +55,7 @@ public class SettingController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) throws ApplicationException {
 
         String result = settingService.deleteSetting(id);
 

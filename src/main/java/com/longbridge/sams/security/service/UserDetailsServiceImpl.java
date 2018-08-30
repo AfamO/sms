@@ -15,12 +15,11 @@ import com.longbridge.sams.SchoolContext;
 import com.longbridge.sams.model.User;
 import com.longbridge.sams.model.UserType;
 
-
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService, ApplicationListener<AuthenticationSuccessEvent> {
 
 	@Autowired
-	private UserService userService;
+	private LoginUserService userService;
 	@Autowired
 	private Converter<User, UserDetails> userUserDetailsConverter;
 
@@ -40,12 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService, ApplicationLi
 		UserDetailsImpl ud = (UserDetailsImpl) event.getAuthentication().getPrincipal();
 		String userName = ud.getUsername();
 //		boolean pwdEpired = user.getPasswordExpiryDate().before(new Date());
-		
-		try {
-			userService.log(userName,ud.getType());
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-		}
+
+		userService.log(userName, ud.getType());
 
 	}
 

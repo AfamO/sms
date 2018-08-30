@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.longbridge.sams.model.User;
-import com.longbridge.sams.model.UserStatus;
+import com.longbridge.sams.model.Status;
 import com.longbridge.sams.security.service.UserDetailsImpl;
 
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ public class UserToUserDetails implements Converter<User, UserDetails> {
 			userDetails.setUsername(user.getLoginId());
 			userDetails.setPassword(user.getPassword());
 			userDetails.setSid(user.getSchoolId());
-			boolean enabled = user.getStatus().equals(UserStatus.ENABLED);
-			boolean locked = user.getStatus().equals(UserStatus.LOCKED) ? true : false;
+			boolean enabled = user.getStatus().equals(Status.ENABLED);
+			boolean locked = user.getStatus().equals(Status.LOCKED) ? true : false;
 			userDetails.setEnabled(enabled);
 			userDetails.setNonLocked(!locked);
 			

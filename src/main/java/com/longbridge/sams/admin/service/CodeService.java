@@ -4,6 +4,7 @@ package com.longbridge.sams.admin.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.data.dto.CodeTypeDTO;
@@ -28,7 +29,9 @@ public interface CodeService {
 	Page<Code> findCode(String pattern,Pageable page);
 	Page<CodeTypeDTO> getCodeTypes(Pageable pageDetails);
 	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	Code modify(Code code) throws ApplicationException;
+	@PreAuthorize("hasAuthority('ROLE_STAFF')")
 	Code add(Code code) throws ApplicationException;
 	void remove(Code code) throws ApplicationException;
 	

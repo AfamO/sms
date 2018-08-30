@@ -1,74 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/admin/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/admin/layout}">
 <head>
 <meta charset="UTF-8" />
 <link rel="stylesheet" th:href="@{/datatables/select/css/select.bootstrap.css}" />
-    <link rel="stylesheet" th:href="@{/datatables/css/dataTables.bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/datatables/css/dataTables.bootstrap.css}" />
 </head>
 <body>
-<div id="wrapper">
-    <div class="container" layout:fragment="content">
-        <div class="wrapper">
-            <div class="row border-bottom white-bg dashboard-header">
-                <h2>Manage School</h2>
-            </div>
-        </div>
-        <br>
-        <div class="wrapper">
-            <div class="row border-bottom white-bg dashboard-header">
-                <div class="ibox float-e-margins">
+	<div layout:fragment="subject">
+		<h2>Schools</h2>
+		<div class="col-md-12" >
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
+				<li class="breadcrumb-item active">School</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row" layout:fragment="content">
+		<div class="col-lg-12">
+			<div class="ibox ">
+				<div class="ibox-title">
+					<h5></h5>
+					 <a th:href="@{/admin/school/new}" class="tool" data-toggle="tooltip" data-placement="top" title="New School">
+                         <i class="fa fa-plus-square-o fa-2x"></i>
+                     </a>
+					<div class="ibox-tools">
+						<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+						</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-wrench"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li><a href="#" class="dropdown-item">Config option 1</a></li>
+							<li><a href="#" class="dropdown-item">Config option 2</a></li>
+						</ul>
+						<a class="close-link"> <i class="fa fa-times"></i>
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<table class="table" id="schoolTable" >
+							<thead>
+								<tr>
+								 <th >Status</th>
+									<th>Code</th>
+									<th>School Name</th>
+									<th>Email Address</th>
+									<th>Telephone Number</th>
+									<th>Website</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody >
+							</tbody>
+							<tfoot>
+								<tr>
+								 <th>Status</th>
+									<th>Code</th>
+									<th>School Name</th>
+									<th>Email Address</th>
+									<th>Telephone Number</th>
+									<th>Website</th>
+									
+									 <th></th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
-                    <div class="table-responsive">
-                        <table class="table table-striped dt-responsive nowrap table-bordered table-hover dataTables-example" name="schoolTable" id="schoolTable" >
-                            <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>School Name</th>
-                                <th>Email Address</th>
-                                <th>Telephone Number</th>
-                                <th>Website</th>
-                                <th>Operations</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-
-                            <tfoot>
-                            <tr>
-                                <th>Code</th>
-                                <th>School Name</th>
-                                <th>Email Address</th>
-                                <th>Telephone Number</th>
-                                <th>Website</th>
-                                <th>operations</th>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="margin-footer">
-    </div>
-
-</div>
-<!--School ajax-->
 
 <th:block layout:fragment="scripts">
-    	<script th:src="@{/datatables/js/jquery.dataTables.js}"></script>
+	<script th:src="@{/datatables/js/jquery.dataTables.js}"></script>
 	<script th:src="@{/datatables/js/dataTables.bootstrap.js}"></script>
 	<script th:src="@{/datatables/select/js/dataTables.select.js}"></script>
 	<script th:src="@{/js/jquery.spring-friendly.min.js}"></script>
-    <script th:src="@{/ajax/school/list.js}" type="text/javascript"></script>
+	<script th:src="@{/ajax/school/list.js}" type="text/javascript"></script>
 </th:block>
-
-<!--POP UP WELCOME MESSAGE-->
-<!--END HERE-->
-
-
-
-</body>
-</html>

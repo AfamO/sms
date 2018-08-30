@@ -13,5 +13,7 @@ public interface RoleRepository extends CommonRepository<Role, Long> {
 
 	List<Role> findByName(String string);
 	
+	Page<Role> findBySchoolId( Long schoolId, Pageable page);
 	
+	List<Role> findBySchoolId( Long schoolId);
 }

@@ -27,7 +27,7 @@ public class User extends AbstractSchoolEntity{
 	private static final String INVALID_PWD = "ROLE_PWD_RESET";
 	private String password;
 	private UserType type;
-	private UserStatus status;
+	private Status status;
 	private Date expiryDate;
 	private Date lastLoginDate;
 	@Column(unique=true) @NotEmpty
@@ -62,11 +62,11 @@ public class User extends AbstractSchoolEntity{
 		this.loginId = loginId;
 	}
 	
-	public UserStatus getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(UserStatus status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 

@@ -19,7 +19,7 @@ import com.longbridge.sams.data.dto.SchoolInfo;
 import com.longbridge.sams.model.Role;
 import com.longbridge.sams.model.School;
 import com.longbridge.sams.model.User;
-import com.longbridge.sams.model.UserStatus;
+import com.longbridge.sams.model.Status;
 import com.longbridge.sams.model.UserType;
 import com.longbridge.sams.repository.RoleRepository;
 import com.longbridge.sams.repository.SchoolRepository;
@@ -51,9 +51,10 @@ public class SchoolServiceImpl implements SchoolService {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public School create(School school) {
+	public School create(School school) throws ApplicationException {
 		School result = null;
 		try {
+			school.setStatus(Status.ENABLED);
 			result = repo.save(school);
 		}
 		catch (Exception e) {
@@ -65,7 +66,7 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Override
 	@Transactional(rollbackFor=Exception.class) 
-	public School update(School school) {
+	public School update(School school) throws ApplicationException {
 		School result = null;
 		try {
 			result = repo.save(school);;
@@ -80,7 +81,7 @@ public class SchoolServiceImpl implements SchoolService {
 
 
 	@Override
-	public School changeSchoolStatus(Long id, String status) {
+	public School changeSchoolStatus(Long id, Status status) throws ApplicationException {
 		School school = null;
 		try {
 			school = repo.getOne(id);
@@ -111,7 +112,7 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 	@Override
-	public User addDefaultUser(Long schoolId, User user) {
+	public User addDefaultUser(Long schoolId, User user) throws ApplicationException {
 		// TODO Auto-generated method stub
 		School school = repo.getOne(schoolId);
 		user.setType(UserType.STAFF);
@@ -122,14 +123,14 @@ public class SchoolServiceImpl implements SchoolService {
 		user.setLoginId(school.getCode().toLowerCase());
 		//TODO: set and send password
 		user.setPassword(encoder.encode(school.getCode().toLowerCase()));
-		user.setStatus(UserStatus.ENABLED);
+		user.setStatus(Status.ENABLED);
 		//user.setRole(role);
 		user.setSchoolId(schoolId);
 		return userRepo.save(user);
 	}
 
 	@Override
-	public School create(School school, boolean adduser) {
+	public School create(School school, boolean adduser) throws ApplicationException {
 		// TODO Auto-generated method stub
 		School school2 = create(school);
 		if(adduser) {

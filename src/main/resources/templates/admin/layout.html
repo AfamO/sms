@@ -1,805 +1,220 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-	<meta charset="utf-8" />
+
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="apple-touch-icon" sizes="76x76" th:href="@{~/img/apple-icon.png}">
-	<link rel="icon" type="image/png" sizes="96x96" th:href="@{~/img/favicon.png}">
 
-    <title>ICON SCHOOL MANAGER</title>
+   <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">SMS - School Management System</title>
 
-
-    <link th:href="@{~/css/bootstrap.min.css}" rel="stylesheet">
-
-
-    <link th:href="@{~/css/font-awesome.css}" rel="stylesheet">
-
-
-
-    <!-- Toastr style -->
-    <link th:href="@{~/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
-
-    <!-- Gritter -->
-    <link th:href="@{~/js/plugins/gritter/jquery.gritter.css}" rel="stylesheet">
-
-    <link th:href="@{~/css/animate.css}" rel="stylesheet">
-    <link th:href="@{~/css/style.css}" rel="stylesheet">
-    <!--<link th:href="@{~/css/custom.css}" rel="stylesheet">-->
-    <link rel="stylesheet" th:href="@{~/css/sweet-alert/sweetalert.css}">
-    <link rel="stylesheet" th:href="@{~/css/notification.css}">
-    <link rel="stylesheet" th:href="@{~/css/custom.css}">
-    <link rel="stylesheet" th:href="@{~/css/select2.min.css}">
+    <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link href="../../static/font-awesome/css/font-awesome.css" th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+<link href="../../static/css/plugins/toastr/toastr.min.css" th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
+    <link href="../../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet">
+    <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+     <link href="../../static/css/custom.css" th:href="@{/css/custom.css}" rel="stylesheet">
 
 </head>
-<body>
-<div id="wrapper">
-    <!--SIDE BAR START HERE-->
-    <nav class="navbar-default navbar-static-side" role="navigation" th:fragment="sidebar">
+
+<body class="">
+
+    <div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" th:src="@{/img/profile_small.jpg}" />
-                                 </span>
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" src="../../static/img/profile_small.jpg"/>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong sec:authentication="name" class="font-bold">David Williams</strong>
-                                 </span> <span class="text-muted text-xs block" sec:authentication="principal.role">Art Director <b class="caret"></b></span> </span> </a>
+                            <span sec:authentication="name" class="block m-t-xs font-bold">David Williams</span>
+                            <span sec:authentication="principal.role" class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                        </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="mailbox.html">Mailbox</a></li>
-                            <li class="divider"></li>
-                            <li><a th:href="@{/admin/logout}">Logout</a></li>
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
+                            <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/logout}">Logout</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
-                        SAM
+                        SAMS
                     </div>
                 </li>
-                <li>
-                    <a href="dashboard_2.html"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span> </a>
+                 <li>
+                    <a th:href="@{/admin/school}"><i class="fa fa-institution"></i> <span class="nav-label">Schools</span></a>
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard"></i> <span class="nav-label">School</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a th:href="@{/admin/school}">View Schools</a></li>
-                        <li><a th:href="@{/admin/school/new}">New Schools</a></li>
-                    </ul>
-                </li>
-
-
-              <li>
-                    <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label"> System</span><span class="fa arrow"></span></a>
+                    <a href=""><i class="fa fa-cogs"></i> <span class="nav-label">System</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a th:href="@{/admin/code/type}">Codes</a></li>
-                        <li><a th:href="@{/admin/code/new}"> New Code</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Staff</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a th:href="@{/addstaff}">Staff Registration</a></li>
-                        <li><a th:href="@{/liststaff}">Manage Staff</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Parent</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a th:href="@{/parent/addparent}">Parent Registration</a></li>
-                        <li><a th:href="@{/parent/listparent}">Manage Parent</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label"> Student</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a th:href="@{/addstudent}">Applicant Registration</a></li>
-                        <li><a th:href="@{/managestudent}">Manage Student</a></li>
-                    </ul>
-                </li>
-                 
-                <li>
-                    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label"> Class</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a th:href="@{/addclass}">Add Class</a></li>
-                        <li><a th:href="@{/allclass}">Manage class</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Documents</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="basic_gallery.html">Manage Document</a></li>
-                        <li><a href="slick_carousel.html">Inventories</a></li>
-                        <li><a href="carousel.html">Expenses</a></li>
+                        <li><a th:href="@{/admin/setting}">Settings</a></li>
+                        <li><a th:href="@{/admin/permission}">Permissions</a></li>
                     </ul>
                 </li>
             </ul>
 
         </div>
     </nav>
-    <!--SIDE BAR END HERE-->
 
-    <div id="page-wrapper" class="gray-bg dashbard-1">
-        <!--TOP BAR SIDE HERE-->
+        <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0" th:fragment="topbar">
-                <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" action="http://webapplayers.com/inspinia_admin-v2.7.1/search_results.html">
-                        <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
+        <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+           <!--  <form role="search" class="navbar-form-custom">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
                 </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li>
-                        <span class="m-r-sm text-muted welcome-message">Welcome to ICON SCHOOL MANAGER.</span>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" th:src="@{/img/a7.jpg}">
-                                    </a>
-                                    <div class="media-body">
-                                        <small class="pull-right">46h ago</small>
-                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" th:src="@{/img/a4.jpg}">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right text-navy">5h ago</small>
-                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" th:src="@{/img/profile.jpg}">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">23h ago</small>
-                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="mailbox.html">
-                                        <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="mailbox.html">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="profile.html">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="grid_options.html">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="notifications.html">
-                                        <strong>See All Alerts</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li>
-                        <a th:href="@{/admin/logout}">
-                            <i class="fa fa-sign-out"></i> Log out
-                        </a>
-                    </li>
-                    <li>
-                        <a class="right-sidebar-toggle">
-                            <i class="fa fa-tasks"></i>
-                        </a>
-                    </li>
-                </ul>
-
-            </nav>
+            </form> -->
         </div>
-        <!--TOP BAR END HERE-->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    
+                </li>
 
-        <div class="content" >
-            <div class="container-fluid" layout:fragment="content">
-                
-                
-                
-            </div>
+
+                <li>
+                    <a th:href="@{/admin/logout}">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
         </div>
-
-        <div class="footer">
-            <div class="pull-right">
-                <strong>Version 2.0</strong>
-            </div>
-            <div>
-                <strong>ICON SCHOOL MANAGER</strong> Powered by Longbridge
-            </div>
-        </div>
-
-    </div>
-
-
-
-
-
-<!--FOOTER END HERE-->
-</div>
-
-
-<!--&lt;!&ndash;CHAT BOX START HERE&ndash;&gt;-->
-<div class="chatb">
-    <div class="small-chat-box fadeInRight animated"  >
-
-        <div class="heading" draggable="true">
-            <small class="chat-date pull-right">
-                02.19.2015
-            </small>
-            Small chat
-        </div>
-
-        <div class="content">
-
-            <div class="left">
-                <div class="author-name">
-                    Monica Jackson <small class="chat-date">
-                    10:02 am
-                </small>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4"  layout:fragment="subject">
+                    <h2>the main title</h2>
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item">
+                            <a href="index-2.html">This is</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Breadcrumb</strong>
+                        </li>
+                    </ol>
                 </div>
-                <div class="chat-message active">
-                    Lorem Ipsum is simply dummy text input.
-                </div>
-
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Mick Smith
-                    <small class="chat-date">
-                        11:24 am
-                    </small>
-                </div>
-                <div class="chat-message">
-                    Lorem Ipsum is simpl.
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Alice Novak
-                    <small class="chat-date">
-                        08:45 pm
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    Check this stock char.
-                </div>
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Anna Lamson
-                    <small class="chat-date">
-                        11:24 am
-                    </small>
-                </div>
-                <div class="chat-message">
-                    The standard chunk of Lorem Ipsum
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Mick Lane
-                    <small class="chat-date">
-                        08:45 pm
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    I belive that. Lorem Ipsum is simply dummy text.
-                </div>
+               <!--  <div class="col-sm-8">
+                    <div class="title-action">
+                        <a href="#" class="btn btn-primary">This is action area</a>
+                    </div>
+                </div> -->
             </div>
 
+            <div class="wrapper wrapper-content animated fadeInRight" >
+                <!-- Content goes here -->
+                <div layout:fragment="content">
+                </div>
+            </div>
+            <div class="footer">
+                <div class="float-right">
+                    Powered by <strong>Longbridge</strong> ltd.
+                </div>
+            </div>
 
         </div>
-        <div class="form-chat">
-            <div class="input-group input-group-sm">
-                <input type="text" class="form-control">
-                <span class="input-group-btn"> <button
-                        class="btn btn-primary" type="button">Send
-                </button> </span></div>
         </div>
 
-    </div>
-    <div id="small-chat">
+    <!-- Mainly scripts -->
+    <script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script src="../../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+    <script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js" th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
 
-        <span class="badge badge-warning pull-right">5</span>
-        <a class="open-small-chat">
-            <i class="fa fa-comments"></i>
+    <!-- Custom and plugin javascript -->
+    <script src="../../static/js/inspinia.js" th:src="@{/js/inspinia.js}"></script>
+    <script src="../../static/js/plugins/pace/pace.min.js" th:src="@{/js/plugins/pace/pace.min.js}"></script>
+        <script src="../../static/js/plugins/toastr/toastr.min.js" th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+	    function initnotices(){
+	    	toastr.options = {
+		                    "closeButton": true,
+		                    "debug": false,
+		                    "newestOnTop": false,
+		                    "progressBar": false,
+		                    "positionClass": "toast-top-right",
+		                    "preventDuplicates": false,
+		                    "onclick": null,
+		                    "showDuration": "5000",
+		                    "hideDuration": "1000",
+		                    "timeOut": "3500",
+		                    "extendedTimeOut": "1000",
+		                    "showEasing": "swing",
+		                    "hideEasing": "linear",
+		                    "showMethod": "fadeIn",
+		                    "hideMethod": "fadeOut"
+		                }
+	    	
+	    	
+		$("#fieldErrors li").each(function(index, value) {
+			
+			fname = $(this).attr("fieldName");
+			msg = '<label  class="error" for="'+fname+'">'+$(this).text()+'</label>'
+			field = $("[name='" + fname + "']");
+			
+			$("[name='" + fname + "']").closest(".form-group").addClass("has-error");
+		});
+		
+		$('#messages li').each(function(index, value) {
+			tt = $(this).text();
+            toastr["success"](tt);
+		});
+	
+		$('#fieldMessages li').each(function(index, value) {
+			fld = $(this).attr("field");
+			field = $("[name='" + fld + "']");
+			
+			if(field.length > 0){
+				msg = '<label  class="error" for="'+field+'">'+$(this).text()+'</label>'
+				$(field).after(msg)
+				$(field).closest(".form-group").addClass("has-error");
+			}else{
+				
+				 msg ='<div class="alert alert-danger alert-dismissable">'
+                /* msg += '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>'*/
+                msg += $(this).text()
+                $("form").before(msg)
+			}
+		});
+	
+		$('#errors li').each(function(index, value) {
+			var tt = $(this).text();
+			toastr["error"](tt);
+		});
+	}
 
-        </a>
-    </div>
-</div>
-<!--&lt;!&ndash;CHAT BOX END HERE&ndash;&gt;-->
-
-<!--RIGHT SIDE BAR START HERE-->
-<div id="right-sidebar" class="animated" >
-    <div class="sidebar-container">
-
-        <ul class="nav nav-tabs navs-3">
-
-            <li class="active"><a data-toggle="tab" href="#tab-1">
-                Notes
-            </a></li>
-            <li><a data-toggle="tab" href="#tab-2">
-                Projects
-            </a></li>
-            <li class=""><a data-toggle="tab" href="#tab-3">
-                <i class="fa fa-gear"></i>
-            </a></li>
-        </ul>
-
-        <div class="tab-content">
-
-
-            <div id="tab-1" class="tab-pane active">
-
-                <div class="sidebar-title">
-                    <h3> <i class="fa fa-comments-o"></i> Latest Notes</h3>
-                    <small><i class="fa fa-tim"></i> You have 10 new message.</small>
-                </div>
-
-                <div>
-
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a1.jpg}">
-
-                                <div class="m-t-xs">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                </div>
-                            </div>
-                            <div class="media-body">
-
-                                There are many variations of passages of Lorem Ipsum available.
-                                <br>
-                                <small class="text-muted">Today 4:21 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a2.jpg}">
-                            </div>
-                            <div class="media-body">
-                                The point of using Lorem Ipsum is that it has a more-or-less normal.
-                                <br>
-                                <small class="text-muted">Yesterday 2:45 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a3.jpg}">
-
-                                <div class="m-t-xs">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                Mevolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                <br>
-                                <small class="text-muted">Yesterday 1:10 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a4.jpg}">
-                            </div>
-
-                            <div class="media-body">
-                                Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the
-                                <br>
-                                <small class="text-muted">Monday 8:37 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a8.jpg}">
-                            </div>
-                            <div class="media-body">
-
-                                All the Lorem Ipsum generators on the Internet tend to repeat.
-                                <br>
-                                <small class="text-muted">Today 4:21 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a7.jpg}">
-                            </div>
-                            <div class="media-body">
-                                Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                                <br>
-                                <small class="text-muted">Yesterday 2:45 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a3.jpg}">
-
-                                <div class="m-t-xs">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below.
-                                <br>
-                                <small class="text-muted">Yesterday 1:10 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="sidebar-message">
-                        <a href="#">
-                            <div class="pull-left text-center">
-                                <img alt="image" class="img-circle message-avatar" th:src="@{/img/a4.jpg}">
-                            </div>
-                            <div class="media-body">
-                                Uncover many web sites still in their infancy. Various versions have.
-                                <br>
-                                <small class="text-muted">Monday 8:37 pm</small>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="tab-2" class="tab-pane">
-
-                <div class="sidebar-title">
-                    <h3> <i class="fa fa-cube"></i> Latest projects</h3>
-                    <small><i class="fa fa-tim"></i> You have 14 projects. 10 not completed.</small>
-                </div>
-
-                <ul class="sidebar-list">
-                    <li>
-                        <a href="#">
-                            <div class="small pull-right m-t-xs">9 hours ago</div>
-                            <h4>Business valuation</h4>
-                            It is a long established fact that a reader will be distracted.
-
-                            <div class="small">Completion with: 22%</div>
-                            <div class="progress progress-mini">
-                                <div style="width: 22%;" class="progress-bar progress-bar-warning"></div>
-                            </div>
-                            <div class="small text-muted m-t-xs">Project end: 4:00 pm - 12.06.2014</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="small pull-right m-t-xs">9 hours ago</div>
-                            <h4>Contract with Company </h4>
-                            Many desktop publishing packages and web page editors.
-
-                            <div class="small">Completion with: 48%</div>
-                            <div class="progress progress-mini">
-                                <div style="width: 48%;" class="progress-bar"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="small pull-right m-t-xs">9 hours ago</div>
-                            <h4>Meeting</h4>
-                            By the readable content of a page when looking at its layout.
-
-                            <div class="small">Completion with: 14%</div>
-                            <div class="progress progress-mini">
-                                <div style="width: 14%;" class="progress-bar progress-bar-info"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="label label-primary pull-right">NEW</span>
-                            <h4>The generated</h4>
-                            There are many variations of passages of Lorem Ipsum available.
-                            <div class="small">Completion with: 22%</div>
-                            <div class="small text-muted m-t-xs">Project end: 4:00 pm - 12.06.2014</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="small pull-right m-t-xs">9 hours ago</div>
-                            <h4>Business valuation</h4>
-                            It is a long established fact that a reader will be distracted.
-
-                            <div class="small">Completion with: 22%</div>
-                            <div class="progress progress-mini">
-                                <div style="width: 22%;" class="progress-bar progress-bar-warning"></div>
-                            </div>
-                            <div class="small text-muted m-t-xs">Project end: 4:00 pm - 12.06.2014</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="small pull-right m-t-xs">9 hours ago</div>
-                            <h4>Contract with Company </h4>
-                            Many desktop publishing packages and web page editors.
-
-                            <div class="small">Completion with: 48%</div>
-                            <div class="progress progress-mini">
-                                <div style="width: 48%;" class="progress-bar"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="small pull-right m-t-xs">9 hours ago</div>
-                            <h4>Meeting</h4>
-                            By the readable content of a page when looking at its layout.
-
-                            <div class="small">Completion with: 14%</div>
-                            <div class="progress progress-mini">
-                                <div style="width: 14%;" class="progress-bar progress-bar-info"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="label label-primary pull-right">NEW</span>
-                            <h4>The generated</h4>
-                            <!--<div class="small pull-right m-t-xs">9 hours ago</div>-->
-                            There are many variations of passages of Lorem Ipsum available.
-                            <div class="small">Completion with: 22%</div>
-                            <div class="small text-muted m-t-xs">Project end: 4:00 pm - 12.06.2014</div>
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-            <div id="tab-3" class="tab-pane">
-
-                <div class="sidebar-title">
-                    <h3><i class="fa fa-gears"></i> Settings</h3>
-                    <small><i class="fa fa-tim"></i> You have 14 projects. 10 not completed.</small>
-                </div>
-
-                <div class="setings-item">
-                    <span>
-                        Show notifications
-                    </span>
-                    <div class="switch">
-                        <div class="onoffswitch">
-                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example">
-                            <label class="onoffswitch-label" for="example">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="setings-item">
-                    <span>
-                        Disable Chat
-                    </span>
-                    <div class="switch">
-                        <div class="onoffswitch">
-                            <input type="checkbox" name="collapsemenu" checked class="onoffswitch-checkbox" id="example2">
-                            <label class="onoffswitch-label" for="example2">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="setings-item">
-                    <span>
-                        Enable history
-                    </span>
-                    <div class="switch">
-                        <div class="onoffswitch">
-                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example3">
-                            <label class="onoffswitch-label" for="example3">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="setings-item">
-                    <span>
-                        Show charts
-                    </span>
-                    <div class="switch">
-                        <div class="onoffswitch">
-                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example4">
-                            <label class="onoffswitch-label" for="example4">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="setings-item">
-                    <span>
-                        Offline users
-                    </span>
-                    <div class="switch">
-                        <div class="onoffswitch">
-                            <input type="checkbox" checked name="collapsemenu" class="onoffswitch-checkbox" id="example5">
-                            <label class="onoffswitch-label" for="example5">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="setings-item">
-                    <span>
-                        Global search
-                    </span>
-                    <div class="switch">
-                        <div class="onoffswitch">
-                            <input type="checkbox" checked name="collapsemenu" class="onoffswitch-checkbox" id="example6">
-                            <label class="onoffswitch-label" for="example6">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="setings-item">
-                    <span>
-                        Update everyday
-                    </span>
-                    <div class="switch">
-                        <div class="onoffswitch">
-                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example7">
-                            <label class="onoffswitch-label" for="example7">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-content">
-                    <h4>Settings</h4>
-                    <div class="small">
-                        I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        And typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-
-
-
-
-<div th:if="${success}">
-    <div hidden="hidden">
-        <ul class="actionMessage">
-            <li th:each="msg : ${success}" th:text="${msg}">Message</li>
-        </ul>
-    </div>
-</div>
-
-<div th:if="${failure}">
-    <div hidden="hidden">
-        <ul class="actionError">
-            <li th:each="msg : ${failure}" th:text="${msg}">Message</li>
-        </ul>
-    </div>
-</div>
-
+        $(document).ready(function(){
+        		initnotices();
+        });
+            /*]]>*/
+        </script>
+ <th:block layout:fragment="scripts">
+  </th:block>
+  <div hidden="hidden">
+		<ul id="messages" >
+			<li th:if="${message != null}" th:text="${message}"></li>
+		</ul>
+	</div>
+	<div hidden="hidden">
+		<ul id="errors" >
+			<li th:if="${error != null}" th:text="${error}"></li>
+		</ul>
+	</div>
 </body>
 
-<!-- Mainly scripts -->
-<!--<script src="@{https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js}"></script>-->
-<script th:src="@{~/js/jquery.js}"></script>
-<script th:src="@{~/js/bootstrap.js}"></script>
-<script th:src="@{~/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
-<script th:src="@{~/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
-<script th:src="@{~/js/select2.min.js}"></script>
-
-
-<!--BOOTBOX START-->
-<script src="/js/bootbox.min.js" type="text/javascript"></script>
-<!--BOOTBOX END-->
-
-
-
-<!-- Custom and plugin javascript -->
-<script th:src="@{~/js/inspinia.js}"></script>
-<script th:src="@{~/js/plugins/pace/pace.min.js}"></script>
-
-<!-- jQuery UI -->
-<script th:src="@{~/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
-
-<!-- GITTER -->
-<script th:src="@{~/js/plugins/gritter/jquery.gritter.min.js}"></script>
-
-<!-- Toastr -->
-<script th:src="@{~/js/plugins/toastr/toastr.min.js}"></script>
-
-
-<script th:src="@{~/js/sweet-alert/sweetalert.min.js}"></script>
-
-<script th:src="@{~/js/notification.js}"></script>
-<script th:src="@{~/js/custom.js}"></script>
-
-  <th:block layout:fragment="scripts">
-  </th:block>
 
 </html>

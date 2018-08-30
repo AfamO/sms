@@ -56,7 +56,7 @@ public class SecurityConfig {
 			filter.setAuthenticationFailureHandler(failureHandler());
 			
 			http.authorizeRequests()
-					.antMatchers("/css/**", "/img/**", "/ajax/**", "/fonts/**", "/js/**", "/datatables/**")
+					.antMatchers("/css/**", "/img/**", "/ajax/**","/font-awesome/**", "/fonts/**", "/js/**", "/datatables/**")
 					.permitAll().and()
 					.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 					.antMatcher("/admin/**")
@@ -98,7 +98,7 @@ public class SecurityConfig {
 			SchoolAuthenticationFilter filter2 = new SchoolAuthenticationFilter(schoolService);
 			
 			http.authorizeRequests()
-					.antMatchers("/css/**", "/img/**", "/ajax/**", "/fonts/**", "/js/**", "/datatables/**").permitAll()
+					.antMatchers("/css/**", "/img/**", "/ajax/**", "/font-awesome/**", "/fonts/**", "/js/**", "/datatables/**").permitAll()
 					.and().antMatcher("/school/**")
 					.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 					.addFilterBefore(filter2, CustomAuthenticationFilter.class)

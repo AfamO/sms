@@ -1,58 +1,87 @@
 package com.longbridge.sams.admin.web;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
-import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.longbridge.sams.admin.service.SchoolService;
 import com.longbridge.sams.model.School;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
-import com.longbridge.sams.utils.DataTablesUtils;
-
-
-import javax.validation.Valid;
+import com.longbridge.sams.utils.Messages;
 
 @Controller
 @RequestMapping("/admin/school")
 public class AdmSchoolView {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdmSchoolView.class);
+	@Autowired
+	private Messages message;
 
-	  	@GetMapping("/{id}/edit")
-	    public String editSchool(@PathVariable Long id, Model model){
-	  		model.addAttribute("id", id);
-	        return "admin/school/edit";
-	    }
+	@Autowired
+	private SchoolService schoolService;
 
-		@GetMapping("/add")
-		public String addSchool(){
+	@GetMapping("/{id}/edit")
+	public String editSchool(@PathVariable Long id, Model model) {
+		School school = schoolService.getSchool(id);
+		model.addAttribute("school", school);
+//		model.addAttribute("logo", );
+//		model.addAttribute("banner", school);
+		return "admin/school/edit";
+	}
+
+	@PostMapping
+	public String createOrUpdateSchool(@ModelAttribute("school") @Valid School school, BindingResult result,
+			RedirectAttributes redirectAttributes, @RequestParam("_logo") MultipartFile logo,@RequestParam("_banner") MultipartFile banner) {
+		logger.info("schoolDTO received is {} " + school);
+
+		String response = null;
+		try {
+			if (result.hasErrors()) {
+				logger.warn("Error occurred creating School{}", result.toString());
+				return "admin/school/edit";
+			}
+			if (school.getId() != null) {
+				School sch2 = schoolService.getSchool(school.getId());
+				CustomBeanUtilsBean.getInstance().copyProperties(sch2, school);
+				school = sch2;
+				schoolService.update(school);
+				response = "school.update.success";
+
+			} else {
+				schoolService.create(school, true);
+				response = "school.create.success";
+			}
+
+		} catch (Exception ex) {
+			result.reject(ex.getMessage());
+			logger.error("Error occurred creating School{}", ex);
 			return "admin/school/edit";
 		}
-	  	
-	  	@GetMapping("/new")
-	    public String newSchool(){
-	        return "admin/school/edit";
-	    }
-	  	
-	    @GetMapping
-	    public String listschool(){
+		redirectAttributes.addFlashAttribute("message", message.get(response,school.getCode()));
+		return "redirect:/admin/school";
+	}
 
-	        return "admin/school/list";
-	    }
+	@GetMapping("/new")
+	public String newSchool(Model model) {
+		model.addAttribute("school", new School());
+		return "admin/school/edit";
+	}
 
-	    @GetMapping("/info")
-	    public String schoolInfo(){
-	        return "admin/school/info";
-	    }
+	@GetMapping
+	public String listschool() {
+		return "admin/school/list";
+	}
+
+	@GetMapping("/info")
+	public String schoolInfo() {
+		return "admin/school/info";
+	}
 }

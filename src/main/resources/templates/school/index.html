@@ -1,35 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/school/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/school/layout}">
 
 <body>
-<div id="wrapper">
-    <div class="container" layout:fragment="content">
-        <div class="wrapper">
-            <div class="row border-bottom white-bg dashboard-header">
-                <h2>Index</h2>
-            </div>
-        </div>
-        <br>
-        <div class="wrapper">
-            <div class="row border-bottom white-bg dashboard-header">
-                <div class="ibox float-e-margins">
+	<div class="col-md-6" layout:fragment="breadcrumb">
+		<ul class="breadcrumb">
+			<li class="active"><i class="fa fa-home"></i> Home</li>
+		</ul>
+	</div>
 
-                    
+	<div class="container-fluid" layout:fragment="content">
 
-                </div>
-            </div>
-        </div>
+		
+		<!-- /.row -->
 
-            <div class="margin-footer">
-            </div>
-</div>
+	</div>
+	<th:block layout:fragment="scripts">
+	</th:block>
 
-
-<th:block layout:fragment="scripts">
-</th:block>
+	<!--POP UP WELCOME MESSAGE-->
+	<script th:replace="layout :: welcomeMsg">
+		
+	</script>
+	<!--END HERE-->
 
 
 </body>

@@ -15,34 +15,60 @@ $(document).ready(function () {
             responsive: true,
             ordering: false,
             columns: [
+            	{ data: "status" },
                 { data: "code" },
                 { data: "name"},
                 { data: "emailAddress" },
                 { data: "phoneNumber"},
                 { data: "website" },
-                { data: "operations" }
+                { data: null }
             ],
+            "columnDefs" : [{
+           	 "targets" : 0,
+               "data" : "status",
+               "render" : function (data, type, row) {
+            	   lbl = '';
+            	   if (type === 'display' ) {
+            		   switch (data) {
+            		   case 'ENABLED':
+            		     lbl = 'label-primary';
+            		     break;
+            		   case 'DISABLED':
+              		     lbl = 'label-danger';
+              		     break;
+            		   case 'LOCKED':
+              		     lbl = 'label-warning';
+              		     break;
+            		   default:
+            			   lbl = 'label-info';
+            		 }  
+   					kk =  '<span class="label '+lbl+'">'+data+'</span>';
+   					return kk;
+   				}
+   				return data;
+               }
+              
+           },
+           {
+             	 "targets" : 6,
+                 "data" : "operations",
+                 "render" : function (data, type, row) {
+              	   lbl = '';
+              	   if (type === 'display' ) {
+              		  
+              		 kk='<a href="/admin/school/'+row.id+'/edit" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>  </a>'
+              		 kk += '<a href="/admin/school/'+row.id+'/users" class="btn btn-white btn-sm"><i class="fa fa-user"></i>  </a>'
+              		 kk += '<a href="/admin/school/'+row.id+'/roles" class="btn btn-white btn-sm"><i class="fa fa-user-secret"></i>  </a>'
+              		 return kk;
+     				}
+     				return data;
+                 }
+                
+             }],
             ajax: {
                 url: "/admin/v1/school",
                 type: "GET"
-            },
-            "columnDefs" : [{
-            	 "targets" : 5,
-                "data" : "operations",
-                "render" : function (data, type, row) {
-                    var linkView = '<div class="btn-group">'+
-                        '<a type="button" class="btn btn-warning " href="/school/'+row.id +'"><i class="fa fa-eye"></i></a>'+
-                        '</div>';
-                    var linkEdit = '<div class="btn-group">'+
-                        '<a type="button" class="btn btn-warning " href="/admin/school/'+row.id +'/edit/"><i class="fa fa-pencil"></i></a>'+
-                        '</div>';
-                    var linkDelete = '<div class="btn-group">'+
-                        '<a type="button" class="btn btn-warning " onclick="deleteDialog('+row.id+')"><i class="fa fa-trash"></i></a>'+
-                        '</div>';
-                    return linkView + " | " + linkEdit + " | " + linkDelete;
-                }
-               
-            }]
+            }
         });
 
 });

@@ -44,43 +44,27 @@ public class PermissionServiceImpl implements PermissionService {
 
 
 	@Override
-	public String modify(Permission permission) throws ApplicationException {
-		String result = "" ;
+	public Permission modify(Permission permission) throws ApplicationException {
 		try{
-			repo.save(permission);
-			result= messageSource.get("permission.update.success");
+			return repo.save(permission);
 		}catch(Exception ex){
-			result= messageSource.get("permission.update.error");
-			log.error(result, ex);
-			throw new ApplicationException(result);
+			log.error("Error saving permission", ex);
+			throw new ApplicationException(ex.getMessage());
 		}
-		return result;
 	}
 
 	@Override
-	public String create(Permission permission) throws ApplicationException {
-		String result = "" ;
-		System.out.println("permission name is: " + permission.getName());
-		Permission permission1 = repo.findFirstByName(permission.getName());
-		System.out.println("permission1 is " + permission1);
+	public Permission create(Permission permission) throws ApplicationException {
 		try{
-			if(permission1 != null){
-				result = messageSource.get("permission.name.exist");
-				return result;
-			}else {
-				repo.save(permission);
-				result= messageSource.get("permission.create.success");
-			}
-
+			return repo.save(permission);
 		}catch(Exception ex){
-			result= messageSource.get("permission.create.error");
-			throw new ApplicationException(result);
+			log.error("Error saving permission", ex);
+			throw new ApplicationException(ex.getMessage());
 		}
-		return result;
 	}
 
 	@Override
-	public String delete(Permission permission) throws ApplicationException {
+	public void delete(Permission permission) throws ApplicationException {
 		throw new ApplicationException("Unimplimented");
 		//return null;
 	}
@@ -110,7 +94,7 @@ public class PermissionServiceImpl implements PermissionService {
 			permissionArray[idx] = perm.getId();
 			idx++;
 		}
-		// not in NULL 1check
+		// not in NULL check
 		if (permissionArray.length == 0)
 			permissionArray = new Long[] { -1L };
 		List<Permission> optionsNotInRole = repo.findByIdNotIn(permissionArray);

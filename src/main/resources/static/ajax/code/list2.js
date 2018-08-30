@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+	codetype= $("#codeTable").attr("data-type");
 	var table = $("#codeTable").DataTable({
 		"language" : {
 			"processing" : "<i class='fa fa-spinner fa-spin'/>"
@@ -16,8 +16,7 @@ $(document).ready(function () {
 			url : "/admin/v1/code",
 			"type" : "GET",
 			"data" : function(d) {
-				var x = $("[name='codetype']").val();
-				d['type'] = x;
+				d['type'] = codetype;
 			}
 		},
 		"columns" :   [
@@ -27,18 +26,15 @@ $(document).ready(function () {
 		  ],
 		"columnDefs" : [{
        	 "targets" : 2,
-       	 "render" : function (data, type, row) {
-             var linkView = '<div class="btn-group">'+
-                 '<a type="button" class="btn btn-warning " href="/admin/'+row.id +'"><i class="fa fa-eye"></i></a>'+
-                 '</div>';
-             var linkEdit = '<div class="btn-group">'+
-                 '<a type="button" class="btn btn-warning " href="/admin/code/'+row.id +'/edit/"><i class="fa fa-pencil"></i></a>'+
-                 '</div>';
-             var linkDelete = '<div class="btn-group">'+
-                 '<a type="button" class="btn btn-warning " onclick="deleteDialog('+row.id+')"><i class="fa fa-trash"></i></a>'+
-                 '</div>';
-             return linkView + " | " + linkEdit + " | " + linkDelete;
-         }
+       	"render" : function (data, type, row) {
+       	   lbl = '';
+       	   if (type === 'display' ) {
+       		
+       		 kk='<a href="/admin/code/'+row.id+'" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>  </a>'
+       		 return kk;
+			}
+			return data;
+          }
           
        }]
 });

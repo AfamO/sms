@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface PermissionService {
 
-    public String create(Permission permission) throws ApplicationException;
+    public Permission create(Permission permission) throws ApplicationException;
 
-    public String modify(Permission permission)throws ApplicationException;
+    public Permission modify(Permission permission)throws ApplicationException;
 
-    public String delete(Permission permission)throws ApplicationException;
+    public void delete(Permission permission)throws ApplicationException;
 
     public Permission get(Long Id);
 
