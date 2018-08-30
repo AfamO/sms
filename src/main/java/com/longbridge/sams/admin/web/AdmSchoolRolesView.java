@@ -45,7 +45,7 @@ public class AdmSchoolRolesView {
 
 	@GetMapping("/roles")
 	public String listRoles(@PathVariable Long schoolId, Model model) {
-		return "admin/role/list";
+		return "admin/school/role/list";
 	}
 
 	@ModelAttribute(name = "school")
@@ -64,7 +64,7 @@ public class AdmSchoolRolesView {
 
 		Iterable<Permission> permissions = permissionService.getAllPermissions();
 		model.addAttribute("permissionList", permissions);
-		return "admin/role/edit";
+		return "admin/school/role/edit";
 	}
 
 	@GetMapping("/role/{rid}")
@@ -75,7 +75,7 @@ public class AdmSchoolRolesView {
 		List<Permission> allOtherOptions = permissionService.getAllPermissionsNotInRole(role);
 		model.addAttribute("permissionList", allOtherOptions);
 
-		return "admin/role/edit";
+		return "admin/school/role/edit";
 	}
 
 	@PostMapping("/role")
@@ -91,7 +91,7 @@ public class AdmSchoolRolesView {
 				permissions = permissionService.getAllPermissions();
 			}
 			model.addAttribute("permissionList", permissions);
-			return "admin/roles/edit";
+			return "admin/school/roles/edit";
 		}
 		String response = "";
 		try {
@@ -123,7 +123,7 @@ public class AdmSchoolRolesView {
 			}
 			model.addAttribute("permissionList", permissions);
 			logger.error("Error occurred creating role{}", e);
-			return "admin/roles/edit";
+			return "admin/school/role/edit";
 		}
 		redirectAttributes.addFlashAttribute("message", message.get(response, role.getName()));
 		return "redirect:/admin/school/"+schoolId+"/roles";

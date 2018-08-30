@@ -9,12 +9,12 @@
 <body>
 	
 	<div layout:fragment="subject">
-		<h2>Code - Edit</h2>
+		<h2 th:text="${school.name + ' - User - Edit'}">User - Edit </h2>
 		<div class="col-md-12" >
 			<ul class="breadcrumb">
-				<li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
-				<li class="breadcrumb-item"><a th:href="@{/admin/code/type}">Codes</a></li>
-				<li class="breadcrumb-item" th:unless="${#strings.isEmpty(code.type)}" ><a th:href="${'/admin/code/type/' + {code.type} +''}">[[${code.type}]]</a></li>
+				<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+				<li class="breadcrumb-item "><a th:href="@{/admin/school}">Schools</a></li>
+				<li class="breadcrumb-item "><a th:href="${'/admin/school/'+{school.id}+'/users/'}">Users</a></li>
 				<li class="breadcrumb-item active">Edit</li>
 			</ul>
 		</div>
@@ -38,7 +38,7 @@
 					</div>
 				</div>
 				<div class="ibox-content">
-					<form role="form" method="post" th:action="@{/admin/code}" th:object="${code}">
+					<form role="form" method="post" th:action="${'/admin/school/'+{school.id}+'/user/'}" th:object="${user}">
 						<div hidden="hidden">
 							<ul id="fieldErrors" th:if="${#fields.hasErrors('*')}">
 								<li th:each="e : ${#fields.detailedErrors()}" th:text="${e.global}? '*' : ${e.fieldName}"></li>
@@ -52,18 +52,10 @@
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="form-group">
-									<label>Name*</label> <input type="text" class="form-control" th:field="*{name}" placeholder="Name "
+									<label>Login Id*</label> <input type="text" class="form-control" th:field="*{loginId}" placeholder="Login id"
 										aria-describedby="basic-addon1">
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-xs-12">
-								<div class="form-group">
-									<label>Description*</label> <input type="text" class="form-control" th:field="*{description}" placeholder="Description"
-										aria-describedby="basic-addon1">
-								</div>
-							</div>
-						</div>
-						<div class="row">
 							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="form-group">
 									<label>Type*</label> <input type="text" class="form-control" th:field="*{type}" placeholder="Type"
@@ -71,6 +63,27 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-xs-12">
+								<div class="form-group">
+									<label>Role*</label> 
+									<select class="form-control" th:field="*{role}" id="role">
+										<option value="" selected="selected">Choose your option</option>
+										<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
+											th:selected="${role.id==user.role}"></option>
+									</select>
+
+
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-xs-12">
+								<div class="form-group">
+									<label>Status*</label> <input type="text" class="form-control" th:field="*{status}"
+										placeholder="Enter Email Address" aria-describedby="basic-addon1">
+								</div>
+							</div>
+						</div>
+						
 						<div class="form-group row">
 							<div class="col-sm-4 col-sm-offset-2">
 								<button class="btn btn-w-m btn-primary" id="createOrUpdateSchool">Submit</button>

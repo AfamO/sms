@@ -41,7 +41,7 @@ public class AdmSchoolUsersView {
 
 	@GetMapping("/users")
 	public String listUsers(@PathVariable Long schoolId, Model model) {
-		return "admin/user/list";
+		return "admin/school/user/list";
 	}
 
 	@ModelAttribute(name = "school")
@@ -57,7 +57,7 @@ public class AdmSchoolUsersView {
 	@GetMapping("/user/new")
 	public String newUser(Model model) {
 		model.addAttribute("user", new User());
-		return "admin/user/edit";
+		return "admin/school/user/edit";
 	}
 
 
@@ -65,16 +65,16 @@ public class AdmSchoolUsersView {
 	public String editUser(@PathVariable Long uid,Model model) {
 		User user = userService.getUser(uid);
 		model.addAttribute("user", user);
-		return "admin/user/edit";
+		return "admin/school/user/edit";
 	}
 	
 	@PostMapping("/user")
 	public String createOrUpdateRole(@ModelAttribute("user") @Valid User user, BindingResult result,
 			RedirectAttributes redirectAttributes, Model model, @PathVariable("schoolId") Long schoolId) {
 		if (result.hasErrors()) {
-			logger.warn("Error occurred creating role{}", result.toString());
+			logger.warn("Error occurred creating user{}", result.toString());
 			model.addAttribute("user", user);
-			return "admin/roles/edit";
+			return "admin/school/user/edit";
 		}
 		String response = "";
 		try {
@@ -92,7 +92,7 @@ public class AdmSchoolUsersView {
 		} catch (Exception e) {
 			result.reject(e.getMessage());
 			logger.error("Error occurred creating/Updating User{}", e);
-			return "admin/user/edit";
+			return "admin/school/user/edit";
 		}
 		redirectAttributes.addFlashAttribute("message", message.get(response, user.getLoginId()));
 		return "redirect:/admin/school/"+schoolId+"/users";
