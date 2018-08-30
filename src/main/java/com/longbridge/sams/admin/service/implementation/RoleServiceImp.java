@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Service
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImp implements RoleService {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -38,9 +38,9 @@ public class RoleServiceImpl implements RoleService {
 		String result = "" ;
 		try{
 			roleRepo.save(role);
-			result= messageSource.get("role.update.success");
+			result= messageSource.get("role.create.success");
 		}catch(Exception ex){
-			result= messageSource.get("role.update.error");
+			result= messageSource.get("role.create.error");
 			log.error(result, ex);
 			throw new ApplicationException(result);
 		}
