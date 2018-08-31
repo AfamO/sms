@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 public interface StudentService {
 	
-    String createStudent(Student student) ;
+    Student createStudent(Student student) ;
 
-    String deleteStudent(Student student);
+    Student deleteStudent(Student student);
 
-    String updateStudent(Student student) ;
+    Student updateStudent(Student student) ;
 
     Student getStudent(Long id);
 
