@@ -49,6 +49,18 @@ $(document).ready(function () {
               
            },
            {
+           	 "targets" : 3,
+               "data" : "role",
+               "render" : function (data, type, row) {
+            	   if (type === 'display' && row.role != null) {
+   					kk=  "<a  data-toggle='tooltip' title='Open' data-placement='right' href='/admin/school/"+sid+"/role/"+ row.role.id+ "'>" + data +"</a>";
+   					return kk;
+   				}
+   				return data;
+               }
+              
+           },
+           {
              	 "targets" : 4,
                  "data" : "operations",
                  "render" : function (data, type, row) {

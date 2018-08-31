@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.longbridge.sams.admin.service.CodeService;
+import com.longbridge.sams.admin.service.implementation.CodeServiceImpl;
 import com.longbridge.sams.model.Code;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.Messages;
@@ -27,6 +28,8 @@ public class AdmCodeView {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private CodeService codeService;
+	
+	
 	@Autowired
 	private Messages message;
 	

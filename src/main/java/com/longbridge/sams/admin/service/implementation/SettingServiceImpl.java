@@ -9,14 +9,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.longbridge.sams.ApplicationException;
-import com.longbridge.sams.admin.service.SettingService;
+import com.longbridge.sams.admin.service.AdmSettingService;
 import com.longbridge.sams.model.Setting;
 import com.longbridge.sams.repository.SettingRepository;
 import com.longbridge.sams.utils.Messages;
 
 
 @Service
-public class SettingServiceImpl implements SettingService {
+public class SettingServiceImpl implements  AdmSettingService {
 
 	@Autowired
 	private SettingRepository repo ;

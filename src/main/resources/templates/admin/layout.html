@@ -158,6 +158,8 @@
 		                    "showMethod": "fadeIn",
 		                    "hideMethod": "fadeOut"
 		                }
+	    	
+	    	
 		$("#fieldErrors li").each(function(index, value) {
 			
 			fname = $(this).attr("fieldName");
@@ -175,9 +177,18 @@
 		$('#fieldMessages li').each(function(index, value) {
 			fld = $(this).attr("field");
 			field = $("[name='" + fld + "']");
-			msg = '<label  class="error" for="'+field+'">'+$(this).text()+'</label>'
-			$(field).after(msg)
-			$(field).closest(".form-group").addClass("has-error");
+			
+			if(field.length > 0){
+				msg = '<label  class="error" for="'+field+'">'+$(this).text()+'</label>'
+				$(field).after(msg)
+				$(field).closest(".form-group").addClass("has-error");
+			}else{
+				
+				 msg ='<div class="alert alert-danger alert-dismissable">'
+                /* msg += '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>'*/
+                msg += $(this).text()
+                $("form").before(msg)
+			}
 		});
 	
 		$('#errors li').each(function(index, value) {

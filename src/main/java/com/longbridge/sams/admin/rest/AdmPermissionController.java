@@ -34,47 +34,6 @@ public class 	AdmPermissionController {
 	@Autowired
 	PermissionService permissionService;
 
-	@PostMapping(consumes="application/json")
-	public ResponseEntity<?>  createOrUpdatePermission(@RequestBody @Valid Permission permission,  Errors errors) {
-		logger.info("permissionDTO received is {} " + permission);
-
-		Permission response = null;
-		ResponseEntity<?> resp = null;
-		ResponseData dt = new ResponseData();
-		try {
-			if(errors.hasErrors()) {
-				List<FieldError> err_summary = errors.getFieldErrors().stream().map(f -> new FieldError(f.getField(),f.getDefaultMessage())).collect(Collectors.toList());
-				dt.setError(err_summary);
-				return ResponseEntity.badRequest().body(dt);
-			}
-			if (permission.getId() != null) {
-				Permission sch2 = permissionService.get(permission.getId());
-				CustomBeanUtilsBean.getInstance().copyProperties(sch2, permission);
-				permission = sch2;
-				response = permissionService.modify(permission);
-				resp = new ResponseEntity<>(new ResponseData (response),HttpStatus.OK);
-			} else {
-				response = permissionService.create(permission);
-				resp = new ResponseEntity<>( new ResponseData (response),HttpStatus.OK);
-			}
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			logger.debug("Error Adding {}",permission,ex);
-			ResponseData responseData = new ResponseData ();
-			responseData.setError(ex.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
-		}
-		
-		return resp;
-	}
-
-	@GetMapping("{id}/view")
-	ResponseEntity<?> getPermission(@PathVariable Long id) {
-		Permission permission = permissionService.get(id);
-		return ResponseEntity.ok(new ResponseData(permission));
-	}
-
 	
 	@GetMapping
 	public DataTablesOutput<Permission> getPermissions(DataTablesInput input) {
@@ -96,16 +55,5 @@ public class 	AdmPermissionController {
 
 
 
-	@RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
-	public ResponseEntity handle() {
-		return new ResponseEntity(HttpStatus.OK);
-
-	}
-
-	@ExceptionHandler(Exception.class)
-	public void handleException(Exception ex, WebRequest webRequest) {
-		logger.error("an error occur here {} ", ex);
-		ex.printStackTrace();
-	}
-
+	
 }
