@@ -74,7 +74,6 @@ public class AdmSchoolView {
 		model.addAttribute("school", new School());
 		return "admin/school/edit";
 	}
-
 	@GetMapping
 	public String listschool() {
 		return "admin/school/list";

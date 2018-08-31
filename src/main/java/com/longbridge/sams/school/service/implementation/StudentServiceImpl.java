@@ -7,7 +7,9 @@ import org.springframework.data.domain.Pageable;
 import com.longbridge.sams.model.Student;
 import com.longbridge.sams.repository.StudentRepo;
 import com.longbridge.sams.school.service.StudentService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentServiceImpl implements StudentService {
 
 	@Autowired

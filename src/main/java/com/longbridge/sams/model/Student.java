@@ -15,16 +15,26 @@ import java.util.List;
 public class Student extends AbstractSchoolEntity {
 
     private String admissionNumber;
+
     private String firstName;
+
     private String middleName;
+
     private String lastName;
+
     private  String gender;
+
     private  String religion;
+
     @OneToOne
     private Image passport;
+
     private String email;
+
     private String sportHouse;
+
     private String phoneNum;
+
     private String department;
 
 
