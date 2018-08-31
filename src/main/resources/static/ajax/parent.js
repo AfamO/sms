@@ -1,60 +1,5 @@
 
 
-
-//Save Parent Method goes here
-
-$("#addparent").click(function () {
-    $(this).attr("disabled", "disabled");
-    var data = {
-        "firstName": $('#firstName').val(),
-        "middleName": $('#middleName').val(),
-        "lastName": $('#lastName').val(),
-        "phoneNumber": $('#phoneNumber').val(),
-        "email": $('#email').val(),
-        "nationality": $('#nationality').val(),
-        "religion": $('#religion').val(),
-        "gender": $("input[name='gender']:checked").val(),
-        "maritalStatus": $('#maritalStatus').val(),
-
-
-        "address": {
-            "name": $('#name').val(),
-            "localGovt": $('#localGovt').val(),
-            "stateOfOrigin": $('#stateOfOrigin').val(),
-            "country": $('#country').val()
-        }
-
-    };
-
-    var url = "/parent/save"
-    $.ajax(
-        {
-
-        url:url,
-        type:'POST',
-        contentType:"application/json;charset=utf-8",
-        data: JSON.stringify(data),
-
-        success:function () {
-            alert("Success");
-            window.location = "http//localhost:8000/parent/listparent";
-
-        },
-
-        error:function () {
-            window.location = "http//localhost:8000/parent/listparent";
-
-        }
-    }
-    );
-
-
-});
-
-
-//Save parent method ends here
-
-
 //DataTable Method starts here
 
 $(document).ready(function () {
@@ -175,83 +120,94 @@ $(document).ready(function () {
 //    Data table for parents starts here
 
     var table = $('#parentTable').DataTable({
-        select: true,
-        responsive: true,
-        "draw":1,
-        "recordsTotal": 4,
-        "recordsFiltered": 4,
 
         language: {
-            searchPlaceholder: "Search records"
+            processing:"<i class='fa fa-spinner fa-spin'/>"
         },
 
-        "pagingType": "simple_numbers",
-        "searching": true,
-        "processing": true,
-        "paging" : true,
-        "ordering" : false,
-        "dom": 'blfrtip',
-        "sAjaxSource": "/parent/all",
-        "sAjaxDataProp": "",
-        "aoColumns": [
-            {"mData": "firstName"},
-            {"mData":"lastName"},
-            {"mData": "phoneNumber"},
-            {"mData": "email"},
-            {"mData": "address.name"},
-            {"mData": "operations"}
+        dom: 'frtpl',
+        lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+        pagingType: "simple_numbers",
+        searching: false,
+        rowId: "id",
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        ordering: false,
+        columns: [
+            {data: "firstName"},
+            {data:"lastName"},
+            {data: "email"},
+            {data: "phoneNumber"},
+            {data:null}
+
+
         ],
         "columnDefs" : [{
             "data" : "operations",
+            "targets" : 4,
+            "render" : function (data, type, row) {
+                lbl='';
+                if (type === 'display' ) {
 
-            "mRender" : function (data, type, row) {
-                var linkView = '<div class="btn-group">'+
-                    '<a type="button" class="btn btn-warning " onclick=view('+row.id+')><i class="fa fa-eye"></i></a>'+
-                    '</div>';
-                var linkEdit = '<div class="btn-group">'+
-                    '<a type="button" class="btn btn-warning " onclick=edit('+row.id+')><i class="fa fa-pencil"></i></a>'+
-                    '</div>';
-                var linkDelete = '<div class="btn-group">'+
-                    '<a type="button" class="btn btn-warning " onclick="deleteDialog('+row.id+')"><i class="fa fa-trash"></i></a>'+
-                    '</div>';
-                return linkView + " | " + linkEdit + " | " + linkDelete;
+                    kk='<a href="/school/parent/'+row.id+'/edit" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>  </a>'
+                    // kk += '<a href="/parent/'+row.id+'/" class="btn btn-white btn-sm"><i class="fa fa-user"></i>  </a>'
+                    kk += '<a href="/school/parent/'+row.id+'/info" class="btn btn-white btn-sm"><i class="fa fa-user-secret"></i>  </a>'
+                    return kk;
+                }
+                return data;
+
             },
-            "targets" : 5
-        }]
+
+        }],
+        ajax: {
+            url: "/school/parent/v1/",
+            type: "GET"
+        }
 
     });
 });
 
-function view(id){
-    window.location = "/parent/"+id+"/get"
-}
-
-function edit(id){
-    window.location = "/parent/"+id+"/edit"
-}
+// function view(id){
+//     window.location = "/parent/"+id+"/get"
+// }
+//
+// function edit(id){
+//     window.location = "/parent/"+id+"/edit"
+// }
 
 //Delete Method start here
-function deleteDialog(id) {
-    bootbox.dialog({
-        message: "You are about to delete a parent ?",
-        buttons: {
-            danger: {
-                label: 'Delete',
-                className: 'btn-danger',
-                callback: function (result) {
-                    console.log("successfully delete user");
-                    window.location = "/parent/"+id+"/delete/";
-                }
-            },
-            cancel: {
-                label: 'No',
-                className: 'btn-success',
-                callback: function (result) {
-                    // $('.bootbox').modal('hide');
-                    result = false;
-                }
-            }
-        },
-    });
-
-};
+// function deleteDialog(id) {
+//     bootbox.dialog({
+//         message: "You are about to delete a parent ?",
+//         buttons: {
+//             danger: {
+//                 label: 'Delete',
+//                 className: 'btn-danger',
+//                 callback: function (result) {
+//                     console.log("successfully delete user");
+//                     window.location = "/parent/"+id+"/delete/";
+//                 }
+//             },
+//             cancel: {
+//                 label: 'No',
+//                 className: 'btn-success',
+//                 callback: function (result) {
+//                     // $('.bootbox').modal('hide');
+//                     result = false;
+//                 }
+//             }
+//         },
+//     });
+//
+// };
+// var linkView = '<div class="btn-group">'+
+//     '<a type="button" class="btn btn-warning " onclick=view('+row.id+')><i class="fa fa-eye"></i></a>'+
+//     '</div>';
+// var linkEdit = '<div class="btn-group">'+
+//     '<a type="button" class="btn btn-warning " onclick=edit('+row.id+')><i class="fa fa-pencil"></i></a>'+
+//     '</div>';
+// var linkDelete = '<div class="btn-group">'+
+//     '<a type="button" class="btn btn-warning " onclick="deleteDialog('+row.id+')"><i class="fa fa-trash"></i></a>'+
+//     '</div>';
+// return linkView + " | " + linkEdit + " | " + linkDelete;

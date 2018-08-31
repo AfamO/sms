@@ -10,13 +10,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@Controller("/parent")
-public class ParentRestController {
+@RequestMapping("/school/parent/v1/")
+class ParentRestController{
 
     @Autowired
     ParentService parentService;
@@ -26,7 +27,7 @@ public class ParentRestController {
 
 
     @GetMapping
-    public DataTablesOutput<Parent> getParents(DataTablesInput input) {
+    public DataTablesOutput<Parent> getParent(DataTablesInput input) {
         Pageable pageable = DataTablesUtils.getPageable(input);
 
         Page<Parent> parents = null;
@@ -38,4 +39,5 @@ public class ParentRestController {
         out.setRecordsTotal(parents.getTotalElements());
         return out;
     }
+
 }
