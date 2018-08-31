@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+
+<body>
+    <div id="wrapper">
+        <div class="container" layout:fragment="content">
+                <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                    <h2>Staff Registration</h2>
+                </div>
+            </div>
+            <br>
+            <div class="wrapper">
+                <form method="post" enctype="multipart/form-data" id="staff">
+                <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Bio-Data</h3>    
+                        <div>
+                            <!--<form  role="form">-->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Staff ID</label>
+                                          <input type="number" class="form-control" placeholder="Enter Staff Id" aria-describedby="basic-addon1" id="staffId" name="staffId" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Title</label>
+                                          <select class="form-control" placeholder="Enter Title" id="title" name="title" >
+                                              <option>Mr.</option>
+                                              <option>Mrs.</option>
+                                              <option>Miss</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>First Name*</label>
+                                          <input type="text" class="form-control" placeholder="Enter first name" aria-describedby="basic-addon1" id="firstName" name="firstName" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Last Name*</label>
+                                          <input type="text" class="form-control" placeholder="Enter last name " aria-describedby="basic-addon1" id="lastName" name="lastName" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Middle Name*</label>
+                                          <input type="text" class="form-control" placeholder="Enter middle name " aria-describedby="basic-addon1" id="middleName" name="middleName" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Religion*</label>
+                                          <select class="form-control" id="religion" name="religion">
+                                              <option>Selet Religion</option>
+                                              <option>Christian</option>
+                                              <option>Muslim</option>
+                                              <option>Traditionalist</option>
+                                              <option>Buddist</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Gender*</label>
+                                          <br>
+                                            <label class="checkbox-inline"> <input type="radio" id="gender" name="gender" > Male </label>
+                                            <label class="checkbox-inline">
+                                            <input type="radio" id="gender1" name="gender"> Female </label>
+                                        
+                                        </div>
+                                    </div>     
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Marital Status*</label>
+                                          <select class="form-control" name="maritalStatus" id="maritalStatus">
+                                            <option>Single</option>
+                                            <option>Married</option>
+                                            <option>Divorced</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Nationality*</label>
+                                          <select class="form-control" name="nationality" id="nationality">
+                                            <option>Select Nationality</option>
+                                            <option>Nigeria</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>State of Origin*</label>
+                                          <select class="form-control" name="stateOfOrigin" id="stateOfOrigin">
+                                              <option>Select State of Origin</option>
+                                              <option>Lagos</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Local Govt Area*</label>
+                                          <select class="form-control" name="localGovt" id="localGovt">
+                                              <option>Select L.G.A</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Address*</label>
+                                          <input type="text" class="form-control" placeholder="Enter Address" aria-describedby="basic-addon1" id="staffAddress" name="staffAddress" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Email Address*</label>
+                                          <input type="email" class="form-control" placeholder="Enter Email Address" aria-describedby="basic-addon1" id="emailAddress" name="emailAddress">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Telephone Number*</label>
+                                          <input type="text" class="form-control" placeholder="Enter Telephone Number" aria-describedby="basic-addon1" name="phoneNumber" id="phoneNumber">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="btn btn-w-m btn-info">Next</button>
+                                </div>
+                            <!--</form>-->
+                        </div>
+                    
+                </div>
+            <!--</div>-->
+            <br>
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Qualification</h3>    
+                        <div>
+                            <!--<form role="form">-->
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Name of School*</label>
+                                          <input type="text" class="form-control" placeholder="Enter name of school" aria-describedby="basic-addon1" id="schoolName" name="schoolName">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Type of Institution*</label>
+                                          <select class="form-control" name="institutionType" id="institutionType">
+                                            <option>Select Institution</option>
+                                            <option>Post Graduate</option>
+                                            <option>Tertiary Institution</option>
+                                            <option>A'Level</option>
+                                            <option>O'Level</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Entry Date*</label>
+                                          <input type="year" class="form-control" placeholder="Enter Year of entry" aria-describedby="basic-addon1" name="entryDate" id="entryDate" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Graduation Date*</label>
+                                          <input type="year" class="form-control" placeholder="Enter Year of graduation" aria-describedby="basic-addon1" id="graduationDate" name="graduationDate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <button class="btn btn-info btn-circle btn-lg"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="btn btn-w-m btn-info">Next</button>
+                                </div>
+                            <!--</form>-->
+                        </div>
+                    
+                </div>
+            </div>
+            <br>
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Referee</h3>    
+                        <div>
+                            <!--<form role="form">-->
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Name of Referee*</label>
+                                          <input type="text" class="form-control" placeholder="Enter name of referee" aria-describedby="basic-addon1" id="name" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Occupation of Referee*</label>
+                                          <input type="text" class="form-control" placeholder="Enter name of referee" aria-describedby="basic-addon1" name="occupation" id="occupation">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Phone Number of Referee*</label>
+                                          <input type="text" class="form-control" placeholder="Enter referee phone number" aria-describedby="basic-addon1"  name="phoneNumber">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Address of referee*</label>
+                                          <input type="text" class="form-control" placeholder="Enter referee name " aria-describedby="basic-addon1" id="refAddress" name="refAddress">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <button class="btn btn-info btn-circle btn-lg"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="btn btn-w-m btn-info">Next</button>
+                                </div>
+                            <!--</form>-->
+                        </div>
+                    
+                </div>
+            </div>
+            <br>
+            
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Upload Documents</h3>    
+                        <div>
+                            <!--<form role="form">-->
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Upload CV*</label>
+                                          <input type="file" class="form-control" placeholder="Upload CV" aria-describedby="basic-addon1">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Upload Cover Letter*</label>
+                                          <input type="file" class="form-control" placeholder="Upload Cover Letter" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Upload Passport*</label>
+                                          <input type="file" class="form-control" placeholder="Upload Passport" aria-describedby="basic-addon1" >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="btn btn-w-m btn-info">Next</button>
+                                </div>
+                            <!--</form>-->
+                        </div>
+                    
+                </div>
+            </div>
+            <br>
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Job Position</h3>    
+                        <div>
+                            <!--<form role="form">-->
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Job Position*</label>
+                                          <select class="form-control" id="jobPosition" name="jobPosition">
+                                            <option>Principal</option>
+                                            <option>Propietress</option>
+                                            <option>Bursar</option>
+                                            <option>Vice Pricipal</option>
+                                            <option>Head Teacher</option>
+                                            <option>Asst. Teacher</option>
+                                            <option>Librarian</option>
+                                            <option>House Master</option>
+                                            <option>Matron</option>
+                                            <option>Patron</option>
+                                            <option>Cook</option>
+                                            <option>Waiter</option>
+                                            <option>Cleaner</option>
+                                            <option>Driver</option>
+                                            <option>Gate Keeper</option>
+                                            <option>Security</option>
+                                          </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Venue Assigned to*</label>
+                                          <input type="text" class="form-control" placeholder="Enter venue assigned to staff" aria-describedby="basic-addon1" id="venueAssigned" name="venueAssigned">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Date of employment*</label>
+                                          <input type="date" class="form-control" id="dateOfEmployment" placeholder="Enter date of employment" name="dateOfEmployment">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="btn btn-w-m btn-info">Next</button>
+                                </div>
+                            <!--</form>-->
+                        </div>
+                    
+                </div>
+            </div>
+            <br>
+            
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                        <h3>Payroll</h3>   
+                        <br>
+                        <button type="button" class="btn btn-success payroll">Add to payroll</button>
+                        
+                        <br>
+
+                        <div style="margin-top: 20px" id="payroll">
+                            <!--<form role="form">-->
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Monthly Salary*</label>
+                                          <input type="text" class="form-control" placeholder="Enter Basic Salary per month">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>PayDay*</label>
+                                          <input type="date" class="form-control" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group">
+                                          <label>Payroll Category*</label>
+                                          <select class="form-control">
+                                              <option>Select Payroll category</option>
+                                              <option>CAT 1</option>
+                                              <option>CAT 2</option>
+                                              <option>CAT 3</option>
+                                              <option>CAT 4</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="btn btn-w-m btn-info">Next</button>
+                                </div>
+                            <!--</form>-->
+                        </div>
+                    
+                </div>
+            </div>
+            <br>
+
+            <div>
+                <button class="btn btn-w-m btn-primary btn-block" id="addStaff">Submit</button>
+            </div>
+            </form>
+        </div>
+            <br>
+            <div class="margin-footer">
+            </div>
+
+    </div>
+            <!-Staff ajax-->
+            <th:block layout:fragment="scripts">
+                <script src="ajax/staff.js" ></script>
+            </th:block>
+
+            <!--POP UP WELCOME MESSAGE-->
+            <script th:replace="layout :: welcomeMsg">
+            </script>
+            <!--END HERE-->
+    </div>
+
+    </div>
+
+</body>
+</html>

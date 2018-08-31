@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+>
+
+
+<body>
+<div id="wrapper">
+
+    <div class="container" layout:fragment="content">
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Add Class</h2>
+            </div>
+        </div>
+        <br>
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h3>Class Details</h3>
+                <div>
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Class Name</label>
+                                    <input type="text" class="form-control"  id="name" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Class Description</label>
+                                    <input type="text" class="form-control"  id="descrp" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>session start</label>
+                                    <input type="date" class="form-control" id="ss" placeholder="Enter date of session begin " >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>session end</label>
+                                    <input type="date" class="form-control" id="se" placeholder="Enter date of session end" >
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-w-m btn-primary btn-block" id="submit">create</button>
+                    </form>
+                    <br>
+                </div>
+                <div>
+
+                </div>
+                <br>
+            </div>
+        <!--</div>-->
+        <br>
+        <div class="margin-footer">
+        </div>
+
+    </div>
+    <script th:src="@{/js/jquery-2.1.1.js}"></script>
+    <!-Parent ajax-->
+    <th:block layout:fragment="scripts">
+        <script src="ajax/class/add.js"></script>
+    </th:block>
+
+    <!--POP UP WELCOME MESSAGE-->
+    <script th:replace="layout :: welcomeMsg">
+    </script>
+    <!--END HERE-->
+</div>
+
+</body>
+</html>

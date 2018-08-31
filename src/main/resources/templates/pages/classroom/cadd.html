@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+>
+
+
+<body>
+<div id="wrapper">
+
+    <div class="container" layout:fragment="content">
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Add ClassRoom</h2>
+            </div>
+        </div>`
+
+        <br>
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+
+                <div>
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Class Name</label>
+                                    <input type="text" class="form-control"  id="name" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>class</label>
+                                    <select id="class" class="form-control">
+                                        <option th:each="class: ${classconfigs}" th:text="${class.getName()}" th:value="${class.getId()}"/>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text" class="form-control"  id="descrp" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Teacher</label>
+                                    <select id="tch_id" class="form-control">
+                                        <option th:each="staffs: ${staffs}" th:text="${staffs.getFirstName()}" th:value="${staffs.getId()}"/>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Assistance Teacher</label>
+                                    <select id="asstch_id" class="form-control">
+                                        <option th:each="staffs: ${staffs}" th:text="${staffs.getFirstName()}" th:value="${staffs.getId()}"/>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-w-m btn-primary btn-block" id="submit">create</button>
+                    </form>
+                    <br>
+                </div>
+                <div>
+
+                </div>
+                <br>
+            </div>
+            <!--</div>-->
+            <br>
+            <div class="margin-footer">
+            </div>
+
+        </div>
+        <script th:src="@{/js/jquery-2.1.1.js}"></script>
+        <!-Parent ajax-->
+        <th:block layout:fragment="scripts">
+            <script src="ajax/classroom/add.js"></script>
+        </th:block>
+
+        <!--POP UP WELCOME MESSAGE-->
+        <script th:replace="layout :: welcomeMsg">
+        </script>
+        <!--END HERE-->
+    </div>
+
+</body>
+</html>

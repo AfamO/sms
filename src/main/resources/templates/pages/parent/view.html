@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+>
+
+
+<body>
+<div id="wrapper">
+    <div class="container" layout:fragment="content" th:each="parent : ${parentEntity}">
+        <br>
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Parent Details</h2>
+            </div>
+        </div>
+        <br>
+
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <div class="row">
+                    <div class="col-md-9 col-lg-9 col-12" >
+                        <h3>Bio-Data</h3>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Name:</span></p>
+                            </div>
+                            <div class="col-md-8">
+
+                                <span th:text="${parentEntity.lastName} + '  ' + ${parentEntity.middleName} + '  ' + ${parentEntity.firstName} "></span></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Religion:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.religion}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold" >Gender:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.gender}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Marital Status:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.maritalStatus}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Country:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.address.getCountry()}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">State of Origin:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.address.getStateOfOrigin()}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Local Govt Area:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.address.getLocalGovt()}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Address:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.address.name}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Email Address:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.email}"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><span class="makeBold">Telephone Number:</span></p>
+                            </div>
+                            <div class="col-md-8">
+                                <p><span th:text="${parentEntity.phoneNumber}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!--<div class="textRight">-->
+            <!--<a class="btn btn-primary" type="button" onclick="edit(${parentEntity.id})">Edit</a>-->
+
+        <!--</div>-->
+    </div>
+    <br>
+    <div class="margin-footer">
+    </div>
+
+</div>
+<!-Staff ajax-->
+<th:block layout:fragment="scripts">
+    <script th:src="/ajax/parent.js"></script>
+    <script th:src="/ajax/parentedit.js"></script>
+</th:block>
+
+<!--POP UP WELCOME MESSAGE-->
+<script th:replace="layout :: welcomeMsg">
+</script>
+<!--END HERE-->
+
+</body>
+
+</html>

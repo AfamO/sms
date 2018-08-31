@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head th:replace="layout :: head">
+</head>
+<body>
+
+<div id="wrapper">
+
+    <div class="container" layout:fragment="content">
+
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>View Setting</h2>
+            </div>
+        </div>
+        <br />
+
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <div class="col-md-9 col-lg-9 col-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="makeBold">Name:</span></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p id="sname"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-9 col-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="makeBold">Type:</span></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p id="type"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-9 col-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="makeBold">value:</span></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p id="setVal"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-9 col-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="makeBold">Description:</span></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p id="descrp"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-9 col-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="makeBold">Enabled:</span></p>
+                        </div>
+                        <div class="col-md-8">
+                            <p id="enable"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div class="margin-footer">
+    </div>
+</div>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/ajax/settingedit.js}"></script>
+</th:block>
+</body>
+</html>

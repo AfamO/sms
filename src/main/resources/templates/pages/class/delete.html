@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+
+<!--HEAD START HERE-->
+<head th:replace="layout :: head">
+</head>
+<!--HEAD END HERE-->
+<body>
+<div id="wrapper">
+    <div th:replace="layout :: sidebar">
+    </div>
+    <!--SIDE BAR END HERE-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <!--TOP BAR START HERE-->
+            <div  th:replace="layout :: topbar">
+            </div>
+            <!--TOP BAR END HERE-->
+        </div>
+
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h2>Update Class</h2>
+            </div>
+        </div>
+        <br>
+        <div class="wrapper">
+            <div class="row border-bottom white-bg dashboard-header">
+                <h3>Class Details</h3>
+                <div>
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Class Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter class Name" id="name" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Number of Rooms</label>
+                                    <input type="number" class="form-control" placeholder="" id="nor" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="class_id" value="5"/>
+                        <button class="btn btn-w-m btn-primary btn-block" id="submit">delete</button>
+                    </form>
+                    <br>
+                </div>
+                <div>
+
+                </div>
+                <br>
+            </div>
+
+            <div class="margin-footer">
+            </div>
+
+            <!--FOOTER START HERE-->
+        </div>
+
+    </div>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-Staff ajax-->
+    <th:block layout:fragment="scripts">
+        <script src="ajax/classdelete.js"></script>
+    </th:block>
+
+    <!--POP UP WELCOME MESSAGE-->
+    <script th:replace="layout :: welcomeMsg">
+    </script>
+    <!--END HERE-->
+
+
+</body>
+</html>
