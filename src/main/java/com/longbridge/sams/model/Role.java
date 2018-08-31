@@ -25,6 +25,8 @@ public class Role extends AbstractSchoolEntity {
 	@Email
 	private String email;
 	
+	private UserType type;
+	
 	@ManyToMany(cascade={CascadeType.MERGE},fetch=FetchType.EAGER)
 	private Set<Permission> permissions;
 	
@@ -62,6 +64,12 @@ public class Role extends AbstractSchoolEntity {
 	
 	
 	
+	public UserType getType() {
+		return type;
+	}
+	public void setType(UserType type) {
+		this.type = type;
+	}
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
 	}

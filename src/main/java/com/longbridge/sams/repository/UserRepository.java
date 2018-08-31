@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.longbridge.sams.model.Role;
 import com.longbridge.sams.model.User;
 import com.longbridge.sams.model.UserType;
 
@@ -19,4 +20,6 @@ public interface UserRepository extends CommonRepository<User,Long> {
 	Page<User> findBySchoolId( Long schoolId, Pageable page);
 	Page<User> findBySchoolIdAndType( Long schoolId,UserType type, Pageable page);
 	List<User> findByIdNotIn(Long[] memberArray);
+	List<User> findByRole(Role role);
+	int countByRole(Role role);
 }

@@ -19,6 +19,7 @@ import com.longbridge.sams.admin.service.UserService;
 import com.longbridge.sams.model.Role;
 import com.longbridge.sams.model.School;
 import com.longbridge.sams.model.User;
+import com.longbridge.sams.model.UserType;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.Messages;
 
@@ -57,6 +58,7 @@ public class AdmSchoolUsersView {
 	@GetMapping("/user/new")
 	public String newUser(Model model) {
 		model.addAttribute("user", new User());
+		model.addAttribute("types",UserType.values());
 		return "admin/school/user/edit";
 	}
 
@@ -65,6 +67,7 @@ public class AdmSchoolUsersView {
 	public String editUser(@PathVariable Long uid,Model model) {
 		User user = userService.getUser(uid);
 		model.addAttribute("user", user);
+		model.addAttribute("types",UserType.values());
 		return "admin/school/user/edit";
 	}
 	

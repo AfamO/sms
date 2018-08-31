@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.longbridge.sams.admin.service.PermissionService;
 import com.longbridge.sams.model.Permission;
+import com.longbridge.sams.model.UserType;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.Messages;
 
@@ -31,12 +32,16 @@ public class AdmPermissionView {
 	    public String editPermission(@PathVariable Long id, Model model){
 	  		Permission permission = permissionService.get(id);
 			model.addAttribute("permission",permission);
+			model.addAttribute("types",UserType.values());
 	        return "admin/permission/edit";
 	    }
+	  	
+	  	
 	  	
 	  	@GetMapping("/new")
 	    public String newPermission(Model model){
 	  		model.addAttribute("permission",new Permission());
+	  		model.addAttribute("types",UserType.values());
 	        return "admin/permission/edit";
 	    }
 	  	
@@ -53,7 +58,7 @@ public class AdmPermissionView {
 			String response = null;
 			try {
 				if (result.hasErrors()) {
-					logger.warn("Error occurred creating Code{}", result.toString());
+					logger.warn("Error occurred creating Permission{}", result.toString());
 					return "admin/code/edit";
 				}
 				if (permission.getId() != null) {

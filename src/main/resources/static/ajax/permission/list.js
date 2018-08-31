@@ -15,6 +15,7 @@ $(document).ready(function () {
             responsive: true,
             ordering: false,
             columns: [
+            	 { data: "type"},
                 { data: "name"},
                 { data: "description" },
                 { data: "category"},
@@ -25,7 +26,7 @@ $(document).ready(function () {
                 type: "GET"
             },
             "columnDefs" : [{
-            	 "targets" : 3,
+            	 "targets" : 4,
                 "data" : "operations",
                 "render" : function (data, type, row) {
                 	 lbl = '';

@@ -4,6 +4,8 @@ package com.longbridge.sams.admin.service.implementation;
 
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.admin.service.PermissionService;
 import com.longbridge.sams.model.Permission;
 import com.longbridge.sams.model.Role;
+import com.longbridge.sams.model.UserType;
 import com.longbridge.sams.repository.PermissionRepository;
 import com.longbridge.sams.utils.Messages;
 
@@ -32,14 +35,14 @@ public class PermissionServiceImpl implements PermissionService {
 	
 	@Override
 	public Permission get(Long id) {
-		Permission permission = repo.findById(id).get();
+		Permission permission = repo.getOne(id);
 		return permission;
 	}
 
 	@Override
-	public List<Permission> getAllPermissions() {
+	public List<Permission> getAllPermissions(UserType type) {
 		log.debug("get All permissions");
-		return repo.findAll();
+		return repo.findByType(type);
 	}
 
 
@@ -88,16 +91,12 @@ public class PermissionServiceImpl implements PermissionService {
 
 	@Override
 	public List<Permission> getAllPermissionsNotInRole(Role role) {
-		Long[] permissionArray = new Long[role.getPermissions().size()];
-		int idx = 0;
-		for (Permission perm : role.getPermissions()) {
-			permissionArray[idx] = perm.getId();
-			idx++;
-		}
+		
+		List<Long> list = role.getPermissions().stream().map(p -> p.getId()).collect(Collectors.toList());
 		// not in NULL check
-		if (permissionArray.length == 0)
-			permissionArray = new Long[] { -1L };
-		List<Permission> optionsNotInRole = repo.findByIdNotIn(permissionArray);
+		if(list.isEmpty())
+			list.add(new Long(-1L));
+		List<Permission> optionsNotInRole = repo.findByIdNotInAndType(list,role.getType());
 		return optionsNotInRole;
 	}
 
@@ -105,6 +104,12 @@ public class PermissionServiceImpl implements PermissionService {
 	public List<Permission> getAllPermissionsInRole(Role role) {
 		List<Permission> optionsInRole = repo.findByRole(role);
 		return optionsInRole;
+	}
+	
+	@Override
+	public Map<String, List<Permission>> groupPermission(List<Permission> permissions){
+		Map<String, List<Permission>> map = permissions.stream().collect(Collectors.groupingBy(Permission::getCategory));
+		return map;
 	}
 
 }

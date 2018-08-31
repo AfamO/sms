@@ -64,6 +64,18 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-xs-12">
+								<div class="form-group">
+								<label>Type*</label> <select id="role_type" class="form-control" th:field="${role.type}" >
+										<option value="" selected="selected" hidden>Choose your option</option>
+										<option th:each="t : ${types}" th:value="${t.name()}" th:text="${t}"
+											th:if="${not #strings.equals(t, 'Admin')}" th:selected="${t==role.type} " th:attr="data-name=${t.name()}" ></option>
+											
+									</select>
+								</div>
+							</div>
+						</div>
 							
 							<div class="form-group row">
 									<div class="col-sm-5">
@@ -114,10 +126,37 @@ $(document).ready(function() {
 			function() {
 				return !$('.left-selector option:selected').remove().appendTo('.right-selector');
 			});
+	updateLists();
 });
 $("form").submit(function(e) {
 	$('.right-selector option').prop("selected", true);	
 });
+
+$("#role_type").change(function(){
+    //var userType = $(this).find(":selected").text();
+	updateLists();
+});
+
+function updateLists(){
+	 userType = $("#role_type").find(":selected").attr("data-name");
+	 if (!userType) return ;
+	    $.ajax({
+	        type: 'GET',
+	        url: "/admin/v1/permission/type/" + userType,
+	        success: function(data){
+	        	$('.right-selector').empty();
+	            options = $('.left-selector') ;
+	            options.empty();
+	            $(data).each(function( index,element){
+	           		options.append("<option value='"+element.id + "'>"+element.description + "</option>");
+	            });
+	        },
+	        error:function(){
+	            alert("error");
+	        }
+
+	    });
+}
 /*]]>*/
 </script>
 </th:block>

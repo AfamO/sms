@@ -58,8 +58,12 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="form-group">
-									<label>Type*</label> <input type="text" class="form-control" th:field="*{type}" placeholder="Type"
-										aria-describedby="basic-addon1">
+									<label>Type*</label> <select id="role_type" class="form-control" th:field="${user.type}" >
+										<option disabled="disabled" value="">Choose your option</option>
+										<option th:each="t : ${types}" th:value="${t.name()}" th:text="${t}"
+											th:if="${not #strings.equals(t, 'Admin')}" th:selected="${t==user.type} " th:attr="data-name=${t.name()}" ></option>
+											
+									</select>
 								</div>
 							</div>
 						</div>

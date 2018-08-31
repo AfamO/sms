@@ -19,7 +19,6 @@ public class Permission extends AbstractEntity {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3497014696349586764L;
 
 	public Permission(String name, String category, String description) {
 		super();
@@ -27,12 +26,22 @@ public class Permission extends AbstractEntity {
 		this.category = category;
 		this.description = description;
 	}
+	
+	public Permission(String name, String category, String description, UserType type) {
+		super();
+		this.name = name;
+		this.category = category;
+		this.description = description;
+		this.type = type;
+	}
 
 	public Permission() {
 	}
 
 	@NotEmpty
 	private String name;
+	
+	private UserType type;
 	
 	private String category;
 	@NotEmpty
@@ -68,6 +77,16 @@ public class Permission extends AbstractEntity {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	
+	
+	public UserType getType() {
+		return type;
+	}
+
+	public void setType(UserType type) {
+		this.type = type;
 	}
 
 	@Override

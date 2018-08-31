@@ -23,6 +23,7 @@ import com.longbridge.sams.model.Code;
 import com.longbridge.sams.model.Permission;
 import com.longbridge.sams.model.Role;
 import com.longbridge.sams.model.School;
+import com.longbridge.sams.model.UserType;
 import com.longbridge.sams.utils.CustomBeanUtilsBean;
 import com.longbridge.sams.utils.Messages;
 
@@ -57,13 +58,17 @@ public class AdmSchoolRolesView {
 //	public List<Role> getRoles(@PathVariable Long schoolId) {
 //		return roleService.fetchAllRoles(schoolId);
 //	}
+	
+	@ModelAttribute(name = "types")
+	public UserType[] getTypes(@PathVariable Long schoolId) {
+		return UserType.values();
+	}
 
 	@GetMapping("/role/new")
 	public String newRole(Model model) {
 		model.addAttribute("role", new Role());
-
-		Iterable<Permission> permissions = permissionService.getAllPermissions();
-		model.addAttribute("permissionList", permissions);
+//		Iterable<Permission> permissions = permissionService.getAllPermissions();
+//		model.addAttribute("permissionList", permissions);
 		return "admin/school/role/edit";
 	}
 
@@ -71,7 +76,6 @@ public class AdmSchoolRolesView {
 	public String editRole(@PathVariable Long rid, Model model) {
 		Role role = roleService.getRole(rid);
 		model.addAttribute("role", role);
-
 		List<Permission> allOtherOptions = permissionService.getAllPermissionsNotInRole(role);
 		model.addAttribute("permissionList", allOtherOptions);
 
@@ -88,7 +92,7 @@ public class AdmSchoolRolesView {
 			if (role.getId() != null) {
 				permissions = permissionService.getAllPermissionsNotInRole(role);
 			} else {
-				permissions = permissionService.getAllPermissions();
+//				permissions = permissionService.getAllPermissions();
 			}
 			model.addAttribute("permissionList", permissions);
 			return "admin/school/roles/edit";
@@ -119,7 +123,7 @@ public class AdmSchoolRolesView {
 			if (role.getId() != null) {
 				permissions = permissionService.getAllPermissionsNotInRole(role);
 			} else {
-				permissions = permissionService.getAllPermissions();
+//				permissions = permissionService.getAllPermissions();
 			}
 			model.addAttribute("permissionList", permissions);
 			logger.error("Error occurred creating role{}", e);
@@ -128,5 +132,7 @@ public class AdmSchoolRolesView {
 		redirectAttributes.addFlashAttribute("message", message.get(response, role.getName()));
 		return "redirect:/admin/school/"+schoolId+"/roles";
 	}
+	
+	
 
 }

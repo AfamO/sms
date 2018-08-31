@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.model.Permission;
 import com.longbridge.sams.model.Role;
+import com.longbridge.sams.model.UserType;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PermissionService {
 
@@ -19,7 +21,7 @@ public interface PermissionService {
 
     public Permission get(Long Id);
 
-    public List<Permission> getAllPermissions();
+    public List<Permission> getAllPermissions(UserType type);
 
     public Page<Permission> getPermissions(Pageable page);
     
@@ -28,6 +30,8 @@ public interface PermissionService {
 	Page<Permission> findPermission(String pattern, Pageable page);
 
 	List<Permission> getAllPermissionsInRole(Role role);
+
+	Map<String, List<Permission>> groupPermission(List<Permission> permissions);
 
 
 }

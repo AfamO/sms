@@ -14,6 +14,7 @@ import com.longbridge.sams.ApplicationException;
 import com.longbridge.sams.admin.service.AdminRoleService;
 import com.longbridge.sams.model.Role;
 import com.longbridge.sams.repository.RoleRepository;
+import com.longbridge.sams.repository.UserRepository;
 import com.longbridge.sams.utils.Messages;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
     @Autowired
     private RoleRepository roleRepo;
+    @Autowired
+    private UserRepository userRepo;
 
     @Autowired
     private Messages messageSource;
@@ -76,6 +79,13 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 	@Override
 	public Role modifyRole(Long schoolId,Role role) throws ApplicationException {
 		try{
+			//check type
+			Role oldRole = roleRepo.getOne(role.getId());
+			if(!oldRole.getType().equals(role.getType())) {
+				//check if users are linked to the role
+				if(userRepo.countByRole(oldRole) > 0)
+					throw new ApplicationException(messageSource.get("role.type.error",oldRole.getType().toString(),role.getType().toString()));
+			}
 			role.setSchoolId(schoolId);
 			role = roleRepo.save(role);
 		}catch(Exception ex){
