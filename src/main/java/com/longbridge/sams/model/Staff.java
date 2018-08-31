@@ -2,6 +2,7 @@ package com.longbridge.sams.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 
@@ -28,12 +29,12 @@ public class Staff extends AbstractSchoolEntity{
     private String jobPosition;
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "${date.format}")
+    @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfBirth;
 
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "${date.format}")
+    @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfEmployment;
     
     private String nextOfKin;
@@ -48,6 +49,7 @@ public class Staff extends AbstractSchoolEntity{
     private User user;
     
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Address address;
 
     

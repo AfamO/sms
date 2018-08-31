@@ -22,6 +22,7 @@ import com.longbridge.sams.utils.Messages;
 public class AdmSchoolView {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdmSchoolView.class);
+
 	@Autowired
 	private Messages message;
 
