@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{school/layout}">
+
+
+<body>
+<div id="wrapper">
+    <div class="row" layout:fragment="content">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5></h5>
+                    <a th:href="@{/school/parent/new}" class="tool" data-toggle="tooltip" data-placement="top" title="New School">
+                        <i class="fa fa-plus-square-o fa-2x"></i>
+                    </a>
+                    <div class="ibox-tools">
+                        <a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+                        </a> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-wrench"></i>
+                    </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#" class="dropdown-item">Config option 1</a></li>
+                            <li><a href="#" class="dropdown-item">Config option 2</a></li>
+                        </ul>
+                        <a class="close-link"> <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table" id="parentTable" >
+                            <thead>
+                            <tr>
+                                <th >Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email Address</th>
+                                <th>Telephone Number</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th >Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email Address</th>
+                                <th>Telephone Number</th>
+
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="margin-footer">
+    </div>
+
+</div>
+
+
+<!-Parent ajax-->
+<th:block layout:fragment="scripts">
+    <script src="/ajax/parent.js"></script>
+    <script th:src="@{/datatables/js/jquery.dataTables.js}"></script>
+    <script th:src="@{/datatables/js/dataTables.bootstrap.js}"></script>
+    <script th:src="@{/datatables/select/js/dataTables.select.js}"></script>
+    <script th:src="@{/js/jquery.spring-friendly.min.js}"></script>
+
+</th:block>
+
+<!--POP UP WELCOME MESSAGE-->
+<script th:replace="layout :: welcomeMsg">
+</script>
+<!--END HERE-->
+
+
+</body>
+</html>

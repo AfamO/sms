@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+<head th:replace="layout :: head">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container" layout:fragment="content">
+
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                    <h2>School Information</h2>
+                </div>
+            </div>
+            <br>
+            <div class="wrapper">
+                <div class="row border-bottom white-bg dashboard-header">
+                    <div>
+                        <h3>Longbridge College</h3>
+                        <br>
+                        <p>School Code: <span>#00078</span></p>
+                        <p>Motto: <span>Think, Learn and Innovate</span></p>
+                        <p>Address: <span>5 Joel Ogunnaike street, GRA Ikeja.</span></p>
+                        <p>City: <span>Ikeja</span></p>
+                        <p>Local Government Area: <span>Oregun LGA</span></p>
+                        <p>State: <span>Lagos</span></p>
+                        <p>Country: <span>Nigeria</span></p>
+                        <p>Telephone No: <span>08100969815</span></p>
+                        <p>Email: <span>info@longbridgetech.com</span></p>
+                        <p>Website: <span>www.longbridgetech.com</span></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="wrapper">
+                <div class="row  border-bottom white-bg dashboard-header">
+                    <div>
+                        <h3>History</h3>
+                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div class="margin-footer">
+        </div>
+
+    </div>
+    <!--School ajax-->
+    <th:block layout:fragment="scripts">
+        <script src="ajax/school.js"></script>
+    </th:block>
+
+    <!--POP UP WELCOME MESSAGE-->
+    <script th:replace="layout :: welcomeMsg">
+    </script>
+    <!--END HERE-->
+
+
+</body>
+
+</html>

@@ -17,7 +17,7 @@ $(document).ready(function () {
             columns: [
                 { data: "staffId" },
                 { data: "firstName"},
-                { data: "lastName" },
+                { data: "jobPosition" },
                 { data: "phoneNumber"},
                 { data: "emailAddress" },
                 { data: "operations" }
@@ -30,16 +30,10 @@ $(document).ready(function () {
             	 "targets" : 5,
                 "data" : "operations",
                 "render" : function (data, type, row) {
-                    var linkView = '<div class="btn-group">'+
-                        '<a type="button" class="btn btn-warning " href="/school/staff/'+row.id +'"><i class="fa fa-eye"></i></a>'+
-                        '</div>';
-                    var linkEdit = '<div class="btn-group">'+
-                        '<a type="button" class="btn btn-warning " href="/school/staff/'+row.id +'/edit/"><i class="fa fa-pencil"></i></a>'+
-                        '</div>';
-                    var linkDelete = '<div class="btn-group">'+
-                        '<a type="button" class="btn btn-warning " onclick="deleteDialog('+row.id+')"><i class="fa fa-trash"></i></a>'+
-                        '</div>';
-                    return linkView + " | " + linkEdit + " | " + linkDelete;
+                    kk='<a href="/school/staff/'+row.id+'/edit" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>  </a>'
+                    kk += '<a href="/school/staff/'+row.id+'/users" class="btn btn-white btn-sm"><i class="fa fa-user"></i>  </a>'
+                    kk += '<a href="/school/staff/'+row.id+'/qualification" class="btn btn-white btn-sm"><i class="fa fa-user-secret"></i>  </a>'
+                    return kk;
                 }
                
             }]

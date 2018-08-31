@@ -22,6 +22,7 @@ import com.longbridge.sams.utils.Messages;
 public class AdmSchoolView {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdmSchoolView.class);
+
 	@Autowired
 	private Messages message;
 
@@ -74,7 +75,6 @@ public class AdmSchoolView {
 		model.addAttribute("school", new School());
 		return "admin/school/edit";
 	}
-
 	@GetMapping
 	public String listschool() {
 		return "admin/school/list";

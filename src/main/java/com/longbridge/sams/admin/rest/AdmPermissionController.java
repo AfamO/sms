@@ -29,7 +29,7 @@ import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/admin/v1/permission")
-public class AdmPermissionController {
+public class 	AdmPermissionController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdmPermissionController.class);
 

@@ -87,12 +87,6 @@ public class RoleServiceImpl implements RoleService {
 		return roleRepo.findByNameContaining(pattern, page);
 	}
 
-//	@Override
-//	public Role getDefaultUserRole() throws ApplicationException {
-//		Role role = roleRepo.findById(1L).get();
-//		if(role == null)throw new ApplicationException("No default role");
-//		return role;
-//	}
 
 
 }

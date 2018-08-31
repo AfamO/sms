@@ -60,13 +60,13 @@ public class SchoolServiceImpl implements SchoolService {
 		catch (Exception e) {
 			log.error("error creating school {}",school, e);
 			throw new ApplicationException(e);
-		}
+}
 		return result;
-	}
+				}
 
-	@Override
-	@Transactional(rollbackFor=Exception.class) 
-	public School update(School school) throws ApplicationException {
+@Override
+@Transactional(rollbackFor=Exception.class)
+public School update(School school) throws ApplicationException {
 		School result = null;
 		try {
 			result = repo.save(school);;

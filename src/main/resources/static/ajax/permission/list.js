@@ -22,7 +22,7 @@ $(document).ready(function () {
                 { data: null }
             ],
             ajax: {
-                url: "/admin/v1/permission",
+                url: "/school/v1/permission",
                 type: "GET"
             },
             "columnDefs" : [{

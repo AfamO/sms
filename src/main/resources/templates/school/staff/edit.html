@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/school/layout}">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/datatables/select/css/select.bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/datatables/css/dataTables.bootstrap.css}" />
+</head>
+<body>
+
+<div layout:fragment="subject">
+
+    <div class="col-md-6" >
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+            <li class="breadcrumb-item "><a th:href="${'/school/staff'}">Staffs</a>></li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row" layout:fragment="content">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5></h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+                    </a> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-wrench"></i>
+                </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#" class="dropdown-item">Config option 1</a></li>
+                        <li><a href="#" class="dropdown-item">Config option 2</a></li>
+                    </ul>
+                    <a class="close-link"> <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ibox-content">
+                <form role="form" method="post"  th:action="@{/school/staff}" th:object="${staff}">
+                    <div hidden="hidden">
+                        <ul id="fieldErrors" th:if="${#fields.hasErrors('*')}">
+                            <li th:each="e : ${#fields.detailedErrors()}" th:text="${e.global}? '*' : ${e.fieldName}"></li>
+                        </ul>
+                    </div>
+                    <div hidden="hidden">
+                        <ul id="fieldMessages" th:if="${#fields.hasErrors('*')}">
+                            <li th:each="e : ${#fields.detailedErrors()}" th:attr="field=${e.fieldName}" th:text="${e.message}"></li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>FirstName*</label> <input type="text" class="form-control" th:field="*{firstName}"
+                                                                 aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>MiddleName*</label> <input type="text" class="form-control" th:field="*{middleName}"
+                                                                  aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>LastName*</label> <input type="text" class="form-control" th:field="*{lastName}"
+                                                                 aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>Tittle*</label> <input type="text" class="form-control" th:field="*{title}"
+                                                               aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>next of kin*</label> <input type="text" class="form-control" th:field="*{nextOfKin}"
+                                                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>next of kin number*</label> <input type="text" class="form-control" th:field="*{nokPhoneNumber}"
+                                                                           aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>years of Experience*</label> <input type="number" class="form-control" th:field="*{yearOfExperience}"
+                                                                            aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>venue Assigned</label> <input type="text" class="form-control" th:field="*{venueAssigned}"
+                                                                      aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>date of Employment*</label> <input type="date" class="form-control" th:field="*{dateOfEmployment}"
+                                                                           aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>date of Birth*</label> <input type="date" class="form-control" th:field="*{dateOfBirth}"
+                                                                     aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>job Position*</label> <input type="text" class="form-control" th:field="*{jobPosition}"
+                                                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>religion*</label> <input type="text" class="form-control" th:field="*{religion}"
+                                                                aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>marital status*</label> <input type="text" class="form-control" th:field="*{maritalStatus}"
+                                                                      aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>phone number*</label> <input type="text" class="form-control" th:field="*{phoneNumber}"
+                                                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>emailAdress*</label> <input type="email" class="form-control" th:field="*{emailAddress}"
+                                                                   aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>staffId*</label> <input type="text" class="form-control" th:field="*{staffId}"
+                                                                   aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label>schoolId*</label> <input type="number" class="form-control" th:field="*{schoolId}" th:value="${schoolId}"
+                                                               aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label>Country*</label> <input type="text" class="form-control"   th:field="*{address.country}"
+                                                        aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label>State*</label> <input type="text" class="form-control" th:field="*{address.state}"
+                                                     aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label>Local Govt Area*</label> <input type="text" class="form-control" th:field="*{address.localGovt}"
+                                                                aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label>City*</label> <input type="text" class="form-control" th:field="*{address.city}"
+                                                     aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label>Address*</label> <input type="text" class="form-control" th:field="*{address.name}"
+                                                        aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <button class="btn btn-w-m btn-primary" id="createOrUpdateSchool">Submit</button>
+                    <input th:hidden="hidden" th:field="*{id}">
+                </div>
+            </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
+
+
+
+<th:block layout:fragment="scripts">
+</th:block>
+</html>

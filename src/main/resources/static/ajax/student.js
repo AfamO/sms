@@ -14,7 +14,6 @@ $('#createStudent').click(function () {
         "gender" : $("input[name=\'gender\']:checked").val(),
         "phoneNum" : $('#phoneNum').val(),
         "email" : $('#email').val(),
-        "dateOfBirth" : $('#dateOfBirth').val(),
         "sportHouse" : $('#sportHouse').val(),
         "department" : $('#department').val(),
 
